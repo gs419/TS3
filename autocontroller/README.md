@@ -6,20 +6,18 @@ and the runway is free. Dry-run by default — it prints what it would do.
 
 Background and evidence: see `../docs/AI-CONTROLLER-FEASIBILITY.md`.
 
-## Calibrate first (once, on the gaming PC)
+## Calibration status: DONE for the current build
 
-The log line formats are undocumented and build-dependent. Before trusting the
-bot:
+`gamestate.py` is calibrated to this install's real logs (v1.5.x / MeloTTS) and
+validated end-to-end — see `../docs/PLAYER-LOG-FORMAT.md`. It parses
+`COMMAND:`, `PILOT:` (spoken, resolved to ICAO via `callsign_resolver.py`),
+`CREATE SERVER AIRPLANE:`, and `Add Scoring:` lines. A replay over the real
+logs tracked 52 planes, resolved all 8 on-final calls, and issued 4
+clear-to-land commands while correctly holding 2 for runway occupancy.
 
-1. Play a short session (a couple of arrivals, issue clearances by hand), quit.
-2. Find the log: `Win+R` → `%AppData%\..\LocalLow` → `FeelThere_*\Tower! Simulator 3\Player.log`.
-3. Run `python main.py --log <path> --replay` — it parses the whole log and
-   prints the plane states it reconstructed.
-4. If nothing was detected, open Player.log and search for the command you
-   typed and the pilot's "on final" call. Adjust the prefixes in
-   `gamestate.py` `PATTERNS` to match your build (current builds may not use
-   the `ADD TTS to Acapela:` prefix — look for whatever line carries pilot
-   speech text).
+If a future game update changes the format, re-check with:
+`python main.py --log <path> --replay` (parses the whole log, prints
+reconstructed plane states), then adjust `PATTERNS` in `gamestate.py`.
 
 ## Run live (dry-run)
 
