@@ -1,0 +1,565 @@
+matches:
+
+# Cardinal Directions
+
+  - trigger: pbn;
+    replace: "PUSHBACK APPROVED FACING NORTH"
+  - trigger: pbne
+    replace: "PUSHBACK APPROVED FACING NORTHEAST"
+  - trigger: pbnw
+    replace: "PUSHBACK APPROVED FACING NORTHWEST"  
+  - trigger: pbe
+    replace: "PUSHBACK APPROVED FACING EAST"
+  - trigger: pbs;
+    replace: "PUSHBACK APPROVED FACING SOUTH"    
+  - trigger: pbse
+    replace: "PUSHBACK APPROVED FACING SOUTHEAST"
+  - trigger: pbsw
+    replace: "PUSHBACK APPROVED FACING SOUTHWEST"
+  - trigger: pbw
+    replace: "PUSHBACK APPROVED FACING WEST"
+
+# Specific Runways
+
+  # ROW
+  - trigger: "pb01;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 01"
+
+  - trigger: "pb01l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 01L"
+
+  - trigger: "pb01r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 01R"
+
+  - trigger: "pb01c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 01C"
+
+  - trigger: "pb02;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 02"
+
+  - trigger: "pb02l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 02L"
+
+  - trigger: "pb02r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 02R"
+
+  - trigger: "pb02c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 02C"
+
+  - trigger: "pb03;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 03"
+
+  - trigger: "pb03l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 03L"
+
+  - trigger: "pb03r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 03R"
+
+  - trigger: "pb03c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 03C"
+
+  - trigger: "pb04;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 04"
+
+  - trigger: "pb04l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 04L"
+
+  - trigger: "pb04r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 04R"
+
+  - trigger: "pb04c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 04C"
+
+  - trigger: "pb05;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 05"
+
+  - trigger: "pb05l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 05L"
+
+  - trigger: "pb05r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 05R"
+
+  - trigger: "pb05c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 05C"
+
+  - trigger: "pb06;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 06"
+
+  - trigger: "pb06l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 06L"
+
+  - trigger: "pb06r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 06R"
+
+  - trigger: "pb06c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 06C"
+
+  - trigger: "pb07;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 07"
+
+  - trigger: "pb07l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 07L"
+
+  - trigger: "pb07r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 07R"
+
+  - trigger: "pb07c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 07C"
+
+  - trigger: "pb08;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 08"
+
+  - trigger: "pb08l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 08L"
+
+  - trigger: "pb08r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 08R"
+
+  - trigger: "pb08c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 08C"
+
+  - trigger: "pb09;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 09"
+
+  - trigger: "pb09l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 09L"
+
+  - trigger: "pb09r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 09R"
+
+  - trigger: "pb09c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 09C"
+
+  # US
+  - trigger: "pb1;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 1"
+
+  - trigger: "pb1l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 1L"
+
+  - trigger: "pb1r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 1R"
+
+  - trigger: "pb1c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 1C"
+
+  - trigger: "pb2;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 2"
+
+  - trigger: "pb2l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 2L"
+
+  - trigger: "pb2r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 2R"
+
+  - trigger: "pb2c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 2C"
+
+  - trigger: "pb3;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 3"
+
+  - trigger: "pb3l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 3L"
+
+  - trigger: "pb3r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 3R"
+
+  - trigger: "pb3c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 3C"
+
+  - trigger: "pb4;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 4"
+
+  - trigger: "pb4l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 4L"
+
+  - trigger: "pb4r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 4R"
+
+  - trigger: "pb4c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 4C"
+
+  - trigger: "pb5;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 5"
+
+  - trigger: "pb5l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 5L"
+
+  - trigger: "pb5r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 5R"
+
+  - trigger: "pb5c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 5C"
+
+  - trigger: "pb6;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 6"
+
+  - trigger: "pb6l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 6L"
+
+  - trigger: "pb6r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 6R"
+
+  - trigger: "pb6c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 6C"
+
+  - trigger: "pb7;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 7"
+
+  - trigger: "pb7l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 7L"
+
+  - trigger: "pb7r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 7R"
+
+  - trigger: "pb7c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 7C"
+
+  - trigger: "pb8;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 8"
+
+  - trigger: "pb8l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 8L"
+
+  - trigger: "pb8r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 8R"
+
+  - trigger: "pb8c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 8C"
+
+  - trigger: "pb9;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 9"
+
+  - trigger: "pb9l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 9L"
+
+  - trigger: "pb9r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 9R"
+
+  - trigger: "pb9c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 9C"
+
+  # 10-36
+  - trigger: "pb10;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 10"
+
+  - trigger: "pb10l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 10L"
+
+  - trigger: "pb10r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 10R"
+
+  - trigger: "pb10c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 10C"
+
+  - trigger: "pb11;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 11"
+
+  - trigger: "pb11l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 11L"
+
+  - trigger: "pb11r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 11R"
+
+  - trigger: "pb11c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 11C"
+
+  - trigger: "pb12;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 12"
+
+  - trigger: "pb12l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 12L"
+
+  - trigger: "pb12r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 12R"
+
+  - trigger: "pb12c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 12C"
+
+  - trigger: "pb13;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 13"
+
+  - trigger: "pb13l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 13L"
+
+  - trigger: "pb13r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 13R"
+
+  - trigger: "pb13c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 13C"
+
+  - trigger: "pb14;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 14"
+
+  - trigger: "pb14l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 14L"
+
+  - trigger: "pb14r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 14R"
+
+  - trigger: "pb14c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 14C"
+
+  - trigger: "pb15;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 15"
+
+  - trigger: "pb15l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 15L"
+
+  - trigger: "pb15r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 15R"
+
+  - trigger: "pb15c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 15C"
+
+  - trigger: "pb16;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 16"
+
+  - trigger: "pb16l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 16L"
+
+  - trigger: "pb16r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 16R"
+
+  - trigger: "pb16c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 16C"
+
+  - trigger: "pb17;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 17"
+
+  - trigger: "pb17l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 17L"
+
+  - trigger: "pb17r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 17R"
+
+  - trigger: "pb17c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 17C"
+
+  - trigger: "pb18;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 18"
+
+  - trigger: "pb18l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 18L"
+
+  - trigger: "pb18r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 18R"
+
+  - trigger: "pb18c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 18C"
+
+  - trigger: "pb19;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 19"
+
+  - trigger: "pb19l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 19L"
+
+  - trigger: "pb19r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 19R"
+
+  - trigger: "pb19c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 19C"
+
+  - trigger: "pb20;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 20"
+
+  - trigger: "pb20l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 20L"
+
+  - trigger: "pb20r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 20R"
+
+  - trigger: "pb20c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 20C"
+
+  - trigger: "pb21;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 21"
+
+  - trigger: "pb21l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 21L"
+
+  - trigger: "pb21r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 21R"
+
+  - trigger: "pb21c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 21C"
+
+  - trigger: "pb22;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 22"
+
+  - trigger: "pb22l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 22L"
+
+  - trigger: "pb22r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 22R"
+
+  - trigger: "pb22c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 22C"
+
+  - trigger: "pb23;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 23"
+
+  - trigger: "pb23l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 23L"
+
+  - trigger: "pb23r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 23R"
+
+  - trigger: "pb23c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 23C"
+
+  - trigger: "pb24;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 24"
+
+  - trigger: "pb24l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 24L"
+
+  - trigger: "pb24r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 24R"
+
+  - trigger: "pb24c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 24C"
+
+  - trigger: "pb25;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 25"
+
+  - trigger: "pb25l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 25L"
+
+  - trigger: "pb25r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 25R"
+
+  - trigger: "pb25c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 25C"
+
+  - trigger: "pb26;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 26"
+
+  - trigger: "pb26l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 26L"
+
+  - trigger: "pb26r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 26R"
+
+  - trigger: "pb26c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 26C"
+
+  - trigger: "pb27;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 27"
+
+  - trigger: "pb27l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 27L"
+
+  - trigger: "pb27r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 27R"
+
+  - trigger: "pb27c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 27C"
+
+  - trigger: "pb28;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 28"
+
+  - trigger: "pb28l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 28L"
+
+  - trigger: "pb28r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 28R"
+
+  - trigger: "pb28c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 28C"
+
+  - trigger: "pb29;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 29"
+
+  - trigger: "pb29l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 29L"
+
+  - trigger: "pb29r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 29R"
+
+  - trigger: "pb29c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 29C"
+
+  - trigger: "pb30;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 30"
+
+  - trigger: "pb30l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 30L"
+
+  - trigger: "pb30r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 30R"
+
+  - trigger: "pb30c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 30C"
+
+  - trigger: "pb31;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 31"
+
+  - trigger: "pb31l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 31L"
+
+  - trigger: "pb31r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 31R"
+
+  - trigger: "pb31c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 31C"
+
+  - trigger: "pb32;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 32"
+
+  - trigger: "pb32l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 32L"
+
+  - trigger: "pb32r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 32R"
+
+  - trigger: "pb32c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 32C"
+
+  - trigger: "pb33;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 33"
+
+  - trigger: "pb33l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 33L"
+
+  - trigger: "pb33r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 33R"
+
+  - trigger: "pb33c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 33C"
+
+  - trigger: "pb34;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 34"
+
+  - trigger: "pb34l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 34L"
+
+  - trigger: "pb34r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 34R"
+
+  - trigger: "pb34c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 34C"
+
+  - trigger: "pb35;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 35"
+
+  - trigger: "pb35l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 35L"
+
+  - trigger: "pb35r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 35R"
+
+  - trigger: "pb35c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 35C"
+
+  - trigger: "pb36;"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 36"
+
+  - trigger: "pb36l"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 36L"
+
+  - trigger: "pb36r"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 36R"
+
+  - trigger: "pb36c"
+    replace: "PUSHBACK APPROVED EXPECT RUNWAY 36C"

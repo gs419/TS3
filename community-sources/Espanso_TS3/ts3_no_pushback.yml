@@ -1,0 +1,563 @@
+matches:
+
+# Cardinal Directions
+
+  - trigger: apn;
+    replace: "APPROVED FACING NORTH"
+  - trigger: apne
+    replace: "APPROVED FACING NORTHEAST"
+  - trigger: apnw
+    replace: "APPROVED FACING NORTHWEST"  
+  - trigger: ape
+    replace: "APPROVED FACING EAST"
+  - trigger: aps;
+    replace: "APPROVED FACING SOUTH"    
+  - trigger: apse
+    replace: "APPROVED FACING SOUTHEAST"
+  - trigger: apsw
+    replace: "APPROVED FACING SOUTHWEST"
+
+# Specific Runways
+    
+  # ROW
+  - trigger: "ap01;"
+    replace: "APPROVED EXPECT RUNWAY 01"
+
+  - trigger: "ap01l"
+    replace: "APPROVED EXPECT RUNWAY 01L"
+
+  - trigger: "ap01r"
+    replace: "APPROVED EXPECT RUNWAY 01R"
+
+  - trigger: "ap01c"
+    replace: "APPROVED EXPECT RUNWAY 01C"
+
+  - trigger: "ap02;"
+    replace: "APPROVED EXPECT RUNWAY 02"
+
+  - trigger: "ap02l"
+    replace: "APPROVED EXPECT RUNWAY 02L"
+
+  - trigger: "ap02r"
+    replace: "APPROVED EXPECT RUNWAY 02R"
+
+  - trigger: "ap02c"
+    replace: "APPROVED EXPECT RUNWAY 02C"
+
+  - trigger: "ap03;"
+    replace: "APPROVED EXPECT RUNWAY 03"
+
+  - trigger: "ap03l"
+    replace: "APPROVED EXPECT RUNWAY 03L"
+
+  - trigger: "ap03r"
+    replace: "APPROVED EXPECT RUNWAY 03R"
+
+  - trigger: "ap03c"
+    replace: "APPROVED EXPECT RUNWAY 03C"
+
+  - trigger: "ap04;"
+    replace: "APPROVED EXPECT RUNWAY 04"
+
+  - trigger: "ap04l"
+    replace: "APPROVED EXPECT RUNWAY 04L"
+
+  - trigger: "ap04r"
+    replace: "APPROVED EXPECT RUNWAY 04R"
+
+  - trigger: "ap04c"
+    replace: "APPROVED EXPECT RUNWAY 04C"
+
+  - trigger: "ap05;"
+    replace: "APPROVED EXPECT RUNWAY 05"
+
+  - trigger: "ap05l"
+    replace: "APPROVED EXPECT RUNWAY 05L"
+
+  - trigger: "ap05r"
+    replace: "APPROVED EXPECT RUNWAY 05R"
+
+  - trigger: "ap05c"
+    replace: "APPROVED EXPECT RUNWAY 05C"
+
+  - trigger: "ap06;"
+    replace: "APPROVED EXPECT RUNWAY 06"
+
+  - trigger: "ap06l"
+    replace: "APPROVED EXPECT RUNWAY 06L"
+
+  - trigger: "ap06r"
+    replace: "APPROVED EXPECT RUNWAY 06R"
+
+  - trigger: "ap06c"
+    replace: "APPROVED EXPECT RUNWAY 06C"
+
+  - trigger: "ap07;"
+    replace: "APPROVED EXPECT RUNWAY 07"
+
+  - trigger: "ap07l"
+    replace: "APPROVED EXPECT RUNWAY 07L"
+
+  - trigger: "ap07r"
+    replace: "APPROVED EXPECT RUNWAY 07R"
+
+  - trigger: "ap07c"
+    replace: "APPROVED EXPECT RUNWAY 07C"
+
+  - trigger: "ap08;"
+    replace: "APPROVED EXPECT RUNWAY 08"
+
+  - trigger: "ap08l"
+    replace: "APPROVED EXPECT RUNWAY 08L"
+
+  - trigger: "ap08r"
+    replace: "APPROVED EXPECT RUNWAY 08R"
+
+  - trigger: "ap08c"
+    replace: "APPROVED EXPECT RUNWAY 08C"
+
+  - trigger: "ap09;"
+    replace: "APPROVED EXPECT RUNWAY 09"
+
+  - trigger: "ap09l"
+    replace: "APPROVED EXPECT RUNWAY 09L"
+
+  - trigger: "ap09r"
+    replace: "APPROVED EXPECT RUNWAY 09R"
+
+  - trigger: "ap09c"
+    replace: "APPROVED EXPECT RUNWAY 09C"
+
+  # US
+  - trigger: "ap1;"
+    replace: "APPROVED EXPECT RUNWAY 1"
+
+  - trigger: "ap1l"
+    replace: "APPROVED EXPECT RUNWAY 1L"
+
+  - trigger: "ap1r"
+    replace: "APPROVED EXPECT RUNWAY 1R"
+
+  - trigger: "ap1c"
+    replace: "APPROVED EXPECT RUNWAY 1C"
+
+  - trigger: "ap2;"
+    replace: "APPROVED EXPECT RUNWAY 2"
+
+  - trigger: "ap2l"
+    replace: "APPROVED EXPECT RUNWAY 2L"
+
+  - trigger: "ap2r"
+    replace: "APPROVED EXPECT RUNWAY 2R"
+
+  - trigger: "ap2c"
+    replace: "APPROVED EXPECT RUNWAY 2C"
+
+  - trigger: "ap3;"
+    replace: "APPROVED EXPECT RUNWAY 3"
+
+  - trigger: "ap3l"
+    replace: "APPROVED EXPECT RUNWAY 3L"
+
+  - trigger: "ap3r"
+    replace: "APPROVED EXPECT RUNWAY 3R"
+
+  - trigger: "ap3c"
+    replace: "APPROVED EXPECT RUNWAY 3C"
+
+  - trigger: "ap4;"
+    replace: "APPROVED EXPECT RUNWAY 4"
+
+  - trigger: "ap4l"
+    replace: "APPROVED EXPECT RUNWAY 4L"
+
+  - trigger: "ap4r"
+    replace: "APPROVED EXPECT RUNWAY 4R"
+
+  - trigger: "ap4c"
+    replace: "APPROVED EXPECT RUNWAY 4C"
+
+  - trigger: "ap5;"
+    replace: "APPROVED EXPECT RUNWAY 5"
+
+  - trigger: "ap5l"
+    replace: "APPROVED EXPECT RUNWAY 5L"
+
+  - trigger: "ap5r"
+    replace: "APPROVED EXPECT RUNWAY 5R"
+
+  - trigger: "ap5c"
+    replace: "APPROVED EXPECT RUNWAY 5C"
+
+  - trigger: "ap6;"
+    replace: "APPROVED EXPECT RUNWAY 6"
+
+  - trigger: "ap6l"
+    replace: "APPROVED EXPECT RUNWAY 6L"
+
+  - trigger: "ap6r"
+    replace: "APPROVED EXPECT RUNWAY 6R"
+
+  - trigger: "ap6c"
+    replace: "APPROVED EXPECT RUNWAY 6C"
+
+  - trigger: "ap7;"
+    replace: "APPROVED EXPECT RUNWAY 7"
+
+  - trigger: "ap7l"
+    replace: "APPROVED EXPECT RUNWAY 7L"
+
+  - trigger: "ap7r"
+    replace: "APPROVED EXPECT RUNWAY 7R"
+
+  - trigger: "ap7c"
+    replace: "APPROVED EXPECT RUNWAY 7C"
+
+  - trigger: "ap8;"
+    replace: "APPROVED EXPECT RUNWAY 8"
+
+  - trigger: "ap8l"
+    replace: "APPROVED EXPECT RUNWAY 8L"
+
+  - trigger: "ap8r"
+    replace: "APPROVED EXPECT RUNWAY 8R"
+
+  - trigger: "ap8c"
+    replace: "APPROVED EXPECT RUNWAY 8C"
+
+  - trigger: "ap9;"
+    replace: "APPROVED EXPECT RUNWAY 9"
+
+  - trigger: "ap9l"
+    replace: "APPROVED EXPECT RUNWAY 9L"
+
+  - trigger: "ap9r"
+    replace: "APPROVED EXPECT RUNWAY 9R"
+
+  - trigger: "ap9c"
+    replace: "APPROVED EXPECT RUNWAY 9C"
+
+  # 10-36
+  - trigger: "ap10;"
+    replace: "APPROVED EXPECT RUNWAY 10"
+
+  - trigger: "ap10l"
+    replace: "APPROVED EXPECT RUNWAY 10L"
+
+  - trigger: "ap10r"
+    replace: "APPROVED EXPECT RUNWAY 10R"
+
+  - trigger: "ap10c"
+    replace: "APPROVED EXPECT RUNWAY 10C"
+
+  - trigger: "ap11;"
+    replace: "APPROVED EXPECT RUNWAY 11"
+
+  - trigger: "ap11l"
+    replace: "APPROVED EXPECT RUNWAY 11L"
+
+  - trigger: "ap11r"
+    replace: "APPROVED EXPECT RUNWAY 11R"
+
+  - trigger: "ap11c"
+    replace: "APPROVED EXPECT RUNWAY 11C"
+
+  - trigger: "ap12;"
+    replace: "APPROVED EXPECT RUNWAY 12"
+
+  - trigger: "ap12l"
+    replace: "APPROVED EXPECT RUNWAY 12L"
+
+  - trigger: "ap12r"
+    replace: "APPROVED EXPECT RUNWAY 12R"
+
+  - trigger: "ap12c"
+    replace: "APPROVED EXPECT RUNWAY 12C"
+
+  - trigger: "ap13;"
+    replace: "APPROVED EXPECT RUNWAY 13"
+
+  - trigger: "ap13l"
+    replace: "APPROVED EXPECT RUNWAY 13L"
+
+  - trigger: "ap13r"
+    replace: "APPROVED EXPECT RUNWAY 13R"
+
+  - trigger: "ap13c"
+    replace: "APPROVED EXPECT RUNWAY 13C"
+
+  - trigger: "ap14;"
+    replace: "APPROVED EXPECT RUNWAY 14"
+
+  - trigger: "ap14l"
+    replace: "APPROVED EXPECT RUNWAY 14L"
+
+  - trigger: "ap14r"
+    replace: "APPROVED EXPECT RUNWAY 14R"
+
+  - trigger: "ap14c"
+    replace: "APPROVED EXPECT RUNWAY 14C"
+
+  - trigger: "ap15;"
+    replace: "APPROVED EXPECT RUNWAY 15"
+
+  - trigger: "ap15l"
+    replace: "APPROVED EXPECT RUNWAY 15L"
+
+  - trigger: "ap15r"
+    replace: "APPROVED EXPECT RUNWAY 15R"
+
+  - trigger: "ap15c"
+    replace: "APPROVED EXPECT RUNWAY 15C"
+
+  - trigger: "ap16;"
+    replace: "APPROVED EXPECT RUNWAY 16"
+
+  - trigger: "ap16l"
+    replace: "APPROVED EXPECT RUNWAY 16L"
+
+  - trigger: "ap16r"
+    replace: "APPROVED EXPECT RUNWAY 16R"
+
+  - trigger: "ap16c"
+    replace: "APPROVED EXPECT RUNWAY 16C"
+
+  - trigger: "ap17;"
+    replace: "APPROVED EXPECT RUNWAY 17"
+
+  - trigger: "ap17l"
+    replace: "APPROVED EXPECT RUNWAY 17L"
+
+  - trigger: "ap17r"
+    replace: "APPROVED EXPECT RUNWAY 17R"
+
+  - trigger: "ap17c"
+    replace: "APPROVED EXPECT RUNWAY 17C"
+
+  - trigger: "ap18;"
+    replace: "APPROVED EXPECT RUNWAY 18"
+
+  - trigger: "ap18l"
+    replace: "APPROVED EXPECT RUNWAY 18L"
+
+  - trigger: "ap18r"
+    replace: "APPROVED EXPECT RUNWAY 18R"
+
+  - trigger: "ap18c"
+    replace: "APPROVED EXPECT RUNWAY 18C"
+
+  - trigger: "ap19;"
+    replace: "APPROVED EXPECT RUNWAY 19"
+
+  - trigger: "ap19l"
+    replace: "APPROVED EXPECT RUNWAY 19L"
+
+  - trigger: "ap19r"
+    replace: "APPROVED EXPECT RUNWAY 19R"
+
+  - trigger: "ap19c"
+    replace: "APPROVED EXPECT RUNWAY 19C"
+
+  - trigger: "ap20;"
+    replace: "APPROVED EXPECT RUNWAY 20"
+
+  - trigger: "ap20l"
+    replace: "APPROVED EXPECT RUNWAY 20L"
+
+  - trigger: "ap20r"
+    replace: "APPROVED EXPECT RUNWAY 20R"
+
+  - trigger: "ap20c"
+    replace: "APPROVED EXPECT RUNWAY 20C"
+
+  - trigger: "ap21;"
+    replace: "APPROVED EXPECT RUNWAY 21"
+
+  - trigger: "ap21l"
+    replace: "APPROVED EXPECT RUNWAY 21L"
+
+  - trigger: "ap21r"
+    replace: "APPROVED EXPECT RUNWAY 21R"
+
+  - trigger: "ap21c"
+    replace: "APPROVED EXPECT RUNWAY 21C"
+
+  - trigger: "ap22;"
+    replace: "APPROVED EXPECT RUNWAY 22"
+
+  - trigger: "ap22l"
+    replace: "APPROVED EXPECT RUNWAY 22L"
+
+  - trigger: "ap22r"
+    replace: "APPROVED EXPECT RUNWAY 22R"
+
+  - trigger: "ap22c"
+    replace: "APPROVED EXPECT RUNWAY 22C"
+
+  - trigger: "ap23;"
+    replace: "APPROVED EXPECT RUNWAY 23"
+
+  - trigger: "ap23l"
+    replace: "APPROVED EXPECT RUNWAY 23L"
+
+  - trigger: "ap23r"
+    replace: "APPROVED EXPECT RUNWAY 23R"
+
+  - trigger: "ap23c"
+    replace: "APPROVED EXPECT RUNWAY 23C"
+
+  - trigger: "ap24;"
+    replace: "APPROVED EXPECT RUNWAY 24"
+
+  - trigger: "ap24l"
+    replace: "APPROVED EXPECT RUNWAY 24L"
+
+  - trigger: "ap24r"
+    replace: "APPROVED EXPECT RUNWAY 24R"
+
+  - trigger: "ap24c"
+    replace: "APPROVED EXPECT RUNWAY 24C"
+
+  - trigger: "ap25;"
+    replace: "APPROVED EXPECT RUNWAY 25"
+
+  - trigger: "ap25l"
+    replace: "APPROVED EXPECT RUNWAY 25L"
+
+  - trigger: "ap25r"
+    replace: "APPROVED EXPECT RUNWAY 25R"
+
+  - trigger: "ap25c"
+    replace: "APPROVED EXPECT RUNWAY 25C"
+
+  - trigger: "ap26;"
+    replace: "APPROVED EXPECT RUNWAY 26"
+
+  - trigger: "ap26l"
+    replace: "APPROVED EXPECT RUNWAY 26L"
+
+  - trigger: "ap26r"
+    replace: "APPROVED EXPECT RUNWAY 26R"
+
+  - trigger: "ap26c"
+    replace: "APPROVED EXPECT RUNWAY 26C"
+
+  - trigger: "ap27;"
+    replace: "APPROVED EXPECT RUNWAY 27"
+
+  - trigger: "ap27l"
+    replace: "APPROVED EXPECT RUNWAY 27L"
+
+  - trigger: "ap27r"
+    replace: "APPROVED EXPECT RUNWAY 27R"
+
+  - trigger: "ap27c"
+    replace: "APPROVED EXPECT RUNWAY 27C"
+
+  - trigger: "ap28;"
+    replace: "APPROVED EXPECT RUNWAY 28"
+
+  - trigger: "ap28l"
+    replace: "APPROVED EXPECT RUNWAY 28L"
+
+  - trigger: "ap28r"
+    replace: "APPROVED EXPECT RUNWAY 28R"
+
+  - trigger: "ap28c"
+    replace: "APPROVED EXPECT RUNWAY 28C"
+
+  - trigger: "ap29;"
+    replace: "APPROVED EXPECT RUNWAY 29"
+
+  - trigger: "ap29l"
+    replace: "APPROVED EXPECT RUNWAY 29L"
+
+  - trigger: "ap29r"
+    replace: "APPROVED EXPECT RUNWAY 29R"
+
+  - trigger: "ap29c"
+    replace: "APPROVED EXPECT RUNWAY 29C"
+
+  - trigger: "ap30;"
+    replace: "APPROVED EXPECT RUNWAY 30"
+
+  - trigger: "ap30l"
+    replace: "APPROVED EXPECT RUNWAY 30L"
+
+  - trigger: "ap30r"
+    replace: "APPROVED EXPECT RUNWAY 30R"
+
+  - trigger: "ap30c"
+    replace: "APPROVED EXPECT RUNWAY 30C"
+
+  - trigger: "ap31;"
+    replace: "APPROVED EXPECT RUNWAY 31"
+
+  - trigger: "ap31l"
+    replace: "APPROVED EXPECT RUNWAY 31L"
+
+  - trigger: "ap31r"
+    replace: "APPROVED EXPECT RUNWAY 31R"
+
+  - trigger: "ap31c"
+    replace: "APPROVED EXPECT RUNWAY 31C"
+
+  - trigger: "ap32;"
+    replace: "APPROVED EXPECT RUNWAY 32"
+
+  - trigger: "ap32l"
+    replace: "APPROVED EXPECT RUNWAY 32L"
+
+  - trigger: "ap32r"
+    replace: "APPROVED EXPECT RUNWAY 32R"
+
+  - trigger: "ap32c"
+    replace: "APPROVED EXPECT RUNWAY 32C"
+
+  - trigger: "ap33;"
+    replace: "APPROVED EXPECT RUNWAY 33"
+
+  - trigger: "ap33l"
+    replace: "APPROVED EXPECT RUNWAY 33L"
+
+  - trigger: "ap33r"
+    replace: "APPROVED EXPECT RUNWAY 33R"
+
+  - trigger: "ap33c"
+    replace: "APPROVED EXPECT RUNWAY 33C"
+
+  - trigger: "ap34;"
+    replace: "APPROVED EXPECT RUNWAY 34"
+
+  - trigger: "ap34l"
+    replace: "APPROVED EXPECT RUNWAY 34L"
+
+  - trigger: "ap34r"
+    replace: "APPROVED EXPECT RUNWAY 34R"
+
+  - trigger: "ap34c"
+    replace: "APPROVED EXPECT RUNWAY 34C"
+
+  - trigger: "ap35;"
+    replace: "APPROVED EXPECT RUNWAY 35"
+
+  - trigger: "ap35l"
+    replace: "APPROVED EXPECT RUNWAY 35L"
+
+  - trigger: "ap35r"
+    replace: "APPROVED EXPECT RUNWAY 35R"
+
+  - trigger: "ap35c"
+    replace: "APPROVED EXPECT RUNWAY 35C"
+
+  - trigger: "ap36;"
+    replace: "APPROVED EXPECT RUNWAY 36"
+
+  - trigger: "ap36l"
+    replace: "APPROVED EXPECT RUNWAY 36L"
+
+  - trigger: "ap36r"
+    replace: "APPROVED EXPECT RUNWAY 36R"
+
+  - trigger: "ap36c"
+    replace: "APPROVED EXPECT RUNWAY 36C"

@@ -1,0 +1,12 @@
+matches:
+
+  - trigger: d33lb1b
+    replace: RUNWAY 33L AT B1 VIA B
+  - trigger: d33ljb
+    replace: RUNWAY 33L AT J VIA B  	
+  - trigger: d34rm6n
+    replace: RUNWAY 34R AT M6 VIA N
+  - trigger: d34rtn
+    replace: RUNWAY 34R AT T VIA N
+  - trigger: d34rtr7
+    replace: RUNWAY 34R AT T VIA R7

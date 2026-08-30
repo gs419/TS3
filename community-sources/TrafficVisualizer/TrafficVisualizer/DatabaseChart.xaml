@@ -1,0 +1,285 @@
+﻿<UserControl
+    x:Class="TrafficVisualizer.DatabaseChart"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TrafficVisualizer"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Me"
+    d:DesignHeight="600"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="cargo" TargetType="TextBlock">
+            <Setter Property="Visibility" Value="Hidden"/>
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="0,4,0,0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=Me,Path=SeparateCargo}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <DataTemplate x:Key="TopList">
+            <Grid  Width="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" Height="18" VerticalAlignment="Top" FontSize="13" Text="{Binding Item}"/>
+                <TextBlock Grid.Column="2" Height="18" VerticalAlignment="Top" FontSize="13" TextAlignment="Right"  Text="{Binding Count}"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Canvas
+        x:Name="C"
+        Background="Azure"
+        DataContextChanged="Canvas_DataContextChanged"
+        SizeChanged="Canvas_SizeChanged">
+
+        <DockPanel
+            Width="{Binding ActualWidth, ElementName=C}"
+            Height="{Binding ActualHeight, ElementName=C}"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top">
+
+            <StackPanel
+                Height="40"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                DockPanel.Dock="Top"
+                Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Margin" Value="2,6,2,0" />
+                        <Setter Property="FontSize" Value="16" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock>Schedule Overview for</TextBlock>
+                <TextBlock Text="{Binding Name}" />
+                <TextBlock>at</TextBlock>
+                <TextBlock Text="{Binding Airport}" />
+            </StackPanel>
+            <TextBlock
+                Height="20"
+                HorizontalAlignment="Center"
+                DockPanel.Dock="Bottom">
+                TrafficVisualizer by CuratedPile
+            </TextBlock>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="TextAlignment" Value="Center" />
+                        <Setter Property="FontSize" Value="11" />
+                        <Setter Property="FontWeight" Value="DemiBold" />
+                        <Setter Property="VerticalAlignment" Value="Stretch" />
+                        <Setter Property="Padding" Value="0,4,0,0" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="22" />
+                    <RowDefinition Height="22" />
+                    <RowDefinition Height="22" />
+                    <RowDefinition Height="22" />
+                    <RowDefinition Height="22" />
+                    <RowDefinition Height="22" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Background="LightGreen">
+                    GA Departures
+                </TextBlock>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Background="LightGreen"
+                    Text="{Binding GADepartures}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Background="Coral">
+                    GA Arrivals
+                </TextBlock>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Background="Coral"
+                    Text="{Binding GAArrivals}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Background="SkyBlue">
+                    Departures
+                </TextBlock>
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Background="SkyBlue"
+                    Text="{Binding Departures}" />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Background="Orange">
+                    Arrivals
+                </TextBlock>
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Background="Orange"
+                    Text="{Binding Arrivals}" />
+                <TextBlock Style="{StaticResource cargo}"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Background="CadetBlue">
+                    Cargo Dep
+                </TextBlock>
+                <TextBlock Style="{StaticResource cargo}"
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Background="CadetBlue"
+                    Text="{Binding CargoDepartures}" />
+                <TextBlock Style="{StaticResource cargo}"
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Background="Tomato">
+                    Cargo Arr
+                </TextBlock>
+                <TextBlock Style="{StaticResource cargo}"
+                    Grid.Row="5"
+                    Grid.Column="2"
+                    Background="Tomato"
+                    Text="{Binding CargoArrivals}" />
+                <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Padding="0,6,0,0"
+                    FontSize="12"
+                    FontWeight="Bold"
+                    TextDecorations="Underline">
+                    Top Operators
+                </TextBlock>
+                <ListBox
+                    Name="lbOperators"
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    IsEnabled="False"
+                    ItemTemplate="{StaticResource TopList}">
+                </ListBox>
+                <!--DataGrid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding ElementName=Me, Path=Database.TopOperators}" AutoGenerateColumns="True">
+                </DataGrid-->
+                <TextBlock
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Padding="0,6,0,0"
+                    FontSize="12"
+                    FontWeight="Bold"
+                    TextDecorations="Underline">
+                    Top Aircraft
+                </TextBlock>
+                <ListBox
+                    x:Name="lbAircraft"
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    IsEnabled="False"
+                    ItemTemplate="{StaticResource TopList}">
+                </ListBox>
+                <Grid x:Name="G" Grid.RowSpan="10" Background="Beige">
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextAlignment" Value="Center"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Rectangle x:Name="Y" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch" Fill="Black" Width="2"/>
+                    <Rectangle Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="24" HorizontalAlignment="Stretch" VerticalAlignment="Top" Fill="Black" Height="2"/>
+                    <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="24" HorizontalAlignment="Stretch" VerticalAlignment="Top" Fill="Gray" Height="1"/>
+                    <TextBlock x:Name="tMax" Grid.RowSpan="2" TextAlignment="Right" Margin="0,17,8,0"/>
+                    <Rectangle Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch" Fill="Gray" Width="1"/>
+                    <Rectangle Grid.Column="6" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch" Fill="Gray" Width="1"/>
+                    <Rectangle Grid.Column="9" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch" Fill="Gray" Width="1"/>
+                    <Rectangle Grid.Column="12" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch" Fill="Gray" Width="1"/>
+                    <Rectangle Grid.Column="15" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch" Fill="Gray" Width="1"/>
+                    <Rectangle Grid.Column="18" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch" Fill="Gray" Width="1"/>
+                    <Rectangle Grid.Column="21" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch" Fill="Gray" Width="1"/>
+                    <Rectangle Grid.Column="24" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch" Fill="Gray" Width="1"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1">00</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="2">01</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="3">02</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="4">03</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="5">04</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="6">05</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="7">06</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="8">07</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="9">08</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="10">09</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="11">10</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="12">11</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="13">12</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="14">13</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="15">14</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="16">15</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="17">16</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="18">17</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="19">18</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="20">19</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="21">20</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="22">21</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="23">22</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="24">23</TextBlock>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Canvas>
+</UserControl>

@@ -1,0 +1,69 @@
+matches:
+ 
+  - trigger: tti
+    replace: "TAXI TO THE INTERSECTION OF "
+  - trigger: ttr
+    replace: "TAXI TO RAMP"
+  
+  - trigger: hp
+    replace: HOLD POSITION
+    
+  - trigger: ct;
+    replace: CONTINUE TAXI
+  
+  - trigger: fc
+    replace: FOLLOW COMPANY
+  
+  - trigger: ct1
+    replace: "CLEARED FOR TAKEOFF ON REACHING ALTITUDE 1000 CONTACT DEPARTURE"
+  - trigger: ci1
+    replace: "CLEARED FOR IMMEDIATE TAKEOFF ON REACHING ALTITUDE 1000 CONTACT DEPARTURE"  
+    
+  - trigger: hs
+    replace: "HOLD SHORT OF TAXIWAY "
+  
+  - trigger: ctl
+    replace: "CLEARED TO LAND"
+  - trigger: ctlr
+    replace: "CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+  - trigger: ctll
+    replace: "CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+  - trigger: ca;
+    replace: "CONTINUE APPROACH"
+
+  - trigger: tnr
+    replace: "TAKE NEXT AVAILABLE EXIT ON RIGHT"
+  - trigger: tnl
+    replace: "TAKE NEXT AVAILABLE EXIT ON LEFT"  
+    
+  - trigger: var;
+    replace: "VACATE RUNWAY RIGHT ONTO TAXIWAY "
+  - trigger: val;
+    replace: "VACATE RUNWAY LEFT ONTO TAXIWAY "  
+    
+  - trigger: stb
+    replace: "STANDBY"  
+    
+  - trigger: cd;
+    replace: "CONTACT DEPARTURE"
+  - trigger: cg;
+    replace: "CONTACT GROUND"
+
+  - trigger: cat;
+    replace: "CANCEL TAKEOFF"
+    
+  - trigger: fh
+    replace: "FLY HEADING "
+    
+  - trigger: ga;
+    replace: "GO AROUND"
+  - trigger: gatr
+    replace: "GO AROUND TURN RIGHT 45 DEGREES CONTACT DEPARTURE"
+  - trigger: gatl
+    replace: "GO AROUND TURN LEFT 45 DEGREES CONTACT DEPARTURE" 
+    
+  - trigger: lw
+    replace: LINE UP AND WAIT
+  - trigger: lbn
+    replace: LINE UP BEHIND NEXT LANDING AIRCRAFT
+   

@@ -1,0 +1,1083 @@
+matches:
+  # ROW
+  - trigger: "01lw"
+    replace: "RUNWAY 01 LINE UP AND WAIT"
+
+  - trigger: "01lbn"
+    replace: "RUNWAY 01 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "01llw"
+    replace: "RUNWAY 01L LINE UP AND WAIT"
+
+  - trigger: "01llbn"
+    replace: "RUNWAY 01L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "01rlw"
+    replace: "RUNWAY 01R LINE UP AND WAIT"
+
+  - trigger: "01rlbn"
+    replace: "RUNWAY 01R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "01clw"
+    replace: "RUNWAY 01C LINE UP AND WAIT"
+
+  - trigger: "01clbn"
+    replace: "RUNWAY 01C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "02lw"
+    replace: "RUNWAY 02 LINE UP AND WAIT"
+
+  - trigger: "02lbn"
+    replace: "RUNWAY 02 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "02llw"
+    replace: "RUNWAY 02L LINE UP AND WAIT"
+
+  - trigger: "02llbn"
+    replace: "RUNWAY 02L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "02rlw"
+    replace: "RUNWAY 02R LINE UP AND WAIT"
+
+  - trigger: "02rlbn"
+    replace: "RUNWAY 02R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "02clw"
+    replace: "RUNWAY 02C LINE UP AND WAIT"
+
+  - trigger: "02clbn"
+    replace: "RUNWAY 02C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "03lw"
+    replace: "RUNWAY 03 LINE UP AND WAIT"
+
+  - trigger: "03lbn"
+    replace: "RUNWAY 03 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "03llw"
+    replace: "RUNWAY 03L LINE UP AND WAIT"
+
+  - trigger: "03llbn"
+    replace: "RUNWAY 03L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "03rlw"
+    replace: "RUNWAY 03R LINE UP AND WAIT"
+
+  - trigger: "03rlbn"
+    replace: "RUNWAY 03R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "03clw"
+    replace: "RUNWAY 03C LINE UP AND WAIT"
+
+  - trigger: "03clbn"
+    replace: "RUNWAY 03C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "04lw"
+    replace: "RUNWAY 04 LINE UP AND WAIT"
+
+  - trigger: "04lbn"
+    replace: "RUNWAY 04 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "04llw"
+    replace: "RUNWAY 04L LINE UP AND WAIT"
+
+  - trigger: "04llbn"
+    replace: "RUNWAY 04L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "04rlw"
+    replace: "RUNWAY 04R LINE UP AND WAIT"
+
+  - trigger: "04rlbn"
+    replace: "RUNWAY 04R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "04clw"
+    replace: "RUNWAY 04C LINE UP AND WAIT"
+
+  - trigger: "04clbn"
+    replace: "RUNWAY 04C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "05lw"
+    replace: "RUNWAY 05 LINE UP AND WAIT"
+
+  - trigger: "05lbn"
+    replace: "RUNWAY 05 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "05llw"
+    replace: "RUNWAY 05L LINE UP AND WAIT"
+
+  - trigger: "05llbn"
+    replace: "RUNWAY 05L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "05rlw"
+    replace: "RUNWAY 05R LINE UP AND WAIT"
+
+  - trigger: "05rlbn"
+    replace: "RUNWAY 05R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "05clw"
+    replace: "RUNWAY 05C LINE UP AND WAIT"
+
+  - trigger: "05clbn"
+    replace: "RUNWAY 05C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "06lw"
+    replace: "RUNWAY 06 LINE UP AND WAIT"
+
+  - trigger: "06lbn"
+    replace: "RUNWAY 06 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "06llw"
+    replace: "RUNWAY 06L LINE UP AND WAIT"
+
+  - trigger: "06llbn"
+    replace: "RUNWAY 06L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "06rlw"
+    replace: "RUNWAY 06R LINE UP AND WAIT"
+
+  - trigger: "06rlbn"
+    replace: "RUNWAY 06R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "06clw"
+    replace: "RUNWAY 06C LINE UP AND WAIT"
+
+  - trigger: "06clbn"
+    replace: "RUNWAY 06C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "07lw"
+    replace: "RUNWAY 07 LINE UP AND WAIT"
+
+  - trigger: "07lbn"
+    replace: "RUNWAY 07 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "07llw"
+    replace: "RUNWAY 07L LINE UP AND WAIT"
+
+  - trigger: "07llbn"
+    replace: "RUNWAY 07L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "07rlw"
+    replace: "RUNWAY 07R LINE UP AND WAIT"
+
+  - trigger: "07rlbn"
+    replace: "RUNWAY 07R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "07clw"
+    replace: "RUNWAY 07C LINE UP AND WAIT"
+
+  - trigger: "07clbn"
+    replace: "RUNWAY 07C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "08lw"
+    replace: "RUNWAY 08 LINE UP AND WAIT"
+
+  - trigger: "08lbn"
+    replace: "RUNWAY 08 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "08llw"
+    replace: "RUNWAY 08L LINE UP AND WAIT"
+
+  - trigger: "08llbn"
+    replace: "RUNWAY 08L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "08rlw"
+    replace: "RUNWAY 08R LINE UP AND WAIT"
+
+  - trigger: "08rlbn"
+    replace: "RUNWAY 08R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "08clw"
+    replace: "RUNWAY 08C LINE UP AND WAIT"
+
+  - trigger: "08clbn"
+    replace: "RUNWAY 08C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "09lw"
+    replace: "RUNWAY 09 LINE UP AND WAIT"
+
+  - trigger: "09lbn"
+    replace: "RUNWAY 09 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "09llw"
+    replace: "RUNWAY 09L LINE UP AND WAIT"
+
+  - trigger: "09llbn"
+    replace: "RUNWAY 09L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "09rlw"
+    replace: "RUNWAY 09R LINE UP AND WAIT"
+
+  - trigger: "09rlbn"
+    replace: "RUNWAY 09R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "09clw"
+    replace: "RUNWAY 09C LINE UP AND WAIT"
+
+  - trigger: "09clbn"
+    replace: "RUNWAY 09C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  # US
+  - trigger: "1lw"
+    replace: "RUNWAY 1 LINE UP AND WAIT"
+
+  - trigger: "1lbn"
+    replace: "RUNWAY 1 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "1llw"
+    replace: "RUNWAY 1L LINE UP AND WAIT"
+
+  - trigger: "1llbn"
+    replace: "RUNWAY 1L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "1rlw"
+    replace: "RUNWAY 1R LINE UP AND WAIT"
+
+  - trigger: "1rlbn"
+    replace: "RUNWAY 1R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "1clw"
+    replace: "RUNWAY 1C LINE UP AND WAIT"
+
+  - trigger: "1clbn"
+    replace: "RUNWAY 1C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "2lw"
+    replace: "RUNWAY 2 LINE UP AND WAIT"
+
+  - trigger: "2lbn"
+    replace: "RUNWAY 2 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "2llw"
+    replace: "RUNWAY 2L LINE UP AND WAIT"
+
+  - trigger: "2llbn"
+    replace: "RUNWAY 2L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "2rlw"
+    replace: "RUNWAY 2R LINE UP AND WAIT"
+
+  - trigger: "2rlbn"
+    replace: "RUNWAY 2R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "2clw"
+    replace: "RUNWAY 2C LINE UP AND WAIT"
+
+  - trigger: "2clbn"
+    replace: "RUNWAY 2C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "3lw"
+    replace: "RUNWAY 3 LINE UP AND WAIT"
+
+  - trigger: "3lbn"
+    replace: "RUNWAY 3 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "3llw"
+    replace: "RUNWAY 3L LINE UP AND WAIT"
+
+  - trigger: "3llbn"
+    replace: "RUNWAY 3L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "3rlw"
+    replace: "RUNWAY 3R LINE UP AND WAIT"
+
+  - trigger: "3rlbn"
+    replace: "RUNWAY 3R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "3clw"
+    replace: "RUNWAY 3C LINE UP AND WAIT"
+
+  - trigger: "3clbn"
+    replace: "RUNWAY 3C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "4lw"
+    replace: "RUNWAY 4 LINE UP AND WAIT"
+
+  - trigger: "4lbn"
+    replace: "RUNWAY 4 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "4llw"
+    replace: "RUNWAY 4L LINE UP AND WAIT"
+
+  - trigger: "4llbn"
+    replace: "RUNWAY 4L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "4rlw"
+    replace: "RUNWAY 4R LINE UP AND WAIT"
+
+  - trigger: "4rlbn"
+    replace: "RUNWAY 4R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "4clw"
+    replace: "RUNWAY 4C LINE UP AND WAIT"
+
+  - trigger: "4clbn"
+    replace: "RUNWAY 4C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "5lw"
+    replace: "RUNWAY 5 LINE UP AND WAIT"
+
+  - trigger: "5lbn"
+    replace: "RUNWAY 5 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "5llw"
+    replace: "RUNWAY 5L LINE UP AND WAIT"
+
+  - trigger: "5llbn"
+    replace: "RUNWAY 5L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "5rlw"
+    replace: "RUNWAY 5R LINE UP AND WAIT"
+
+  - trigger: "5rlbn"
+    replace: "RUNWAY 5R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "5clw"
+    replace: "RUNWAY 5C LINE UP AND WAIT"
+
+  - trigger: "5clbn"
+    replace: "RUNWAY 5C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "6lw"
+    replace: "RUNWAY 6 LINE UP AND WAIT"
+
+  - trigger: "6lbn"
+    replace: "RUNWAY 6 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "6llw"
+    replace: "RUNWAY 6L LINE UP AND WAIT"
+
+  - trigger: "6llbn"
+    replace: "RUNWAY 6L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "6rlw"
+    replace: "RUNWAY 6R LINE UP AND WAIT"
+
+  - trigger: "6rlbn"
+    replace: "RUNWAY 6R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "6clw"
+    replace: "RUNWAY 6C LINE UP AND WAIT"
+
+  - trigger: "6clbn"
+    replace: "RUNWAY 6C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "7lw"
+    replace: "RUNWAY 7 LINE UP AND WAIT"
+
+  - trigger: "7lbn"
+    replace: "RUNWAY 7 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "7llw"
+    replace: "RUNWAY 7L LINE UP AND WAIT"
+
+  - trigger: "7llbn"
+    replace: "RUNWAY 7L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "7rlw"
+    replace: "RUNWAY 7R LINE UP AND WAIT"
+
+  - trigger: "7rlbn"
+    replace: "RUNWAY 7R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "7clw"
+    replace: "RUNWAY 7C LINE UP AND WAIT"
+
+  - trigger: "7clbn"
+    replace: "RUNWAY 7C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "8lw"
+    replace: "RUNWAY 8 LINE UP AND WAIT"
+
+  - trigger: "8lbn"
+    replace: "RUNWAY 8 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "8llw"
+    replace: "RUNWAY 8L LINE UP AND WAIT"
+
+  - trigger: "8llbn"
+    replace: "RUNWAY 8L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "8rlw"
+    replace: "RUNWAY 8R LINE UP AND WAIT"
+
+  - trigger: "8rlbn"
+    replace: "RUNWAY 8R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "8clw"
+    replace: "RUNWAY 8C LINE UP AND WAIT"
+
+  - trigger: "8clbn"
+    replace: "RUNWAY 8C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "9lw"
+    replace: "RUNWAY 9 LINE UP AND WAIT"
+
+  - trigger: "9lbn"
+    replace: "RUNWAY 9 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "9llw"
+    replace: "RUNWAY 9L LINE UP AND WAIT"
+
+  - trigger: "9llbn"
+    replace: "RUNWAY 9L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "9rlw"
+    replace: "RUNWAY 9R LINE UP AND WAIT"
+
+  - trigger: "9rlbn"
+    replace: "RUNWAY 9R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "9clw"
+    replace: "RUNWAY 9C LINE UP AND WAIT"
+
+  - trigger: "9clbn"
+    replace: "RUNWAY 9C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  # 10-36
+  - trigger: "10lw"
+    replace: "RUNWAY 10 LINE UP AND WAIT"
+
+  - trigger: "10lbn"
+    replace: "RUNWAY 10 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "10llw"
+    replace: "RUNWAY 10L LINE UP AND WAIT"
+
+  - trigger: "10llbn"
+    replace: "RUNWAY 10L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "10rlw"
+    replace: "RUNWAY 10R LINE UP AND WAIT"
+
+  - trigger: "10rlbn"
+    replace: "RUNWAY 10R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "10clw"
+    replace: "RUNWAY 10C LINE UP AND WAIT"
+
+  - trigger: "10clbn"
+    replace: "RUNWAY 10C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "11lw"
+    replace: "RUNWAY 11 LINE UP AND WAIT"
+
+  - trigger: "11lbn"
+    replace: "RUNWAY 11 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "11llw"
+    replace: "RUNWAY 11L LINE UP AND WAIT"
+
+  - trigger: "11llbn"
+    replace: "RUNWAY 11L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "11rlw"
+    replace: "RUNWAY 11R LINE UP AND WAIT"
+
+  - trigger: "11rlbn"
+    replace: "RUNWAY 11R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "11clw"
+    replace: "RUNWAY 11C LINE UP AND WAIT"
+
+  - trigger: "11clbn"
+    replace: "RUNWAY 11C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "12lw"
+    replace: "RUNWAY 12 LINE UP AND WAIT"
+
+  - trigger: "12lbn"
+    replace: "RUNWAY 12 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "12llw"
+    replace: "RUNWAY 12L LINE UP AND WAIT"
+
+  - trigger: "12llbn"
+    replace: "RUNWAY 12L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "12rlw"
+    replace: "RUNWAY 12R LINE UP AND WAIT"
+
+  - trigger: "12rlbn"
+    replace: "RUNWAY 12R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "12clw"
+    replace: "RUNWAY 12C LINE UP AND WAIT"
+
+  - trigger: "12clbn"
+    replace: "RUNWAY 12C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "13lw"
+    replace: "RUNWAY 13 LINE UP AND WAIT"
+
+  - trigger: "13lbn"
+    replace: "RUNWAY 13 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "13llw"
+    replace: "RUNWAY 13L LINE UP AND WAIT"
+
+  - trigger: "13llbn"
+    replace: "RUNWAY 13L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "13rlw"
+    replace: "RUNWAY 13R LINE UP AND WAIT"
+
+  - trigger: "13rlbn"
+    replace: "RUNWAY 13R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "13clw"
+    replace: "RUNWAY 13C LINE UP AND WAIT"
+
+  - trigger: "13clbn"
+    replace: "RUNWAY 13C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "14lw"
+    replace: "RUNWAY 14 LINE UP AND WAIT"
+
+  - trigger: "14lbn"
+    replace: "RUNWAY 14 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "14llw"
+    replace: "RUNWAY 14L LINE UP AND WAIT"
+
+  - trigger: "14llbn"
+    replace: "RUNWAY 14L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "14rlw"
+    replace: "RUNWAY 14R LINE UP AND WAIT"
+
+  - trigger: "14rlbn"
+    replace: "RUNWAY 14R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "14clw"
+    replace: "RUNWAY 14C LINE UP AND WAIT"
+
+  - trigger: "14clbn"
+    replace: "RUNWAY 14C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "15lw"
+    replace: "RUNWAY 15 LINE UP AND WAIT"
+
+  - trigger: "15lbn"
+    replace: "RUNWAY 15 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "15llw"
+    replace: "RUNWAY 15L LINE UP AND WAIT"
+
+  - trigger: "15llbn"
+    replace: "RUNWAY 15L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "15rlw"
+    replace: "RUNWAY 15R LINE UP AND WAIT"
+
+  - trigger: "15rlbn"
+    replace: "RUNWAY 15R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "15clw"
+    replace: "RUNWAY 15C LINE UP AND WAIT"
+
+  - trigger: "15clbn"
+    replace: "RUNWAY 15C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "16lw"
+    replace: "RUNWAY 16 LINE UP AND WAIT"
+
+  - trigger: "16lbn"
+    replace: "RUNWAY 16 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "16llw"
+    replace: "RUNWAY 16L LINE UP AND WAIT"
+
+  - trigger: "16llbn"
+    replace: "RUNWAY 16L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "16rlw"
+    replace: "RUNWAY 16R LINE UP AND WAIT"
+
+  - trigger: "16rlbn"
+    replace: "RUNWAY 16R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "16clw"
+    replace: "RUNWAY 16C LINE UP AND WAIT"
+
+  - trigger: "16clbn"
+    replace: "RUNWAY 16C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "17lw"
+    replace: "RUNWAY 17 LINE UP AND WAIT"
+
+  - trigger: "17lbn"
+    replace: "RUNWAY 17 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "17llw"
+    replace: "RUNWAY 17L LINE UP AND WAIT"
+
+  - trigger: "17llbn"
+    replace: "RUNWAY 17L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "17rlw"
+    replace: "RUNWAY 17R LINE UP AND WAIT"
+
+  - trigger: "17rlbn"
+    replace: "RUNWAY 17R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "17clw"
+    replace: "RUNWAY 17C LINE UP AND WAIT"
+
+  - trigger: "17clbn"
+    replace: "RUNWAY 17C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "18lw"
+    replace: "RUNWAY 18 LINE UP AND WAIT"
+
+  - trigger: "18lbn"
+    replace: "RUNWAY 18 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "18llw"
+    replace: "RUNWAY 18L LINE UP AND WAIT"
+
+  - trigger: "18llbn"
+    replace: "RUNWAY 18L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "18rlw"
+    replace: "RUNWAY 18R LINE UP AND WAIT"
+
+  - trigger: "18rlbn"
+    replace: "RUNWAY 18R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "18clw"
+    replace: "RUNWAY 18C LINE UP AND WAIT"
+
+  - trigger: "18clbn"
+    replace: "RUNWAY 18C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "19lw"
+    replace: "RUNWAY 19 LINE UP AND WAIT"
+
+  - trigger: "19lbn"
+    replace: "RUNWAY 19 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "19llw"
+    replace: "RUNWAY 19L LINE UP AND WAIT"
+
+  - trigger: "19llbn"
+    replace: "RUNWAY 19L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "19rlw"
+    replace: "RUNWAY 19R LINE UP AND WAIT"
+
+  - trigger: "19rlbn"
+    replace: "RUNWAY 19R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "19clw"
+    replace: "RUNWAY 19C LINE UP AND WAIT"
+
+  - trigger: "19clbn"
+    replace: "RUNWAY 19C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "20lw"
+    replace: "RUNWAY 20 LINE UP AND WAIT"
+
+  - trigger: "20lbn"
+    replace: "RUNWAY 20 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "20llw"
+    replace: "RUNWAY 20L LINE UP AND WAIT"
+
+  - trigger: "20llbn"
+    replace: "RUNWAY 20L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "20rlw"
+    replace: "RUNWAY 20R LINE UP AND WAIT"
+
+  - trigger: "20rlbn"
+    replace: "RUNWAY 20R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "20clw"
+    replace: "RUNWAY 20C LINE UP AND WAIT"
+
+  - trigger: "20clbn"
+    replace: "RUNWAY 20C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "21lw"
+    replace: "RUNWAY 21 LINE UP AND WAIT"
+
+  - trigger: "21lbn"
+    replace: "RUNWAY 21 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "21llw"
+    replace: "RUNWAY 21L LINE UP AND WAIT"
+
+  - trigger: "21llbn"
+    replace: "RUNWAY 21L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "21rlw"
+    replace: "RUNWAY 21R LINE UP AND WAIT"
+
+  - trigger: "21rlbn"
+    replace: "RUNWAY 21R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "21clw"
+    replace: "RUNWAY 21C LINE UP AND WAIT"
+
+  - trigger: "21clbn"
+    replace: "RUNWAY 21C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "22lw"
+    replace: "RUNWAY 22 LINE UP AND WAIT"
+
+  - trigger: "22lbn"
+    replace: "RUNWAY 22 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "22llw"
+    replace: "RUNWAY 22L LINE UP AND WAIT"
+
+  - trigger: "22llbn"
+    replace: "RUNWAY 22L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "22rlw"
+    replace: "RUNWAY 22R LINE UP AND WAIT"
+
+  - trigger: "22rlbn"
+    replace: "RUNWAY 22R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "22clw"
+    replace: "RUNWAY 22C LINE UP AND WAIT"
+
+  - trigger: "22clbn"
+    replace: "RUNWAY 22C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "23lw"
+    replace: "RUNWAY 23 LINE UP AND WAIT"
+
+  - trigger: "23lbn"
+    replace: "RUNWAY 23 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "23llw"
+    replace: "RUNWAY 23L LINE UP AND WAIT"
+
+  - trigger: "23llbn"
+    replace: "RUNWAY 23L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "23rlw"
+    replace: "RUNWAY 23R LINE UP AND WAIT"
+
+  - trigger: "23rlbn"
+    replace: "RUNWAY 23R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "23clw"
+    replace: "RUNWAY 23C LINE UP AND WAIT"
+
+  - trigger: "23clbn"
+    replace: "RUNWAY 23C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "24lw"
+    replace: "RUNWAY 24 LINE UP AND WAIT"
+
+  - trigger: "24lbn"
+    replace: "RUNWAY 24 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "24llw"
+    replace: "RUNWAY 24L LINE UP AND WAIT"
+
+  - trigger: "24llbn"
+    replace: "RUNWAY 24L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "24rlw"
+    replace: "RUNWAY 24R LINE UP AND WAIT"
+
+  - trigger: "24rlbn"
+    replace: "RUNWAY 24R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "24clw"
+    replace: "RUNWAY 24C LINE UP AND WAIT"
+
+  - trigger: "24clbn"
+    replace: "RUNWAY 24C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "25lw"
+    replace: "RUNWAY 25 LINE UP AND WAIT"
+
+  - trigger: "25lbn"
+    replace: "RUNWAY 25 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "25llw"
+    replace: "RUNWAY 25L LINE UP AND WAIT"
+
+  - trigger: "25llbn"
+    replace: "RUNWAY 25L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "25rlw"
+    replace: "RUNWAY 25R LINE UP AND WAIT"
+
+  - trigger: "25rlbn"
+    replace: "RUNWAY 25R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "25clw"
+    replace: "RUNWAY 25C LINE UP AND WAIT"
+
+  - trigger: "25clbn"
+    replace: "RUNWAY 25C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "26lw"
+    replace: "RUNWAY 26 LINE UP AND WAIT"
+
+  - trigger: "26lbn"
+    replace: "RUNWAY 26 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "26llw"
+    replace: "RUNWAY 26L LINE UP AND WAIT"
+
+  - trigger: "26llbn"
+    replace: "RUNWAY 26L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "26rlw"
+    replace: "RUNWAY 26R LINE UP AND WAIT"
+
+  - trigger: "26rlbn"
+    replace: "RUNWAY 26R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "26clw"
+    replace: "RUNWAY 26C LINE UP AND WAIT"
+
+  - trigger: "26clbn"
+    replace: "RUNWAY 26C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "27lw"
+    replace: "RUNWAY 27 LINE UP AND WAIT"
+
+  - trigger: "27lbn"
+    replace: "RUNWAY 27 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "27llw"
+    replace: "RUNWAY 27L LINE UP AND WAIT"
+
+  - trigger: "27llbn"
+    replace: "RUNWAY 27L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "27rlw"
+    replace: "RUNWAY 27R LINE UP AND WAIT"
+
+  - trigger: "27rlbn"
+    replace: "RUNWAY 27R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "27clw"
+    replace: "RUNWAY 27C LINE UP AND WAIT"
+
+  - trigger: "27clbn"
+    replace: "RUNWAY 27C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "28lw"
+    replace: "RUNWAY 28 LINE UP AND WAIT"
+
+  - trigger: "28lbn"
+    replace: "RUNWAY 28 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "28llw"
+    replace: "RUNWAY 28L LINE UP AND WAIT"
+
+  - trigger: "28llbn"
+    replace: "RUNWAY 28L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "28rlw"
+    replace: "RUNWAY 28R LINE UP AND WAIT"
+
+  - trigger: "28rlbn"
+    replace: "RUNWAY 28R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "28clw"
+    replace: "RUNWAY 28C LINE UP AND WAIT"
+
+  - trigger: "28clbn"
+    replace: "RUNWAY 28C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "29lw"
+    replace: "RUNWAY 29 LINE UP AND WAIT"
+
+  - trigger: "29lbn"
+    replace: "RUNWAY 29 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "29llw"
+    replace: "RUNWAY 29L LINE UP AND WAIT"
+
+  - trigger: "29llbn"
+    replace: "RUNWAY 29L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "29rlw"
+    replace: "RUNWAY 29R LINE UP AND WAIT"
+
+  - trigger: "29rlbn"
+    replace: "RUNWAY 29R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "29clw"
+    replace: "RUNWAY 29C LINE UP AND WAIT"
+
+  - trigger: "29clbn"
+    replace: "RUNWAY 29C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "30lw"
+    replace: "RUNWAY 30 LINE UP AND WAIT"
+
+  - trigger: "30lbn"
+    replace: "RUNWAY 30 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "30llw"
+    replace: "RUNWAY 30L LINE UP AND WAIT"
+
+  - trigger: "30llbn"
+    replace: "RUNWAY 30L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "30rlw"
+    replace: "RUNWAY 30R LINE UP AND WAIT"
+
+  - trigger: "30rlbn"
+    replace: "RUNWAY 30R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "30clw"
+    replace: "RUNWAY 30C LINE UP AND WAIT"
+
+  - trigger: "30clbn"
+    replace: "RUNWAY 30C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "31lw"
+    replace: "RUNWAY 31 LINE UP AND WAIT"
+
+  - trigger: "31lbn"
+    replace: "RUNWAY 31 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "31llw"
+    replace: "RUNWAY 31L LINE UP AND WAIT"
+
+  - trigger: "31llbn"
+    replace: "RUNWAY 31L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "31rlw"
+    replace: "RUNWAY 31R LINE UP AND WAIT"
+
+  - trigger: "31rlbn"
+    replace: "RUNWAY 31R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "31clw"
+    replace: "RUNWAY 31C LINE UP AND WAIT"
+
+  - trigger: "31clbn"
+    replace: "RUNWAY 31C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "32lw"
+    replace: "RUNWAY 32 LINE UP AND WAIT"
+
+  - trigger: "32lbn"
+    replace: "RUNWAY 32 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "32llw"
+    replace: "RUNWAY 32L LINE UP AND WAIT"
+
+  - trigger: "32llbn"
+    replace: "RUNWAY 32L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "32rlw"
+    replace: "RUNWAY 32R LINE UP AND WAIT"
+
+  - trigger: "32rlbn"
+    replace: "RUNWAY 32R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "32clw"
+    replace: "RUNWAY 32C LINE UP AND WAIT"
+
+  - trigger: "32clbn"
+    replace: "RUNWAY 32C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "33lw"
+    replace: "RUNWAY 33 LINE UP AND WAIT"
+
+  - trigger: "33lbn"
+    replace: "RUNWAY 33 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "33llw"
+    replace: "RUNWAY 33L LINE UP AND WAIT"
+
+  - trigger: "33llbn"
+    replace: "RUNWAY 33L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "33rlw"
+    replace: "RUNWAY 33R LINE UP AND WAIT"
+
+  - trigger: "33rlbn"
+    replace: "RUNWAY 33R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "33clw"
+    replace: "RUNWAY 33C LINE UP AND WAIT"
+
+  - trigger: "33clbn"
+    replace: "RUNWAY 33C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "34lw"
+    replace: "RUNWAY 34 LINE UP AND WAIT"
+
+  - trigger: "34lbn"
+    replace: "RUNWAY 34 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "34llw"
+    replace: "RUNWAY 34L LINE UP AND WAIT"
+
+  - trigger: "34llbn"
+    replace: "RUNWAY 34L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "34rlw"
+    replace: "RUNWAY 34R LINE UP AND WAIT"
+
+  - trigger: "34rlbn"
+    replace: "RUNWAY 34R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "34clw"
+    replace: "RUNWAY 34C LINE UP AND WAIT"
+
+  - trigger: "34clbn"
+    replace: "RUNWAY 34C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "35lw"
+    replace: "RUNWAY 35 LINE UP AND WAIT"
+
+  - trigger: "35lbn"
+    replace: "RUNWAY 35 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "35llw"
+    replace: "RUNWAY 35L LINE UP AND WAIT"
+
+  - trigger: "35llbn"
+    replace: "RUNWAY 35L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "35rlw"
+    replace: "RUNWAY 35R LINE UP AND WAIT"
+
+  - trigger: "35rlbn"
+    replace: "RUNWAY 35R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "35clw"
+    replace: "RUNWAY 35C LINE UP AND WAIT"
+
+  - trigger: "35clbn"
+    replace: "RUNWAY 35C LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "36lw"
+    replace: "RUNWAY 36 LINE UP AND WAIT"
+
+  - trigger: "36lbn"
+    replace: "RUNWAY 36 LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "36llw"
+    replace: "RUNWAY 36L LINE UP AND WAIT"
+
+  - trigger: "36llbn"
+    replace: "RUNWAY 36L LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "36rlw"
+    replace: "RUNWAY 36R LINE UP AND WAIT"
+
+  - trigger: "36rlbn"
+    replace: "RUNWAY 36R LINE UP BEHIND NEXT LANDING AIRCRAFT"
+
+  - trigger: "36clw"
+    replace: "RUNWAY 36C LINE UP AND WAIT"
+
+  - trigger: "36clbn"
+    replace: "RUNWAY 36C LINE UP BEHIND NEXT LANDING AIRCRAFT"

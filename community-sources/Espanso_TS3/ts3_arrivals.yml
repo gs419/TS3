@@ -1,0 +1,1623 @@
+matches:
+  # ROW
+  - trigger: "01cl;"
+    replace: "RUNWAY 01 CLEARED TO LAND"
+
+  - trigger: "01clr"
+    replace: "RUNWAY 01 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "01cll"
+    replace: "RUNWAY 01 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "01lcl"
+    replace: "RUNWAY 01L CLEARED TO LAND"
+
+  - trigger: "01lclr"
+    replace: "RUNWAY 01L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "01lcll"
+    replace: "RUNWAY 01L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "01rcl"
+    replace: "RUNWAY 01R CLEARED TO LAND"
+
+  - trigger: "01rclr"
+    replace: "RUNWAY 01R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "01rcll"
+    replace: "RUNWAY 01R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "01ccl"
+    replace: "RUNWAY 01C CLEARED TO LAND"
+
+  - trigger: "01cclr"
+    replace: "RUNWAY 01C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "01ccll"
+    replace: "RUNWAY 01C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "02cl;"
+    replace: "RUNWAY 02 CLEARED TO LAND"
+
+  - trigger: "02clr"
+    replace: "RUNWAY 02 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "02cll"
+    replace: "RUNWAY 02 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "02lcl"
+    replace: "RUNWAY 02L CLEARED TO LAND"
+
+  - trigger: "02lclr"
+    replace: "RUNWAY 02L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "02lcll"
+    replace: "RUNWAY 02L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "02rcl"
+    replace: "RUNWAY 02R CLEARED TO LAND"
+
+  - trigger: "02rclr"
+    replace: "RUNWAY 02R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "02rcll"
+    replace: "RUNWAY 02R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "02ccl"
+    replace: "RUNWAY 02C CLEARED TO LAND"
+
+  - trigger: "02cclr"
+    replace: "RUNWAY 02C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "02ccll"
+    replace: "RUNWAY 02C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "03cl;"
+    replace: "RUNWAY 03 CLEARED TO LAND"
+
+  - trigger: "03clr"
+    replace: "RUNWAY 03 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "03cll"
+    replace: "RUNWAY 03 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "03lcl"
+    replace: "RUNWAY 03L CLEARED TO LAND"
+
+  - trigger: "03lclr"
+    replace: "RUNWAY 03L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "03lcll"
+    replace: "RUNWAY 03L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "03rcl"
+    replace: "RUNWAY 03R CLEARED TO LAND"
+
+  - trigger: "03rclr"
+    replace: "RUNWAY 03R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "03rcll"
+    replace: "RUNWAY 03R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "03ccl"
+    replace: "RUNWAY 03C CLEARED TO LAND"
+
+  - trigger: "03cclr"
+    replace: "RUNWAY 03C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "03ccll"
+    replace: "RUNWAY 03C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "04cl;"
+    replace: "RUNWAY 04 CLEARED TO LAND"
+
+  - trigger: "04clr"
+    replace: "RUNWAY 04 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "04cll"
+    replace: "RUNWAY 04 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "04lcl"
+    replace: "RUNWAY 04L CLEARED TO LAND"
+
+  - trigger: "04lclr"
+    replace: "RUNWAY 04L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "04lcll"
+    replace: "RUNWAY 04L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "04rcl"
+    replace: "RUNWAY 04R CLEARED TO LAND"
+
+  - trigger: "04rclr"
+    replace: "RUNWAY 04R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "04rcll"
+    replace: "RUNWAY 04R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "04ccl"
+    replace: "RUNWAY 04C CLEARED TO LAND"
+
+  - trigger: "04cclr"
+    replace: "RUNWAY 04C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "04ccll"
+    replace: "RUNWAY 04C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "05cl;"
+    replace: "RUNWAY 05 CLEARED TO LAND"
+
+  - trigger: "05clr"
+    replace: "RUNWAY 05 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "05cll"
+    replace: "RUNWAY 05 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "05lcl"
+    replace: "RUNWAY 05L CLEARED TO LAND"
+
+  - trigger: "05lclr"
+    replace: "RUNWAY 05L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "05lcll"
+    replace: "RUNWAY 05L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "05rcl"
+    replace: "RUNWAY 05R CLEARED TO LAND"
+
+  - trigger: "05rclr"
+    replace: "RUNWAY 05R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "05rcll"
+    replace: "RUNWAY 05R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "05ccl"
+    replace: "RUNWAY 05C CLEARED TO LAND"
+
+  - trigger: "05cclr"
+    replace: "RUNWAY 05C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "05ccll"
+    replace: "RUNWAY 05C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "06cl;"
+    replace: "RUNWAY 06 CLEARED TO LAND"
+
+  - trigger: "06clr"
+    replace: "RUNWAY 06 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "06cll"
+    replace: "RUNWAY 06 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "06lcl"
+    replace: "RUNWAY 06L CLEARED TO LAND"
+
+  - trigger: "06lclr"
+    replace: "RUNWAY 06L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "06lcll"
+    replace: "RUNWAY 06L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "06rcl"
+    replace: "RUNWAY 06R CLEARED TO LAND"
+
+  - trigger: "06rclr"
+    replace: "RUNWAY 06R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "06rcll"
+    replace: "RUNWAY 06R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "06ccl"
+    replace: "RUNWAY 06C CLEARED TO LAND"
+
+  - trigger: "06cclr"
+    replace: "RUNWAY 06C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "06ccll"
+    replace: "RUNWAY 06C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "07cl;"
+    replace: "RUNWAY 07 CLEARED TO LAND"
+
+  - trigger: "07clr"
+    replace: "RUNWAY 07 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "07cll"
+    replace: "RUNWAY 07 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "07lcl"
+    replace: "RUNWAY 07L CLEARED TO LAND"
+
+  - trigger: "07lclr"
+    replace: "RUNWAY 07L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "07lcll"
+    replace: "RUNWAY 07L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "07rcl"
+    replace: "RUNWAY 07R CLEARED TO LAND"
+
+  - trigger: "07rclr"
+    replace: "RUNWAY 07R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "07rcll"
+    replace: "RUNWAY 07R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "07ccl"
+    replace: "RUNWAY 07C CLEARED TO LAND"
+
+  - trigger: "07cclr"
+    replace: "RUNWAY 07C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "07ccll"
+    replace: "RUNWAY 07C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "08cl;"
+    replace: "RUNWAY 08 CLEARED TO LAND"
+
+  - trigger: "08clr"
+    replace: "RUNWAY 08 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "08cll"
+    replace: "RUNWAY 08 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "08lcl"
+    replace: "RUNWAY 08L CLEARED TO LAND"
+
+  - trigger: "08lclr"
+    replace: "RUNWAY 08L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "08lcll"
+    replace: "RUNWAY 08L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "08rcl"
+    replace: "RUNWAY 08R CLEARED TO LAND"
+
+  - trigger: "08rclr"
+    replace: "RUNWAY 08R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "08rcll"
+    replace: "RUNWAY 08R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "08ccl"
+    replace: "RUNWAY 08C CLEARED TO LAND"
+
+  - trigger: "08cclr"
+    replace: "RUNWAY 08C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "08ccll"
+    replace: "RUNWAY 08C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "09cl;"
+    replace: "RUNWAY 09 CLEARED TO LAND"
+
+  - trigger: "09clr"
+    replace: "RUNWAY 09 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "09cll"
+    replace: "RUNWAY 09 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "09lcl"
+    replace: "RUNWAY 09L CLEARED TO LAND"
+
+  - trigger: "09lclr"
+    replace: "RUNWAY 09L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "09lcll"
+    replace: "RUNWAY 09L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "09rcl"
+    replace: "RUNWAY 09R CLEARED TO LAND"
+
+  - trigger: "09rclr"
+    replace: "RUNWAY 09R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "09rcll"
+    replace: "RUNWAY 09R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "09ccl"
+    replace: "RUNWAY 09C CLEARED TO LAND"
+
+  - trigger: "09cclr"
+    replace: "RUNWAY 09C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "09ccll"
+    replace: "RUNWAY 09C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  # US
+  - trigger: "1cl;"
+    replace: "RUNWAY 1 CLEARED TO LAND"
+
+  - trigger: "1clr"
+    replace: "RUNWAY 1 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "1cll"
+    replace: "RUNWAY 1 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "1lcl"
+    replace: "RUNWAY 1L CLEARED TO LAND"
+
+  - trigger: "1lclr"
+    replace: "RUNWAY 1L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "1lcll"
+    replace: "RUNWAY 1L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "1rcl"
+    replace: "RUNWAY 1R CLEARED TO LAND"
+
+  - trigger: "1rclr"
+    replace: "RUNWAY 1R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "1rcll"
+    replace: "RUNWAY 1R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "1ccl"
+    replace: "RUNWAY 1C CLEARED TO LAND"
+
+  - trigger: "1cclr"
+    replace: "RUNWAY 1C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "1ccll"
+    replace: "RUNWAY 1C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "2cl;"
+    replace: "RUNWAY 2 CLEARED TO LAND"
+
+  - trigger: "2clr"
+    replace: "RUNWAY 2 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "2cll"
+    replace: "RUNWAY 2 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "2lcl"
+    replace: "RUNWAY 2L CLEARED TO LAND"
+
+  - trigger: "2lclr"
+    replace: "RUNWAY 2L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "2lcll"
+    replace: "RUNWAY 2L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "2rcl"
+    replace: "RUNWAY 2R CLEARED TO LAND"
+
+  - trigger: "2rclr"
+    replace: "RUNWAY 2R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "2rcll"
+    replace: "RUNWAY 2R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "2ccl"
+    replace: "RUNWAY 2C CLEARED TO LAND"
+
+  - trigger: "2cclr"
+    replace: "RUNWAY 2C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "2ccll"
+    replace: "RUNWAY 2C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "3cl;"
+    replace: "RUNWAY 3 CLEARED TO LAND"
+
+  - trigger: "3clr"
+    replace: "RUNWAY 3 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "3cll"
+    replace: "RUNWAY 3 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "3lcl"
+    replace: "RUNWAY 3L CLEARED TO LAND"
+
+  - trigger: "3lclr"
+    replace: "RUNWAY 3L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "3lcll"
+    replace: "RUNWAY 3L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "3rcl"
+    replace: "RUNWAY 3R CLEARED TO LAND"
+
+  - trigger: "3rclr"
+    replace: "RUNWAY 3R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "3rcll"
+    replace: "RUNWAY 3R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "3ccl"
+    replace: "RUNWAY 3C CLEARED TO LAND"
+
+  - trigger: "3cclr"
+    replace: "RUNWAY 3C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "3ccll"
+    replace: "RUNWAY 3C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "4cl;"
+    replace: "RUNWAY 4 CLEARED TO LAND"
+
+  - trigger: "4clr"
+    replace: "RUNWAY 4 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "4cll"
+    replace: "RUNWAY 4 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "4lcl"
+    replace: "RUNWAY 4L CLEARED TO LAND"
+
+  - trigger: "4lclr"
+    replace: "RUNWAY 4L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "4lcll"
+    replace: "RUNWAY 4L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "4rcl"
+    replace: "RUNWAY 4R CLEARED TO LAND"
+
+  - trigger: "4rclr"
+    replace: "RUNWAY 4R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "4rcll"
+    replace: "RUNWAY 4R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "4ccl"
+    replace: "RUNWAY 4C CLEARED TO LAND"
+
+  - trigger: "4cclr"
+    replace: "RUNWAY 4C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "4ccll"
+    replace: "RUNWAY 4C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "5cl;"
+    replace: "RUNWAY 5 CLEARED TO LAND"
+
+  - trigger: "5clr"
+    replace: "RUNWAY 5 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "5cll"
+    replace: "RUNWAY 5 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "5lcl"
+    replace: "RUNWAY 5L CLEARED TO LAND"
+
+  - trigger: "5lclr"
+    replace: "RUNWAY 5L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "5lcll"
+    replace: "RUNWAY 5L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "5rcl"
+    replace: "RUNWAY 5R CLEARED TO LAND"
+
+  - trigger: "5rclr"
+    replace: "RUNWAY 5R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "5rcll"
+    replace: "RUNWAY 5R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "5ccl"
+    replace: "RUNWAY 5C CLEARED TO LAND"
+
+  - trigger: "5cclr"
+    replace: "RUNWAY 5C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "5ccll"
+    replace: "RUNWAY 5C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "6cl;"
+    replace: "RUNWAY 6 CLEARED TO LAND"
+
+  - trigger: "6clr"
+    replace: "RUNWAY 6 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "6cll"
+    replace: "RUNWAY 6 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "6lcl"
+    replace: "RUNWAY 6L CLEARED TO LAND"
+
+  - trigger: "6lclr"
+    replace: "RUNWAY 6L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "6lcll"
+    replace: "RUNWAY 6L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "6rcl"
+    replace: "RUNWAY 6R CLEARED TO LAND"
+
+  - trigger: "6rclr"
+    replace: "RUNWAY 6R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "6rcll"
+    replace: "RUNWAY 6R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "6ccl"
+    replace: "RUNWAY 6C CLEARED TO LAND"
+
+  - trigger: "6cclr"
+    replace: "RUNWAY 6C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "6ccll"
+    replace: "RUNWAY 6C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "7cl;"
+    replace: "RUNWAY 7 CLEARED TO LAND"
+
+  - trigger: "7clr"
+    replace: "RUNWAY 7 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "7cll"
+    replace: "RUNWAY 7 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "7lcl"
+    replace: "RUNWAY 7L CLEARED TO LAND"
+
+  - trigger: "7lclr"
+    replace: "RUNWAY 7L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "7lcll"
+    replace: "RUNWAY 7L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "7rcl"
+    replace: "RUNWAY 7R CLEARED TO LAND"
+
+  - trigger: "7rclr"
+    replace: "RUNWAY 7R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "7rcll"
+    replace: "RUNWAY 7R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "7ccl"
+    replace: "RUNWAY 7C CLEARED TO LAND"
+
+  - trigger: "7cclr"
+    replace: "RUNWAY 7C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "7ccll"
+    replace: "RUNWAY 7C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "8cl;"
+    replace: "RUNWAY 8 CLEARED TO LAND"
+
+  - trigger: "8clr"
+    replace: "RUNWAY 8 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "8cll"
+    replace: "RUNWAY 8 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "8lcl"
+    replace: "RUNWAY 8L CLEARED TO LAND"
+
+  - trigger: "8lclr"
+    replace: "RUNWAY 8L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "8lcll"
+    replace: "RUNWAY 8L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "8rcl"
+    replace: "RUNWAY 8R CLEARED TO LAND"
+
+  - trigger: "8rclr"
+    replace: "RUNWAY 8R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "8rcll"
+    replace: "RUNWAY 8R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "8ccl"
+    replace: "RUNWAY 8C CLEARED TO LAND"
+
+  - trigger: "8cclr"
+    replace: "RUNWAY 8C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "8ccll"
+    replace: "RUNWAY 8C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "9cl;"
+    replace: "RUNWAY 9 CLEARED TO LAND"
+
+  - trigger: "9clr"
+    replace: "RUNWAY 9 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "9cll"
+    replace: "RUNWAY 9 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "9lcl"
+    replace: "RUNWAY 9L CLEARED TO LAND"
+
+  - trigger: "9lclr"
+    replace: "RUNWAY 9L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "9lcll"
+    replace: "RUNWAY 9L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "9rcl"
+    replace: "RUNWAY 9R CLEARED TO LAND"
+
+  - trigger: "9rclr"
+    replace: "RUNWAY 9R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "9rcll"
+    replace: "RUNWAY 9R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "9ccl"
+    replace: "RUNWAY 9C CLEARED TO LAND"
+
+  - trigger: "9cclr"
+    replace: "RUNWAY 9C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "9ccll"
+    replace: "RUNWAY 9C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  # 10-36
+  - trigger: "10cl;"
+    replace: "RUNWAY 10 CLEARED TO LAND"
+
+  - trigger: "10clr"
+    replace: "RUNWAY 10 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "10cll"
+    replace: "RUNWAY 10 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "10lcl"
+    replace: "RUNWAY 10L CLEARED TO LAND"
+
+  - trigger: "10lclr"
+    replace: "RUNWAY 10L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "10lcll"
+    replace: "RUNWAY 10L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "10rcl"
+    replace: "RUNWAY 10R CLEARED TO LAND"
+
+  - trigger: "10rclr"
+    replace: "RUNWAY 10R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "10rcll"
+    replace: "RUNWAY 10R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "10ccl"
+    replace: "RUNWAY 10C CLEARED TO LAND"
+
+  - trigger: "10cclr"
+    replace: "RUNWAY 10C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "10ccll"
+    replace: "RUNWAY 10C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "11cl;"
+    replace: "RUNWAY 11 CLEARED TO LAND"
+
+  - trigger: "11clr"
+    replace: "RUNWAY 11 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "11cll"
+    replace: "RUNWAY 11 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "11lcl"
+    replace: "RUNWAY 11L CLEARED TO LAND"
+
+  - trigger: "11lclr"
+    replace: "RUNWAY 11L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "11lcll"
+    replace: "RUNWAY 11L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "11rcl"
+    replace: "RUNWAY 11R CLEARED TO LAND"
+
+  - trigger: "11rclr"
+    replace: "RUNWAY 11R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "11rcll"
+    replace: "RUNWAY 11R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "11ccl"
+    replace: "RUNWAY 11C CLEARED TO LAND"
+
+  - trigger: "11cclr"
+    replace: "RUNWAY 11C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "11ccll"
+    replace: "RUNWAY 11C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "12cl;"
+    replace: "RUNWAY 12 CLEARED TO LAND"
+
+  - trigger: "12clr"
+    replace: "RUNWAY 12 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "12cll"
+    replace: "RUNWAY 12 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "12lcl"
+    replace: "RUNWAY 12L CLEARED TO LAND"
+
+  - trigger: "12lclr"
+    replace: "RUNWAY 12L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "12lcll"
+    replace: "RUNWAY 12L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "12rcl"
+    replace: "RUNWAY 12R CLEARED TO LAND"
+
+  - trigger: "12rclr"
+    replace: "RUNWAY 12R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "12rcll"
+    replace: "RUNWAY 12R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "12ccl"
+    replace: "RUNWAY 12C CLEARED TO LAND"
+
+  - trigger: "12cclr"
+    replace: "RUNWAY 12C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "12ccll"
+    replace: "RUNWAY 12C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "13cl;"
+    replace: "RUNWAY 13 CLEARED TO LAND"
+
+  - trigger: "13clr"
+    replace: "RUNWAY 13 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "13cll"
+    replace: "RUNWAY 13 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "13lcl"
+    replace: "RUNWAY 13L CLEARED TO LAND"
+
+  - trigger: "13lclr"
+    replace: "RUNWAY 13L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "13lcll"
+    replace: "RUNWAY 13L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "13rcl"
+    replace: "RUNWAY 13R CLEARED TO LAND"
+
+  - trigger: "13rclr"
+    replace: "RUNWAY 13R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "13rcll"
+    replace: "RUNWAY 13R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "13ccl"
+    replace: "RUNWAY 13C CLEARED TO LAND"
+
+  - trigger: "13cclr"
+    replace: "RUNWAY 13C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "13ccll"
+    replace: "RUNWAY 13C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "14cl;"
+    replace: "RUNWAY 14 CLEARED TO LAND"
+
+  - trigger: "14clr"
+    replace: "RUNWAY 14 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "14cll"
+    replace: "RUNWAY 14 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "14lcl"
+    replace: "RUNWAY 14L CLEARED TO LAND"
+
+  - trigger: "14lclr"
+    replace: "RUNWAY 14L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "14lcll"
+    replace: "RUNWAY 14L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "14rcl"
+    replace: "RUNWAY 14R CLEARED TO LAND"
+
+  - trigger: "14rclr"
+    replace: "RUNWAY 14R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "14rcll"
+    replace: "RUNWAY 14R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "14ccl"
+    replace: "RUNWAY 14C CLEARED TO LAND"
+
+  - trigger: "14cclr"
+    replace: "RUNWAY 14C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "14ccll"
+    replace: "RUNWAY 14C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "15cl;"
+    replace: "RUNWAY 15 CLEARED TO LAND"
+
+  - trigger: "15clr"
+    replace: "RUNWAY 15 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "15cll"
+    replace: "RUNWAY 15 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "15lcl"
+    replace: "RUNWAY 15L CLEARED TO LAND"
+
+  - trigger: "15lclr"
+    replace: "RUNWAY 15L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "15lcll"
+    replace: "RUNWAY 15L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "15rcl"
+    replace: "RUNWAY 15R CLEARED TO LAND"
+
+  - trigger: "15rclr"
+    replace: "RUNWAY 15R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "15rcll"
+    replace: "RUNWAY 15R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "15ccl"
+    replace: "RUNWAY 15C CLEARED TO LAND"
+
+  - trigger: "15cclr"
+    replace: "RUNWAY 15C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "15ccll"
+    replace: "RUNWAY 15C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "16cl;"
+    replace: "RUNWAY 16 CLEARED TO LAND"
+
+  - trigger: "16clr"
+    replace: "RUNWAY 16 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "16cll"
+    replace: "RUNWAY 16 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "16lcl"
+    replace: "RUNWAY 16L CLEARED TO LAND"
+
+  - trigger: "16lclr"
+    replace: "RUNWAY 16L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "16lcll"
+    replace: "RUNWAY 16L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "16rcl"
+    replace: "RUNWAY 16R CLEARED TO LAND"
+
+  - trigger: "16rclr"
+    replace: "RUNWAY 16R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "16rcll"
+    replace: "RUNWAY 16R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "16ccl"
+    replace: "RUNWAY 16C CLEARED TO LAND"
+
+  - trigger: "16cclr"
+    replace: "RUNWAY 16C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "16ccll"
+    replace: "RUNWAY 16C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "17cl;"
+    replace: "RUNWAY 17 CLEARED TO LAND"
+
+  - trigger: "17clr"
+    replace: "RUNWAY 17 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "17cll"
+    replace: "RUNWAY 17 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "17lcl"
+    replace: "RUNWAY 17L CLEARED TO LAND"
+
+  - trigger: "17lclr"
+    replace: "RUNWAY 17L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "17lcll"
+    replace: "RUNWAY 17L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "17rcl"
+    replace: "RUNWAY 17R CLEARED TO LAND"
+
+  - trigger: "17rclr"
+    replace: "RUNWAY 17R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "17rcll"
+    replace: "RUNWAY 17R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "17ccl"
+    replace: "RUNWAY 17C CLEARED TO LAND"
+
+  - trigger: "17cclr"
+    replace: "RUNWAY 17C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "17ccll"
+    replace: "RUNWAY 17C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "18cl;"
+    replace: "RUNWAY 18 CLEARED TO LAND"
+
+  - trigger: "18clr"
+    replace: "RUNWAY 18 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "18cll"
+    replace: "RUNWAY 18 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "18lcl"
+    replace: "RUNWAY 18L CLEARED TO LAND"
+
+  - trigger: "18lclr"
+    replace: "RUNWAY 18L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "18lcll"
+    replace: "RUNWAY 18L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "18rcl"
+    replace: "RUNWAY 18R CLEARED TO LAND"
+
+  - trigger: "18rclr"
+    replace: "RUNWAY 18R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "18rcll"
+    replace: "RUNWAY 18R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "18ccl"
+    replace: "RUNWAY 18C CLEARED TO LAND"
+
+  - trigger: "18cclr"
+    replace: "RUNWAY 18C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "18ccll"
+    replace: "RUNWAY 18C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "19cl;"
+    replace: "RUNWAY 19 CLEARED TO LAND"
+
+  - trigger: "19clr"
+    replace: "RUNWAY 19 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "19cll"
+    replace: "RUNWAY 19 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "19lcl"
+    replace: "RUNWAY 19L CLEARED TO LAND"
+
+  - trigger: "19lclr"
+    replace: "RUNWAY 19L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "19lcll"
+    replace: "RUNWAY 19L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "19rcl"
+    replace: "RUNWAY 19R CLEARED TO LAND"
+
+  - trigger: "19rclr"
+    replace: "RUNWAY 19R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "19rcll"
+    replace: "RUNWAY 19R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "19ccl"
+    replace: "RUNWAY 19C CLEARED TO LAND"
+
+  - trigger: "19cclr"
+    replace: "RUNWAY 19C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "19ccll"
+    replace: "RUNWAY 19C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "20cl;"
+    replace: "RUNWAY 20 CLEARED TO LAND"
+
+  - trigger: "20clr"
+    replace: "RUNWAY 20 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "20cll"
+    replace: "RUNWAY 20 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "20lcl"
+    replace: "RUNWAY 20L CLEARED TO LAND"
+
+  - trigger: "20lclr"
+    replace: "RUNWAY 20L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "20lcll"
+    replace: "RUNWAY 20L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "20rcl"
+    replace: "RUNWAY 20R CLEARED TO LAND"
+
+  - trigger: "20rclr"
+    replace: "RUNWAY 20R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "20rcll"
+    replace: "RUNWAY 20R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "20ccl"
+    replace: "RUNWAY 20C CLEARED TO LAND"
+
+  - trigger: "20cclr"
+    replace: "RUNWAY 20C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "20ccll"
+    replace: "RUNWAY 20C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "21cl;"
+    replace: "RUNWAY 21 CLEARED TO LAND"
+
+  - trigger: "21clr"
+    replace: "RUNWAY 21 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "21cll"
+    replace: "RUNWAY 21 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "21lcl"
+    replace: "RUNWAY 21L CLEARED TO LAND"
+
+  - trigger: "21lclr"
+    replace: "RUNWAY 21L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "21lcll"
+    replace: "RUNWAY 21L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "21rcl"
+    replace: "RUNWAY 21R CLEARED TO LAND"
+
+  - trigger: "21rclr"
+    replace: "RUNWAY 21R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "21rcll"
+    replace: "RUNWAY 21R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "21ccl"
+    replace: "RUNWAY 21C CLEARED TO LAND"
+
+  - trigger: "21cclr"
+    replace: "RUNWAY 21C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "21ccll"
+    replace: "RUNWAY 21C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "22cl;"
+    replace: "RUNWAY 22 CLEARED TO LAND"
+
+  - trigger: "22clr"
+    replace: "RUNWAY 22 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "22cll"
+    replace: "RUNWAY 22 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "22lcl"
+    replace: "RUNWAY 22L CLEARED TO LAND"
+
+  - trigger: "22lclr"
+    replace: "RUNWAY 22L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "22lcll"
+    replace: "RUNWAY 22L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "22rcl"
+    replace: "RUNWAY 22R CLEARED TO LAND"
+
+  - trigger: "22rclr"
+    replace: "RUNWAY 22R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "22rcll"
+    replace: "RUNWAY 22R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "22ccl"
+    replace: "RUNWAY 22C CLEARED TO LAND"
+
+  - trigger: "22cclr"
+    replace: "RUNWAY 22C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "22ccll"
+    replace: "RUNWAY 22C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "23cl;"
+    replace: "RUNWAY 23 CLEARED TO LAND"
+
+  - trigger: "23clr"
+    replace: "RUNWAY 23 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "23cll"
+    replace: "RUNWAY 23 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "23lcl"
+    replace: "RUNWAY 23L CLEARED TO LAND"
+
+  - trigger: "23lclr"
+    replace: "RUNWAY 23L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "23lcll"
+    replace: "RUNWAY 23L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "23rcl"
+    replace: "RUNWAY 23R CLEARED TO LAND"
+
+  - trigger: "23rclr"
+    replace: "RUNWAY 23R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "23rcll"
+    replace: "RUNWAY 23R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "23ccl"
+    replace: "RUNWAY 23C CLEARED TO LAND"
+
+  - trigger: "23cclr"
+    replace: "RUNWAY 23C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "23ccll"
+    replace: "RUNWAY 23C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "24cl;"
+    replace: "RUNWAY 24 CLEARED TO LAND"
+
+  - trigger: "24clr"
+    replace: "RUNWAY 24 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "24cll"
+    replace: "RUNWAY 24 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "24lcl"
+    replace: "RUNWAY 24L CLEARED TO LAND"
+
+  - trigger: "24lclr"
+    replace: "RUNWAY 24L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "24lcll"
+    replace: "RUNWAY 24L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "24rcl"
+    replace: "RUNWAY 24R CLEARED TO LAND"
+
+  - trigger: "24rclr"
+    replace: "RUNWAY 24R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "24rcll"
+    replace: "RUNWAY 24R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "24ccl"
+    replace: "RUNWAY 24C CLEARED TO LAND"
+
+  - trigger: "24cclr"
+    replace: "RUNWAY 24C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "24ccll"
+    replace: "RUNWAY 24C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "25cl;"
+    replace: "RUNWAY 25 CLEARED TO LAND"
+
+  - trigger: "25clr"
+    replace: "RUNWAY 25 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "25cll"
+    replace: "RUNWAY 25 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "25lcl"
+    replace: "RUNWAY 25L CLEARED TO LAND"
+
+  - trigger: "25lclr"
+    replace: "RUNWAY 25L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "25lcll"
+    replace: "RUNWAY 25L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "25rcl"
+    replace: "RUNWAY 25R CLEARED TO LAND"
+
+  - trigger: "25rclr"
+    replace: "RUNWAY 25R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "25rcll"
+    replace: "RUNWAY 25R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "25ccl"
+    replace: "RUNWAY 25C CLEARED TO LAND"
+
+  - trigger: "25cclr"
+    replace: "RUNWAY 25C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "25ccll"
+    replace: "RUNWAY 25C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "26cl;"
+    replace: "RUNWAY 26 CLEARED TO LAND"
+
+  - trigger: "26clr"
+    replace: "RUNWAY 26 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "26cll"
+    replace: "RUNWAY 26 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "26lcl"
+    replace: "RUNWAY 26L CLEARED TO LAND"
+
+  - trigger: "26lclr"
+    replace: "RUNWAY 26L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "26lcll"
+    replace: "RUNWAY 26L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "26rcl"
+    replace: "RUNWAY 26R CLEARED TO LAND"
+
+  - trigger: "26rclr"
+    replace: "RUNWAY 26R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "26rcll"
+    replace: "RUNWAY 26R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "26ccl"
+    replace: "RUNWAY 26C CLEARED TO LAND"
+
+  - trigger: "26cclr"
+    replace: "RUNWAY 26C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "26ccll"
+    replace: "RUNWAY 26C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "27cl;"
+    replace: "RUNWAY 27 CLEARED TO LAND"
+
+  - trigger: "27clr"
+    replace: "RUNWAY 27 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "27cll"
+    replace: "RUNWAY 27 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "27lcl"
+    replace: "RUNWAY 27L CLEARED TO LAND"
+
+  - trigger: "27lclr"
+    replace: "RUNWAY 27L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "27lcll"
+    replace: "RUNWAY 27L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "27rcl"
+    replace: "RUNWAY 27R CLEARED TO LAND"
+
+  - trigger: "27rclr"
+    replace: "RUNWAY 27R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "27rcll"
+    replace: "RUNWAY 27R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "27ccl"
+    replace: "RUNWAY 27C CLEARED TO LAND"
+
+  - trigger: "27cclr"
+    replace: "RUNWAY 27C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "27ccll"
+    replace: "RUNWAY 27C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "28cl;"
+    replace: "RUNWAY 28 CLEARED TO LAND"
+
+  - trigger: "28clr"
+    replace: "RUNWAY 28 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "28cll"
+    replace: "RUNWAY 28 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "28lcl"
+    replace: "RUNWAY 28L CLEARED TO LAND"
+
+  - trigger: "28lclr"
+    replace: "RUNWAY 28L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "28lcll"
+    replace: "RUNWAY 28L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "28rcl"
+    replace: "RUNWAY 28R CLEARED TO LAND"
+
+  - trigger: "28rclr"
+    replace: "RUNWAY 28R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "28rcll"
+    replace: "RUNWAY 28R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "28ccl"
+    replace: "RUNWAY 28C CLEARED TO LAND"
+
+  - trigger: "28cclr"
+    replace: "RUNWAY 28C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "28ccll"
+    replace: "RUNWAY 28C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "29cl;"
+    replace: "RUNWAY 29 CLEARED TO LAND"
+
+  - trigger: "29clr"
+    replace: "RUNWAY 29 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "29cll"
+    replace: "RUNWAY 29 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "29lcl"
+    replace: "RUNWAY 29L CLEARED TO LAND"
+
+  - trigger: "29lclr"
+    replace: "RUNWAY 29L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "29lcll"
+    replace: "RUNWAY 29L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "29rcl"
+    replace: "RUNWAY 29R CLEARED TO LAND"
+
+  - trigger: "29rclr"
+    replace: "RUNWAY 29R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "29rcll"
+    replace: "RUNWAY 29R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "29ccl"
+    replace: "RUNWAY 29C CLEARED TO LAND"
+
+  - trigger: "29cclr"
+    replace: "RUNWAY 29C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "29ccll"
+    replace: "RUNWAY 29C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "30cl;"
+    replace: "RUNWAY 30 CLEARED TO LAND"
+
+  - trigger: "30clr"
+    replace: "RUNWAY 30 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "30cll"
+    replace: "RUNWAY 30 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "30lcl"
+    replace: "RUNWAY 30L CLEARED TO LAND"
+
+  - trigger: "30lclr"
+    replace: "RUNWAY 30L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "30lcll"
+    replace: "RUNWAY 30L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "30rcl"
+    replace: "RUNWAY 30R CLEARED TO LAND"
+
+  - trigger: "30rclr"
+    replace: "RUNWAY 30R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "30rcll"
+    replace: "RUNWAY 30R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "30ccl"
+    replace: "RUNWAY 30C CLEARED TO LAND"
+
+  - trigger: "30cclr"
+    replace: "RUNWAY 30C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "30ccll"
+    replace: "RUNWAY 30C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "31cl;"
+    replace: "RUNWAY 31 CLEARED TO LAND"
+
+  - trigger: "31clr"
+    replace: "RUNWAY 31 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "31cll"
+    replace: "RUNWAY 31 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "31lcl"
+    replace: "RUNWAY 31L CLEARED TO LAND"
+
+  - trigger: "31lclr"
+    replace: "RUNWAY 31L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "31lcll"
+    replace: "RUNWAY 31L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "31rcl"
+    replace: "RUNWAY 31R CLEARED TO LAND"
+
+  - trigger: "31rclr"
+    replace: "RUNWAY 31R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "31rcll"
+    replace: "RUNWAY 31R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "31ccl"
+    replace: "RUNWAY 31C CLEARED TO LAND"
+
+  - trigger: "31cclr"
+    replace: "RUNWAY 31C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "31ccll"
+    replace: "RUNWAY 31C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "32cl;"
+    replace: "RUNWAY 32 CLEARED TO LAND"
+
+  - trigger: "32clr"
+    replace: "RUNWAY 32 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "32cll"
+    replace: "RUNWAY 32 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "32lcl"
+    replace: "RUNWAY 32L CLEARED TO LAND"
+
+  - trigger: "32lclr"
+    replace: "RUNWAY 32L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "32lcll"
+    replace: "RUNWAY 32L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "32rcl"
+    replace: "RUNWAY 32R CLEARED TO LAND"
+
+  - trigger: "32rclr"
+    replace: "RUNWAY 32R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "32rcll"
+    replace: "RUNWAY 32R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "32ccl"
+    replace: "RUNWAY 32C CLEARED TO LAND"
+
+  - trigger: "32cclr"
+    replace: "RUNWAY 32C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "32ccll"
+    replace: "RUNWAY 32C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "33cl;"
+    replace: "RUNWAY 33 CLEARED TO LAND"
+
+  - trigger: "33clr"
+    replace: "RUNWAY 33 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "33cll"
+    replace: "RUNWAY 33 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "33lcl"
+    replace: "RUNWAY 33L CLEARED TO LAND"
+
+  - trigger: "33lclr"
+    replace: "RUNWAY 33L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "33lcll"
+    replace: "RUNWAY 33L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "33rcl"
+    replace: "RUNWAY 33R CLEARED TO LAND"
+
+  - trigger: "33rclr"
+    replace: "RUNWAY 33R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "33rcll"
+    replace: "RUNWAY 33R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "33ccl"
+    replace: "RUNWAY 33C CLEARED TO LAND"
+
+  - trigger: "33cclr"
+    replace: "RUNWAY 33C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "33ccll"
+    replace: "RUNWAY 33C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "34cl;"
+    replace: "RUNWAY 34 CLEARED TO LAND"
+
+  - trigger: "34clr"
+    replace: "RUNWAY 34 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "34cll"
+    replace: "RUNWAY 34 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "34lcl"
+    replace: "RUNWAY 34L CLEARED TO LAND"
+
+  - trigger: "34lclr"
+    replace: "RUNWAY 34L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "34lcll"
+    replace: "RUNWAY 34L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "34rcl"
+    replace: "RUNWAY 34R CLEARED TO LAND"
+
+  - trigger: "34rclr"
+    replace: "RUNWAY 34R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "34rcll"
+    replace: "RUNWAY 34R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "34ccl"
+    replace: "RUNWAY 34C CLEARED TO LAND"
+
+  - trigger: "34cclr"
+    replace: "RUNWAY 34C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "34ccll"
+    replace: "RUNWAY 34C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "35cl;"
+    replace: "RUNWAY 35 CLEARED TO LAND"
+
+  - trigger: "35clr"
+    replace: "RUNWAY 35 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "35cll"
+    replace: "RUNWAY 35 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "35lcl"
+    replace: "RUNWAY 35L CLEARED TO LAND"
+
+  - trigger: "35lclr"
+    replace: "RUNWAY 35L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "35lcll"
+    replace: "RUNWAY 35L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "35rcl"
+    replace: "RUNWAY 35R CLEARED TO LAND"
+
+  - trigger: "35rclr"
+    replace: "RUNWAY 35R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "35rcll"
+    replace: "RUNWAY 35R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "35ccl"
+    replace: "RUNWAY 35C CLEARED TO LAND"
+
+  - trigger: "35cclr"
+    replace: "RUNWAY 35C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "35ccll"
+    replace: "RUNWAY 35C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "36cl;"
+    replace: "RUNWAY 36 CLEARED TO LAND"
+
+  - trigger: "36clr"
+    replace: "RUNWAY 36 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "36cll"
+    replace: "RUNWAY 36 CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "36lcl"
+    replace: "RUNWAY 36L CLEARED TO LAND"
+
+  - trigger: "36lclr"
+    replace: "RUNWAY 36L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "36lcll"
+    replace: "RUNWAY 36L CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "36rcl"
+    replace: "RUNWAY 36R CLEARED TO LAND"
+
+  - trigger: "36rclr"
+    replace: "RUNWAY 36R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "36rcll"
+    replace: "RUNWAY 36R CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"
+
+  - trigger: "36ccl"
+    replace: "RUNWAY 36C CLEARED TO LAND"
+
+  - trigger: "36cclr"
+    replace: "RUNWAY 36C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON RIGHT"
+
+  - trigger: "36ccll"
+    replace: "RUNWAY 36C CLEARED TO LAND TAKE NEXT AVAILABLE EXIT ON LEFT"

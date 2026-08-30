@@ -1,0 +1,543 @@
+matches:
+  # ROW
+  - trigger: "cr01'"
+    replace: "CROSS RUNWAY 01"
+
+  - trigger: "cr01l"
+    replace: "CROSS RUNWAY 01L"
+
+  - trigger: "cr01r"
+    replace: "CROSS RUNWAY 01R"
+
+  - trigger: "cr01c"
+    replace: "CROSS RUNWAY 01C"
+
+  - trigger: "cr02'"
+    replace: "CROSS RUNWAY 02"
+
+  - trigger: "cr02l"
+    replace: "CROSS RUNWAY 02L"
+
+  - trigger: "cr02r"
+    replace: "CROSS RUNWAY 02R"
+
+  - trigger: "cr02c"
+    replace: "CROSS RUNWAY 02C"
+
+  - trigger: "cr03'"
+    replace: "CROSS RUNWAY 03"
+
+  - trigger: "cr03l"
+    replace: "CROSS RUNWAY 03L"
+
+  - trigger: "cr03r"
+    replace: "CROSS RUNWAY 03R"
+
+  - trigger: "cr03c"
+    replace: "CROSS RUNWAY 03C"
+
+  - trigger: "cr04'"
+    replace: "CROSS RUNWAY 04"
+
+  - trigger: "cr04l"
+    replace: "CROSS RUNWAY 04L"
+
+  - trigger: "cr04r"
+    replace: "CROSS RUNWAY 04R"
+
+  - trigger: "cr04c"
+    replace: "CROSS RUNWAY 04C"
+
+  - trigger: "cr05'"
+    replace: "CROSS RUNWAY 05"
+
+  - trigger: "cr05l"
+    replace: "CROSS RUNWAY 05L"
+
+  - trigger: "cr05r"
+    replace: "CROSS RUNWAY 05R"
+
+  - trigger: "cr05c"
+    replace: "CROSS RUNWAY 05C"
+
+  - trigger: "cr06'"
+    replace: "CROSS RUNWAY 06"
+
+  - trigger: "cr06l"
+    replace: "CROSS RUNWAY 06L"
+
+  - trigger: "cr06r"
+    replace: "CROSS RUNWAY 06R"
+
+  - trigger: "cr06c"
+    replace: "CROSS RUNWAY 06C"
+
+  - trigger: "cr07'"
+    replace: "CROSS RUNWAY 07"
+
+  - trigger: "cr07l"
+    replace: "CROSS RUNWAY 07L"
+
+  - trigger: "cr07r"
+    replace: "CROSS RUNWAY 07R"
+
+  - trigger: "cr07c"
+    replace: "CROSS RUNWAY 07C"
+
+  - trigger: "cr08'"
+    replace: "CROSS RUNWAY 08"
+
+  - trigger: "cr08l"
+    replace: "CROSS RUNWAY 08L"
+
+  - trigger: "cr08r"
+    replace: "CROSS RUNWAY 08R"
+
+  - trigger: "cr08c"
+    replace: "CROSS RUNWAY 08C"
+
+  - trigger: "cr09'"
+    replace: "CROSS RUNWAY 09"
+
+  - trigger: "cr09l"
+    replace: "CROSS RUNWAY 09L"
+
+  - trigger: "cr09r"
+    replace: "CROSS RUNWAY 09R"
+
+  - trigger: "cr09c"
+    replace: "CROSS RUNWAY 09C"
+
+  # US
+  - trigger: "cr1'"
+    replace: "CROSS RUNWAY 1"
+
+  - trigger: "cr1l"
+    replace: "CROSS RUNWAY 1L"
+
+  - trigger: "cr1r"
+    replace: "CROSS RUNWAY 1R"
+
+  - trigger: "cr1c"
+    replace: "CROSS RUNWAY 1C"
+
+  - trigger: "cr2'"
+    replace: "CROSS RUNWAY 2"
+
+  - trigger: "cr2l"
+    replace: "CROSS RUNWAY 2L"
+
+  - trigger: "cr2r"
+    replace: "CROSS RUNWAY 2R"
+
+  - trigger: "cr2c"
+    replace: "CROSS RUNWAY 2C"
+
+  - trigger: "cr3'"
+    replace: "CROSS RUNWAY 3"
+
+  - trigger: "cr3l"
+    replace: "CROSS RUNWAY 3L"
+
+  - trigger: "cr3r"
+    replace: "CROSS RUNWAY 3R"
+
+  - trigger: "cr3c"
+    replace: "CROSS RUNWAY 3C"
+
+  - trigger: "cr4'"
+    replace: "CROSS RUNWAY 4"
+
+  - trigger: "cr4l"
+    replace: "CROSS RUNWAY 4L"
+
+  - trigger: "cr4r"
+    replace: "CROSS RUNWAY 4R"
+
+  - trigger: "cr4c"
+    replace: "CROSS RUNWAY 4C"
+
+  - trigger: "cr5'"
+    replace: "CROSS RUNWAY 5"
+
+  - trigger: "cr5l"
+    replace: "CROSS RUNWAY 5L"
+
+  - trigger: "cr5r"
+    replace: "CROSS RUNWAY 5R"
+
+  - trigger: "cr5c"
+    replace: "CROSS RUNWAY 5C"
+
+  - trigger: "cr6'"
+    replace: "CROSS RUNWAY 6"
+
+  - trigger: "cr6l"
+    replace: "CROSS RUNWAY 6L"
+
+  - trigger: "cr6r"
+    replace: "CROSS RUNWAY 6R"
+
+  - trigger: "cr6c"
+    replace: "CROSS RUNWAY 6C"
+
+  - trigger: "cr7'"
+    replace: "CROSS RUNWAY 7"
+
+  - trigger: "cr7l"
+    replace: "CROSS RUNWAY 7L"
+
+  - trigger: "cr7r"
+    replace: "CROSS RUNWAY 7R"
+
+  - trigger: "cr7c"
+    replace: "CROSS RUNWAY 7C"
+
+  - trigger: "cr8'"
+    replace: "CROSS RUNWAY 8"
+
+  - trigger: "cr8l"
+    replace: "CROSS RUNWAY 8L"
+
+  - trigger: "cr8r"
+    replace: "CROSS RUNWAY 8R"
+
+  - trigger: "cr8c"
+    replace: "CROSS RUNWAY 8C"
+
+  - trigger: "cr9'"
+    replace: "CROSS RUNWAY 9"
+
+  - trigger: "cr9l"
+    replace: "CROSS RUNWAY 9L"
+
+  - trigger: "cr9r"
+    replace: "CROSS RUNWAY 9R"
+
+  - trigger: "cr9c"
+    replace: "CROSS RUNWAY 9C"
+
+  # 10-36
+  - trigger: "cr10'"
+    replace: "CROSS RUNWAY 10"
+
+  - trigger: "cr10l"
+    replace: "CROSS RUNWAY 10L"
+
+  - trigger: "cr10r"
+    replace: "CROSS RUNWAY 10R"
+
+  - trigger: "cr10c"
+    replace: "CROSS RUNWAY 10C"
+
+  - trigger: "cr11'"
+    replace: "CROSS RUNWAY 11"
+
+  - trigger: "cr11l"
+    replace: "CROSS RUNWAY 11L"
+
+  - trigger: "cr11r"
+    replace: "CROSS RUNWAY 11R"
+
+  - trigger: "cr11c"
+    replace: "CROSS RUNWAY 11C"
+
+  - trigger: "cr12'"
+    replace: "CROSS RUNWAY 12"
+
+  - trigger: "cr12l"
+    replace: "CROSS RUNWAY 12L"
+
+  - trigger: "cr12r"
+    replace: "CROSS RUNWAY 12R"
+
+  - trigger: "cr12c"
+    replace: "CROSS RUNWAY 12C"
+
+  - trigger: "cr13'"
+    replace: "CROSS RUNWAY 13"
+
+  - trigger: "cr13l"
+    replace: "CROSS RUNWAY 13L"
+
+  - trigger: "cr13r"
+    replace: "CROSS RUNWAY 13R"
+
+  - trigger: "cr13c"
+    replace: "CROSS RUNWAY 13C"
+
+  - trigger: "cr14'"
+    replace: "CROSS RUNWAY 14"
+
+  - trigger: "cr14l"
+    replace: "CROSS RUNWAY 14L"
+
+  - trigger: "cr14r"
+    replace: "CROSS RUNWAY 14R"
+
+  - trigger: "cr14c"
+    replace: "CROSS RUNWAY 14C"
+
+  - trigger: "cr15'"
+    replace: "CROSS RUNWAY 15"
+
+  - trigger: "cr15l"
+    replace: "CROSS RUNWAY 15L"
+
+  - trigger: "cr15r"
+    replace: "CROSS RUNWAY 15R"
+
+  - trigger: "cr15c"
+    replace: "CROSS RUNWAY 15C"
+
+  - trigger: "cr16'"
+    replace: "CROSS RUNWAY 16"
+
+  - trigger: "cr16l"
+    replace: "CROSS RUNWAY 16L"
+
+  - trigger: "cr16r"
+    replace: "CROSS RUNWAY 16R"
+
+  - trigger: "cr16c"
+    replace: "CROSS RUNWAY 16C"
+
+  - trigger: "cr17'"
+    replace: "CROSS RUNWAY 17"
+
+  - trigger: "cr17l"
+    replace: "CROSS RUNWAY 17L"
+
+  - trigger: "cr17r"
+    replace: "CROSS RUNWAY 17R"
+
+  - trigger: "cr17c"
+    replace: "CROSS RUNWAY 17C"
+
+  - trigger: "cr18'"
+    replace: "CROSS RUNWAY 18"
+
+  - trigger: "cr18l"
+    replace: "CROSS RUNWAY 18L"
+
+  - trigger: "cr18r"
+    replace: "CROSS RUNWAY 18R"
+
+  - trigger: "cr18c"
+    replace: "CROSS RUNWAY 18C"
+
+  - trigger: "cr19'"
+    replace: "CROSS RUNWAY 19"
+
+  - trigger: "cr19l"
+    replace: "CROSS RUNWAY 19L"
+
+  - trigger: "cr19r"
+    replace: "CROSS RUNWAY 19R"
+
+  - trigger: "cr19c"
+    replace: "CROSS RUNWAY 19C"
+
+  - trigger: "cr20'"
+    replace: "CROSS RUNWAY 20"
+
+  - trigger: "cr20l"
+    replace: "CROSS RUNWAY 20L"
+
+  - trigger: "cr20r"
+    replace: "CROSS RUNWAY 20R"
+
+  - trigger: "cr20c"
+    replace: "CROSS RUNWAY 20C"
+
+  - trigger: "cr21'"
+    replace: "CROSS RUNWAY 21"
+
+  - trigger: "cr21l"
+    replace: "CROSS RUNWAY 21L"
+
+  - trigger: "cr21r"
+    replace: "CROSS RUNWAY 21R"
+
+  - trigger: "cr21c"
+    replace: "CROSS RUNWAY 21C"
+
+  - trigger: "cr22'"
+    replace: "CROSS RUNWAY 22"
+
+  - trigger: "cr22l"
+    replace: "CROSS RUNWAY 22L"
+
+  - trigger: "cr22r"
+    replace: "CROSS RUNWAY 22R"
+
+  - trigger: "cr22c"
+    replace: "CROSS RUNWAY 22C"
+
+  - trigger: "cr23'"
+    replace: "CROSS RUNWAY 23"
+
+  - trigger: "cr23l"
+    replace: "CROSS RUNWAY 23L"
+
+  - trigger: "cr23r"
+    replace: "CROSS RUNWAY 23R"
+
+  - trigger: "cr23c"
+    replace: "CROSS RUNWAY 23C"
+
+  - trigger: "cr24'"
+    replace: "CROSS RUNWAY 24"
+
+  - trigger: "cr24l"
+    replace: "CROSS RUNWAY 24L"
+
+  - trigger: "cr24r"
+    replace: "CROSS RUNWAY 24R"
+
+  - trigger: "cr24c"
+    replace: "CROSS RUNWAY 24C"
+
+  - trigger: "cr25'"
+    replace: "CROSS RUNWAY 25"
+
+  - trigger: "cr25l"
+    replace: "CROSS RUNWAY 25L"
+
+  - trigger: "cr25r"
+    replace: "CROSS RUNWAY 25R"
+
+  - trigger: "cr25c"
+    replace: "CROSS RUNWAY 25C"
+
+  - trigger: "cr26'"
+    replace: "CROSS RUNWAY 26"
+
+  - trigger: "cr26l"
+    replace: "CROSS RUNWAY 26L"
+
+  - trigger: "cr26r"
+    replace: "CROSS RUNWAY 26R"
+
+  - trigger: "cr26c"
+    replace: "CROSS RUNWAY 26C"
+
+  - trigger: "cr27'"
+    replace: "CROSS RUNWAY 27"
+
+  - trigger: "cr27l"
+    replace: "CROSS RUNWAY 27L"
+
+  - trigger: "cr27r"
+    replace: "CROSS RUNWAY 27R"
+
+  - trigger: "cr27c"
+    replace: "CROSS RUNWAY 27C"
+
+  - trigger: "cr28'"
+    replace: "CROSS RUNWAY 28"
+
+  - trigger: "cr28l"
+    replace: "CROSS RUNWAY 28L"
+
+  - trigger: "cr28r"
+    replace: "CROSS RUNWAY 28R"
+
+  - trigger: "cr28c"
+    replace: "CROSS RUNWAY 28C"
+
+  - trigger: "cr29'"
+    replace: "CROSS RUNWAY 29"
+
+  - trigger: "cr29l"
+    replace: "CROSS RUNWAY 29L"
+
+  - trigger: "cr29r"
+    replace: "CROSS RUNWAY 29R"
+
+  - trigger: "cr29c"
+    replace: "CROSS RUNWAY 29C"
+
+  - trigger: "cr30'"
+    replace: "CROSS RUNWAY 30"
+
+  - trigger: "cr30l"
+    replace: "CROSS RUNWAY 30L"
+
+  - trigger: "cr30r"
+    replace: "CROSS RUNWAY 30R"
+
+  - trigger: "cr30c"
+    replace: "CROSS RUNWAY 30C"
+
+  - trigger: "cr31'"
+    replace: "CROSS RUNWAY 31"
+
+  - trigger: "cr31l"
+    replace: "CROSS RUNWAY 31L"
+
+  - trigger: "cr31r"
+    replace: "CROSS RUNWAY 31R"
+
+  - trigger: "cr31c"
+    replace: "CROSS RUNWAY 31C"
+
+  - trigger: "cr32'"
+    replace: "CROSS RUNWAY 32"
+
+  - trigger: "cr32l"
+    replace: "CROSS RUNWAY 32L"
+
+  - trigger: "cr32r"
+    replace: "CROSS RUNWAY 32R"
+
+  - trigger: "cr32c"
+    replace: "CROSS RUNWAY 32C"
+
+  - trigger: "cr33'"
+    replace: "CROSS RUNWAY 33"
+
+  - trigger: "cr33l"
+    replace: "CROSS RUNWAY 33L"
+
+  - trigger: "cr33r"
+    replace: "CROSS RUNWAY 33R"
+
+  - trigger: "cr33c"
+    replace: "CROSS RUNWAY 33C"
+
+  - trigger: "cr34'"
+    replace: "CROSS RUNWAY 34"
+
+  - trigger: "cr34l"
+    replace: "CROSS RUNWAY 34L"
+
+  - trigger: "cr34r"
+    replace: "CROSS RUNWAY 34R"
+
+  - trigger: "cr34c"
+    replace: "CROSS RUNWAY 34C"
+
+  - trigger: "cr35'"
+    replace: "CROSS RUNWAY 35"
+
+  - trigger: "cr35l"
+    replace: "CROSS RUNWAY 35L"
+
+  - trigger: "cr35r"
+    replace: "CROSS RUNWAY 35R"
+
+  - trigger: "cr35c"
+    replace: "CROSS RUNWAY 35C"
+
+  - trigger: "cr36'"
+    replace: "CROSS RUNWAY 36"
+
+  - trigger: "cr36l"
+    replace: "CROSS RUNWAY 36L"
+
+  - trigger: "cr36r"
+    replace: "CROSS RUNWAY 36R"
+
+  - trigger: "cr36c"
+    replace: "CROSS RUNWAY 36C"
