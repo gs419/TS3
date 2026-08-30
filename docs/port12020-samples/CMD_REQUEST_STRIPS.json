@@ -1,0 +1,33 @@
+{
+  "cmd": "CMD_REQUEST_STRIPS",
+  "value": {
+    "respond": "",
+    "strips": [
+      {
+        "blk": "",
+        "name": "VXP165",
+        "type": "B73W",
+        "rnd": "3227",
+        "arn": "0001",
+        "utc": "1149",
+        "fllv": "0",
+        "inf1": "-",
+        "inf2": "-",
+        "from": "KBUR",
+        "to": "KBOI",
+        "wc": "M",
+        "cs": "AVELO",
+        "tofft": "",
+        "rwcnt": 0,
+        "netidx": 11,
+        "rw_txt": "",
+        "rwb_txt": "",
+        "own": "123.9",
+        "dep": true,
+        "chk": false,
+        "vfr": false,
+        "c_rw": ""
+      }
+    ]
+  }
+}

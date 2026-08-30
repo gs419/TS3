@@ -1,0 +1,100 @@
+{
+  "cmd": "CMD_REQUEST_STATUS",
+  "value": {
+    "game_state": "GAME",
+    "icao": "KBUR",
+    "loadingcnt": 11,
+    "loading": false,
+    "pause": false,
+    "speed": 1.0,
+    "daytime": 0.4933187663555145,
+    "cmdtxt": "",
+    "selected_plane": 0,
+    "tracon_separation": 9259.82421875,
+    "controllerpos": 0,
+    "metar_infocode": 13,
+    "rec_btn": 306,
+    "rec_state": false,
+    "lamp_on": false,
+    "_winddir": 333.0001220703125,
+    "_windspeed": 2.554731607437134,
+    "raw_metar": "",
+    "runwayupdate": false,
+    "runwaycfg": [
+      {
+        "name": "33",
+        "preferred": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      {
+        "name": "8",
+        "preferred": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "name": "26",
+        "preferred": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "name": "15",
+        "preferred": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      }
+    ],
+    "pls": [
+      {
+        "id": "single",
+        "name": "GS419",
+        "type": "",
+        "own": [
+          "123.9",
+          "118.7"
+        ],
+        "ready": false,
+        "ping": 0.0
+      }
+    ],
+    "plid": "single",
+    "campos": {
+      "x": 202.4070281982422,
+      "y": 221.5669708251953,
+      "z": 137.96946716308594
+    },
+    "camdir": {
+      "x": 0.007229969836771488,
+      "y": -0.8910217881202698,
+      "z": 0.4536808133125305,
+      "w": 0.014200391247868538
+    },
+    "camfov": 60.08085632324219
+  }
+}

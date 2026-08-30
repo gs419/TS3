@@ -1,3 +1,8 @@
+> **UPDATE (superseded):** the protocol has since been **decoded** from a live
+> packet capture — see `PORT-PROTOCOL-DECODED.md`. This file remains as the
+> pre-decode investigation record. Note the port is settings-selectable (the
+> decoded capture used **12020**, not 12030).
+
 # Port 12030 / the TS3 Communication Port — findings
 
 Consolidated findings on Tower! Simulator 3's game-owned local TCP data channel

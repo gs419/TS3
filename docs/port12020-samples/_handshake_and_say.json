@@ -1,0 +1,32 @@
+{
+  "tts_greeting": {
+    "greeting": {
+      "name": "TTS",
+      "author": "FeelThere Inc.",
+      "type": "TTS",
+      "version": "v0.2025.349.1000",
+      "description": "Text-to-speech module",
+      "security": "0"
+    }
+  },
+  "core_welcome": {
+    "welcome": {
+      "security check": "fail/pass",
+      "core": "Tower Simulator 4",
+      "author": "FeelThere Inc.",
+      "version": "v0.0.1.1",
+      "description": "core description"
+    }
+  },
+  "core_say": {
+    "cmd": {
+      "type": "SAY",
+      "params": {
+        "voice_id": 7,
+        "quality": 0,
+        "speed": 1.1,
+        "text": "burbank ground . avelo one sixty-five .  with information november .   requesting push and start . "
+      }
+    }
+  }
+}

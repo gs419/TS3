@@ -1,0 +1,10 @@
+{
+  "cmd": "CMD_REQUEST_UICFG",
+  "value": {
+    "respond": "",
+    "cvs_strip": "Airports/KBUR/instruments/default/striplook.csv",
+    "cvs_adirs": "Airports/KBUR/instruments/default/adirslook.csv",
+    "cvs_dbright": "Airports/KBUR/instruments/default/dbrightlook.csv",
+    "cvs_weather": "Airports/KBUR/instruments/default/weatherlook.csv"
+  }
+}

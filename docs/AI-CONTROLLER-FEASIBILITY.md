@@ -52,14 +52,16 @@ Caveats:
   partial timestamps. For a basic controller this is acceptable: we react to
   line arrival order, not log timestamps.
 
-**Richer channel (future): the Communication Port.** TowerGlance's
-`ts3-data-interface-inventory.md` documents a game-owned loopback TCP listener
-(observed on port 12030, selectable in settings) carrying newline-terminated
-JSON-like frames, used live by `extwin`, `cpm`, `recog`, and `tts`. The full
-live panel state flows through it (extwin renders ADIRS/strips from it). It is
-bidirectional and undocumented; reverse-engineering it would give radar-grade
-state (positions, speeds) that the log lacks — but it is not needed for a
-basic clear-to-land controller.
+**Richer channel (now DECODED): the Communication Port.** The game-owned
+loopback listener has since been decoded from a packet capture — see
+`PORT-PROTOCOL-DECODED.md` and the working read-only client
+`../autocontroller/port_client.py`. It is a newline-delimited JSON bus where the
+game core is the server; polling `CMD_REQUEST_AIRPLANES`/`STATUS`/`STRIPS`
+yields **radar-grade state the log lacks** — positions, headings, speeds,
+states, strips — and the TTS channel emits every transmission as text. This is
+now the preferred read source; `Player.log` remains a zero-setup fallback. The
+command-injection (write) path is the recog channel and is identified but needs
+one confirming capture (see the decode doc).
 
 ## Sending commands (output side), ranked by risk
 

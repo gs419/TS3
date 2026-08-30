@@ -1,0 +1,34 @@
+{
+  "cmd": "CMD_REQUEST_FREQS",
+  "value": {
+    "data": [
+      {
+        "freq": "123.9",
+        "write": "GROUND ON 123.9",
+        "say": "GROUND ON ONE TWO TREE POINT NYNER",
+        "read": "ONE TWO TREE POINT NYNER",
+        "areas": [
+          {
+            "target": "TerminalA"
+          },
+          {
+            "target": "TerminalB"
+          },
+          {
+            "target": "TerminalC"
+          },
+          {
+            "target": "TerminalD"
+          },
+          {
+            "target": "TerminalG"
+          },
+          {
+            "target": "TerminalM"
+          }
+        ]
+      },
+      "...(+2 more)"
+    ]
+  }
+}

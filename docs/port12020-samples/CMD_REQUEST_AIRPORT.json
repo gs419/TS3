@@ -1,0 +1,189 @@
+{
+  "cmd": "CMD_REQUEST_AIRPORT",
+  "value": {
+    "_centerlat": 34.198001861572266,
+    "_centerlon": -118.35700225830078,
+    "_winddir": 340.0,
+    "_windforce": 6.0,
+    "_alt": 777.0,
+    "_sunrotate": 180.0,
+    "_gmtoffset": -7,
+    "icao": "KBUR",
+    "name": "Hollywood Burbank Airport",
+    "callsign_tower": "Burbank Tower",
+    "callsign_ground": "Burbank Ground",
+    "desctiption": "",
+    "version": "18",
+    "roads": [
+      {
+        "name": "A",
+        "sayname": "ALFA",
+        "readname": "ALFA, ",
+        "type": 0,
+        "tangent": 0.5,
+        "width": 24.399999618530273,
+        "priority": 1.0,
+        "dir": 0,
+        "traffic_density": 1.0,
+        "traffic_industrial": 0.5,
+        "traffic_flags": 0,
+        "terminal_type": 0,
+        "terminal_sizelimit": 0,
+        "displaced_treshold": 0.0,
+        "enter_altitude": 0.0,
+        "glide_slope": 0.0,
+        "glide_slope_start_distance": 0.0,
+        "maximum_faf_speed": 0.0,
+        "knots": [
+          {
+            "pos": {
+              "x": -193.55999755859375,
+              "y": 0.0,
+              "z": 1515.6500244140625
+            },
+            "gatedir": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "gatetype": 0,
+            "saved_gateroads": "",
+            "name": "",
+            "sayname": "",
+            "idx": 1
+          },
+          {
+            "pos": {
+              "x": -114.5,
+              "y": 0.0,
+              "z": 1450.300048828125
+            },
+            "gatedir": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "gatetype": 0,
+            "saved_gateroads": "",
+            "name": "",
+            "sayname": "",
+            "idx": 19
+          },
+          {
+            "pos": {
+              "x": -90.5999984741211,
+              "y": 0.0,
+              "z": 1429.0999755859375
+            },
+            "gatedir": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "gatetype": 0,
+            "saved_gateroads": "",
+            "name": "",
+            "sayname": "",
+            "idx": 25
+          },
+          {
+            "pos": {
+              "x": -81.0,
+              "y": 0.0,
+              "z": 1401.199951171875
+            },
+            "gatedir": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "gatetype": 0,
+            "saved_gateroads": "",
+            "name": "",
+            "sayname": "",
+            "idx": 30
+          },
+          {
+            "pos": {
+              "x": -70.27999877929688,
+              "y": 0.0,
+              "z": 1354.010009765625
+            },
+            "gatedir": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "gatetype": 0,
+            "saved_gateroads": "",
+            "name": "",
+            "sayname": "",
+            "idx": 39
+          },
+          {
+            "pos": {
+              "x": -65.30000305175781,
+              "y": 0.0,
+              "z": 1327.0999755859375
+            },
+            "gatedir": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "gatetype": 0,
+            "saved_gateroads": "",
+            "name": "",
+            "sayname": "",
+            "idx": 44
+          },
+          {
+            "pos": {
+              "x": -74.0,
+              "y": 0.0,
+              "z": 1304.5999755859375
+            },
+            "gatedir": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "gatetype": 0,
+            "saved_gateroads": "",
+            "name": "",
+            "sayname": "",
+            "idx": 49
+          },
+          {
+            "pos": {
+              "x": -109.4000015258789,
+              "y": 0.0,
+              "z": 1227.699951171875
+            },
+            "gatedir": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "gatetype": 0,
+            "saved_gateroads": "",
+            "name": "",
+            "sayname": "",
+            "idx": 0
+          }
+        ],
+        "prefer_categories": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "...(+94 more)"
+    ],
+    "holdpoints": []
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "cmd": "CMD_REQUEST_AIRPLANES",
+  "value": {
+    "respond": "",
+    "planes": [
+      {
+        "name": "VXP165",
+        "state": 8,
+        "tbl": {
+          "will_out": false,
+          "time": "",
+          "saycall": "",
+          "call": "",
+          "from": "",
+          "to": "",
+          "airline": "",
+          "al_op": "",
+          "pl_icao": "",
+          "pl_iata": "",
+          "regcode": "",
+          "special": [],
+          "prefer_runways": [],
+          "action": 0,
+          "daytime": 0.0,
+          "plane": "",
+          "local": false,
+          "ga": false,
+          "entry_alt": 0.0
+        },
+        "otbl": {
+          "will_out": false,
+          "time": "",
+          "saycall": "",
+          "call": "",
+          "from": "",
+          "to": "",
+          "airline": "",
+          "al_op": "",
+          "pl_icao": "",
+          "pl_iata": "",
+          "regcode": "",
+          "special": [],
+          "prefer_runways": [],
+          "action": 0,
+          "daytime": 0.0,
+          "plane": "",
+          "local": false,
+          "ga": false,
+          "entry_alt": 0.0
+        },
+        "cat": 4,
+        "wc": 1,
+        "time": 0.49236682057380676,
+        "pos": {
+          "x": 202.71839904785156,
+          "y": 0.0,
+          "z": -130.47918701171875
+        },
+        "rot": {
+          "x": 0.0,
+          "y": 177.51519775390625,
+          "z": 0.0
+        },
+        "tstr": {
+          "x": 202.71839904785156,
+          "y": 0.10000000149011612,
+          "z": -130.47918701171875
+        },
+        "trgrot": 177.51519775390625,
+        "spd": 0.0,
+        "lv": 0.0,
+        "trgrw": 0,
+        "flags": 9397,
+        "netidx": 11,
+        "act": 0,
+        "own": "123.9",
+        "metar": 0,
+        "terminal": 48,
+        "sndst": -1,
+        "tofft": "",
+        "pt_lt": 0,
+        "route": [],
+        "lt": 0
+      },
+      "...(+17 more)"
+    ]
+  }
+}
