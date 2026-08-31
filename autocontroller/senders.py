@@ -73,15 +73,15 @@ class PortCommandSender:
     """
 
     def __init__(self, host: str = "127.0.0.1", port: int = 12020,
-                 greet: bool = True, commit_flags: int = 0,
-                 send_commit: bool = True, lowercase: bool = True):
-        import json, socket  # noqa
+                 greet: bool = True, ptt_commit: bool = True,
+                 settle_s: float = 0.05, lowercase: bool = True):
         self._json = __import__("json")
         self._socket = __import__("socket")
+        self._time = __import__("time")
         self.host, self.port = host, port
         self.greet = greet
-        self.commit_flags = commit_flags
-        self.send_commit = send_commit
+        self.ptt_commit = ptt_commit      # bracket the text with PTT true/false
+        self.settle_s = settle_s
         self.lowercase = lowercase
         self.sock = None
 
@@ -106,14 +106,21 @@ class PortCommandSender:
 
     def send(self, text: str) -> None:
         cmd = self.format_command(text, self.lowercase)
-        # set the command text (interim form the recognizer uses)
+        # Mimic the recognizer: press PTT, set the command text, release PTT.
+        # The game streams recognition into the command box (cmdtxt) and executes
+        # it on PTT release (rec_state -> false) — CMD_SET_PTT_STATE is the
+        # port-side control for that (seen in the first capture).
+        if self.ptt_commit:
+            self._raw({"cmd": "CMD_SET_PTT_STATE", "value": "true",
+                       "flags": 0, "func": None})
+            self._time.sleep(self.settle_s)
         self._raw({"cmd": "CMD_SET_CMD_TEXT", "value": cmd, "flags": 1,
                    "func": None})
-        # optional commit: re-send with the commit flag to execute
-        if self.send_commit:
-            self._raw({"cmd": "CMD_SET_CMD_TEXT", "value": cmd,
-                       "flags": self.commit_flags, "func": None})
-        print(f"[port] CMD_SET_CMD_TEXT: {cmd}")
+        if self.ptt_commit:
+            self._time.sleep(self.settle_s)
+            self._raw({"cmd": "CMD_SET_PTT_STATE", "value": "false",
+                       "flags": 0, "func": None})   # release = execute
+        print(f"[port] issued: {cmd}")
 
     def close(self):
         if self.sock:

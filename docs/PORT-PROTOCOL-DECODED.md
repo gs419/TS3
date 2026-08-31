@@ -154,10 +154,21 @@ callsign_tower, callsign_ground, roads[]`, runway geometry, etc.
   (lowercase, e.g. `ups87 pushback approved expect runway 15`). It streams as
   recognition progresses (word-by-word, `flags:1`); the TTS then reads the
   command back, confirming execution ("negative, unknown command" is the failure
-  reply). `senders.PortCommandSender` emits this. **Commit trigger still to
-  confirm on a throwaway session:** whether the game executes on a complete valid
-  string, on a final `flags:0`, or on a separate submit — the sender makes this
-  configurable (`commit_flags`, `send_commit`).
+  reply).
+
+  **Commit = PTT release.** A control-flow trace (`--flow`) of the voice capture
+  showed NO port-side execute message — just `CMD_SET_CMD_TEXT` repeating the
+  full text, interleaved with polling. The game holds the text in `cmdtxt`
+  (a STATUS field) and executes it when **PTT is released** (`rec_state`->false).
+  In the voice capture the physical right-Ctrl key drove that, so nothing
+  crossed the port. The **port-side control is `CMD_SET_PTT_STATE`**
+  (`value:"true"`/`"false"`, seen in the first capture). So the injection
+  sequence is: `CMD_SET_PTT_STATE "true"` → `CMD_SET_CMD_TEXT "<callsign>
+  <command>"` → `CMD_SET_PTT_STATE "false"` (release = execute).
+  `senders.PortCommandSender` emits exactly this (PTT-bracketed; `ptt_commit`
+  toggles it). **Confirm on a throwaway session** — the alternative, if the game
+  ignores port PTT, is TS3 Assistant's `,callsign; COMMAND` path (a different,
+  reply-suppressed mechanism), which one more targeted capture would reveal.
   Not the empty-valued `CMD_RECOG_UPDATE` (that carries only recog button/state
   in this build). `CMD_RECOG_HELPER` still pushes the lexicon.
 
