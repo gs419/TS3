@@ -54,19 +54,67 @@ class KeyboardSender:
         print(f"[keyboard] typed: {text}")
 
 
-class TcpProbeSender:
-    """EXPERIMENTAL. Placeholder for injecting text into the voice pipeline
-    (recog serves on 127.0.0.1:9000; cpm matches text against commands.csv)
-    or, later, JSON frames to the game's Communication Port (observed 12030).
+class PortCommandSender:
+    """Injects commands over the Communication Port using CMD_SET_CMD_TEXT, the
+    mechanism decoded from a live capture: the recognizer pushes the command
+    text into the game's command box as
+        {"cmd":"CMD_SET_CMD_TEXT","value":"<callsign> <command words>","flags":1}
+    and the game parses/executes it. We mimic that.
 
-    The wire formats are unverified — capture them first (e.g. run the game,
-    use a localhost sniffer while speaking one command) before enabling this.
+    The command TEXT is the phraseology the game accepts (callsign + words), e.g.
+    "ups87 pushback approved expect runway 15". Our policies already emit that
+    shape; `format_command` normalizes it.
+
+    IMPORTANT — commit trigger unconfirmed: the capture showed the text building
+    up with flags:1 (interim recognition). Whether the game executes on a
+    complete valid string, on a final flags:0 message, or on a separate submit is
+    not yet certain. `commit_flags` and `send_commit` make this configurable;
+    confirm on a throwaway session before trusting it. Loopback only.
     """
 
-    def __init__(self, host: str = "127.0.0.1", port: int = 9000):
+    def __init__(self, host: str = "127.0.0.1", port: int = 12020,
+                 greet: bool = True, commit_flags: int = 0,
+                 send_commit: bool = True, lowercase: bool = True):
+        import json, socket  # noqa
+        self._json = __import__("json")
+        self._socket = __import__("socket")
         self.host, self.port = host, port
+        self.greet = greet
+        self.commit_flags = commit_flags
+        self.send_commit = send_commit
+        self.lowercase = lowercase
+        self.sock = None
+
+    def connect(self):
+        self.sock = self._socket.create_connection((self.host, self.port), 5.0)
+        if self.greet:
+            self._raw({"greeting": {"name": "AIATC", "author": "self",
+                                    "type": "RECOG", "version": "v0.1",
+                                    "description": "command injector",
+                                    "security": "0"}})
+        return self
+
+    def _raw(self, obj):
+        if self.sock is None:
+            self.connect()
+        self.sock.sendall((self._json.dumps(obj) + "\n").encode("utf-8"))
+
+    @staticmethod
+    def format_command(text: str, lowercase: bool = True) -> str:
+        t = " ".join(text.split())          # collapse whitespace
+        return t.lower() if lowercase else t
 
     def send(self, text: str) -> None:
-        raise NotImplementedError(
-            "Capture the recog/cpm wire format before enabling TCP injection "
-            "— see docs/AI-CONTROLLER-FEASIBILITY.md")
+        cmd = self.format_command(text, self.lowercase)
+        # set the command text (interim form the recognizer uses)
+        self._raw({"cmd": "CMD_SET_CMD_TEXT", "value": cmd, "flags": 1,
+                   "func": None})
+        # optional commit: re-send with the commit flag to execute
+        if self.send_commit:
+            self._raw({"cmd": "CMD_SET_CMD_TEXT", "value": cmd,
+                       "flags": self.commit_flags, "func": None})
+        print(f"[port] CMD_SET_CMD_TEXT: {cmd}")
+
+    def close(self):
+        if self.sock:
+            self.sock.close()

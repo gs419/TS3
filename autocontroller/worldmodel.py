@@ -119,8 +119,10 @@ class WorldModel:
 
     @staticmethod
     def _airborne(pl: Plane) -> bool:
-        # airborne if it has altitude or non-trivial speed (state enum refined
-        # once arrival states are identified from a live capture)
+        # capture-confirmed state enum (states.py); fall back to alt/speed
+        from states import is_airborne
+        if pl.state_int is not None:
+            return is_airborne(pl.state_int)
         return (pl.alt_ft or 0) > 50 or (pl.speed or 0) > 30
 
 

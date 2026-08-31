@@ -36,7 +36,7 @@ class RunwaySafety:
     cross_clear_s: float = 30.0            # time for a jet to start, cross, and clear
     safety_buffer_s: float = 15.0         # extra margin
     approach_watch_s: float = 120.0       # ignore arrivals more than this far out
-    speed_to_mps: float = 1.0             # AIRPLANES spd -> m/s (calibrate)
+    speed_to_mps: float = 0.514444        # AIRPLANES spd is in KNOTS (capture-confirmed)
     min_speed_mps: float = 5.0            # treat slower as stopped
 
     def can_cross(self, *, runway: str, cross_point: tuple, threats: list) -> CrossDecision:
@@ -92,13 +92,14 @@ class RunwaySafety:
         for cs, pl in world.state.planes.items():
             if not pl.pos:
                 continue
+            from states import is_on_final, occupies_runway
             tgt = pl.target_runway
-            on_final = tgt == runway
-            near_rwy = _dist(pl.pos, threshold) < 4000  # within ~2nm of threshold
-            if on_final and (pl.alt_ft or 0) > 20:
+            if tgt != runway:
+                continue
+            if is_on_final(pl.state_int) or (pl.alt_ft or 0) > 20:
                 out.append({"callsign": cs, "pos": pl.pos, "speed": pl.speed or 0,
                             "kind": "arrival"})
-            elif on_final and near_rwy:
+            elif occupies_runway(pl.state_int):
                 out.append({"callsign": cs, "pos": pl.pos, "speed": pl.speed or 0,
                             "kind": "rollout"})
         return out

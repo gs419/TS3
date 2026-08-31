@@ -144,14 +144,35 @@ callsign_tower, callsign_ground, roads[]`, runway geometry, etc.
 - **Read speech (confirmed):** subscribe as (or sniff) the TTS channel to get
   every transmission as text the instant it's spoken — a perfect, immediate
   event feed (no log-format guessing).
-- **Write / command injection (path identified, not yet confirmed):** the recog
-  channel is the input. A client that greets as `recog`, accepts the lexicon,
-  and emits `CMD_RECOG_UPDATE` with recognized command text should have the core
-  parse it as if spoken. The exact "final/committed" form wasn't captured
-  (values were empty — commands during capture were likely typed), so **one
-  confirming capture is needed**: press PTT, speak one command, and grab the
-  non-empty `CMD_RECOG_UPDATE`. Control writes (`CMD_UPDATE_RUNWAY`,
-  `CMD_SET_SEPARATION`, `CMD_SET_PTT_STATE`) are already confirmed shapes.
+- **Write / command injection — DECODED (second capture, KBUR, port 12020):**
+  the recognizer pushes the command into the game's command box via
+  **`CMD_SET_CMD_TEXT`**:
+  ```json
+  {"cmd":"CMD_SET_CMD_TEXT","value":"ups87 pushback approved expect runway 15","flags":1,"func":null}
+  ```
+  The `value` is the phraseology the game parses: **callsign + command words**
+  (lowercase, e.g. `ups87 pushback approved expect runway 15`). It streams as
+  recognition progresses (word-by-word, `flags:1`); the TTS then reads the
+  command back, confirming execution ("negative, unknown command" is the failure
+  reply). `senders.PortCommandSender` emits this. **Commit trigger still to
+  confirm on a throwaway session:** whether the game executes on a complete valid
+  string, on a final `flags:0`, or on a separate submit — the sender makes this
+  configurable (`commit_flags`, `send_commit`).
+  Not the empty-valued `CMD_RECOG_UPDATE` (that carries only recog button/state
+  in this build). `CMD_RECOG_HELPER` still pushes the lexicon.
+
+### AIRPLANES `state` enum — DECODED (speed/alt calibration)
+`states.py`: 1/2/6 = airborne (approach, high); 3/7 = short final / flare;
+13 = rollout (fast on ground); 14 = pushback; 8/9/12/15/16 = ground stationary.
+**`spd` is in KNOTS** (airborne 126–250) → `speed_to_mps = 0.514`. This fixed the
+compression / on-final / RWSL timing (previously an un-calibrated guess).
+
+### New message types this build adds (beyond the first decode)
+`CMD_SET_CMD_TEXT` (command box / write path), `CMD_SOUND_STREAM` (audio, base64
+PCM), `CMD_REQUEST_SCHEDULE`, `CMD_SELECT_AIRPLANE` (select + OK ack), and a
+`CMD_RECOG_UPDATE` that now carries `{"btnRecognize":..,"airplanes":..}` state
+rather than recognized text. UICFG can point at custom instrument packs
+(`Airports/KBUR/instruments/ZAP FBI/...`).
 
 ## Safety
 

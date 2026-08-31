@@ -16,7 +16,7 @@ class Config:
     default_runway: str = ""
     candidate_runways: tuple = ()
     magvar_deg: float = 0.0
-    speed_to_mps: float = 1.0
+    speed_to_mps: float = 0.514444        # AIRPLANES spd is in knots (capture-confirmed)
     # arrival / spacing
     runway_cooldown_s: float = 25.0
     arrival_extra_nm: float = 0.0
