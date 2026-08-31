@@ -66,7 +66,35 @@ class GroundRouter:
             path, cost = leg
             full = full[:-1] + path if full else path
             total += cost
-        return self._finish(full, total, gd)
+        return self._finish(self._smooth(full), total, gd)
+
+    def _smooth(self, nodes: list) -> list:
+        """Remove weaves: if two non-adjacent nodes on the path are joined by a
+        direct edge no longer than the subpath between them, splice it out.
+        Yields a physically shorter, non-backtracking route."""
+        if len(nodes) < 3:
+            return nodes
+        changed = True
+        while changed:
+            changed = False
+            for i in range(len(nodes) - 2):
+                for j in range(len(nodes) - 1, i + 1, -1):
+                    e = self._edge_between(nodes[i], nodes[j])
+                    if not e:
+                        continue
+                    sub = sum(self._seg_len(nodes[k], nodes[k + 1])
+                              for k in range(i, j))
+                    if e.length <= sub + 1e-6:
+                        nodes = nodes[:i + 1] + nodes[j:]
+                        changed = True
+                        break
+                if changed:
+                    break
+        return nodes
+
+    def _seg_len(self, a, b) -> float:
+        e = self._edge_between(a, b)
+        return e.length if e else 1e9
 
     def route_to_handoff(self, start, goal, blocking_runways,
                          guidance: Optional[RouteGuidance] = None):
@@ -151,7 +179,27 @@ class GroundRouter:
                     crossings.append(e.road)
             elif e.road != last:
                 taxiways.append(e.road); last = e.road
+        taxiways = self._collapse_names(taxiways)
         return Route(True, nodes=nodes, taxiways=taxiways, crossings=crossings, cost=cost)
+
+    @staticmethod
+    def _collapse_names(via: list) -> list:
+        """Readability pass for the spoken clearance (node path unchanged):
+        collapse X Y X -> X (a name that flips to a junction spur and back), and
+        drop consecutive duplicates. Turns 'B B5 B B1 B' into 'B'."""
+        changed = True
+        while changed and len(via) >= 3:
+            changed = False
+            for i in range(len(via) - 2):
+                if via[i] == via[i + 2] and via[i] != via[i + 1]:
+                    del via[i + 1:i + 3]
+                    changed = True
+                    break
+        out = []
+        for name in via:
+            if not out or out[-1] != name:
+                out.append(name)
+        return out
 
     # ---- clearance text ---------------------------------------------
     def clearance(self, callsign: str, route: Route, target: str,
