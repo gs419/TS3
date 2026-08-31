@@ -26,10 +26,11 @@ small file. If the command is NOT in the port traffic, that's the answer too
 import sys, os, glob, re, json, collections
 import dpkt
 
-PORT = None; paths = []
+PORT = None; paths = []; FLOW = False
 it = iter(sys.argv[1:])
 for a in it:
     if a == "--port": PORT = int(next(it))
+    elif a == "--flow": FLOW = True
     elif os.path.isdir(a):
         paths += sorted(glob.glob(os.path.join(a, "*.pcapng")) +
                         glob.glob(os.path.join(a, "*.pcap")))
@@ -66,6 +67,7 @@ cand = [PORT] if PORT else [p for p, _ in vol.most_common(3)]
 
 # pass 2: harvest
 cmd_hits = []
+flow = []                                       # de-duplicated client->server control seq
 s2c_types = collections.OrderedDict()          # cmd -> (count, sample)
 recog_vals, tts_says = [], []
 plane_state = {}                               # state int -> (speed, alt)
@@ -92,6 +94,12 @@ for p in paths:
             try: o = json.loads(line)
             except Exception: continue
             cmd = o.get("cmd") if isinstance(o.get("cmd"), str) else None
+            if FLOW and into and cmd:
+                # compact key; collapse consecutive repeats with a count
+                v = str(o.get("value"))[:45]
+                key = f"{cmd} flags={o.get('flags')} value={v}"
+                if flow and flow[-1][0] == key: flow[-1][1] += 1
+                else: flow.append([key, 1])
             if not into and cmd:
                 note_type(cmd, line)
                 if cmd == "CMD_REQUEST_AIRPLANES" and o.get("value"):
@@ -129,6 +137,12 @@ L.append(f"\n[5] recog committed values ({len(recog_vals)}):")
 L += ["   " + r for r in recog_vals] or ["   (none)"]
 L.append(f"\n[5b] TTS SAY samples ({len(tts_says)}):")
 L += ["   " + s for s in tts_says]
+
+if FLOW:
+    L.append(f"\n[FLOW] client->server control sequence "
+             f"(consecutive repeats collapsed, {len(flow)} steps):")
+    for key, n in flow:
+        L.append(f"   x{n:<4} {key}")
 
 report = "\n".join(L)
 print(report)
