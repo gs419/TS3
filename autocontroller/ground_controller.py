@@ -39,6 +39,17 @@ class GroundController:
             hold_short_of=list(set(self.standing.hold_short_of) | set(override.hold_short_of)),
         )
 
+    def reroute_around(self, callsign: str, from_node_or_pos, target: str,
+                       blocked: list, guidance: RouteGuidance | None = None) -> str:
+        """Dynamic re-routing: taxi to target avoiding newly-blocked taxiways
+        (closure, stopped aircraft, congestion)."""
+        gd = guidance or RouteGuidance()
+        gd = RouteGuidance(via=gd.via, avoid=list(set(gd.avoid) | set(blocked)),
+                           prefer=gd.prefer, prefer_factor=gd.prefer_factor,
+                           runway_cross_penalty=gd.runway_cross_penalty,
+                           hold_short_of=gd.hold_short_of)
+        return self.taxi_to(callsign, from_node_or_pos, target, guidance=gd)
+
     def taxi_to(self, callsign: str, from_node_or_pos, target: str,
                 guidance: Optional[RouteGuidance] = None,
                 is_departure: bool = False, runway: str = "") -> str:
