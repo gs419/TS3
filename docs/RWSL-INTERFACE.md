@@ -1,7 +1,19 @@
 # RWSL interface — contracts between the airport-builder and AI-ATC threads
 
 Canonical spec both threads code against. Two data contracts + one shared
-convention. Keep this file in sync across both repos.
+convention.
+
+## Spec-sync policy (both threads agreed)
+This file is **mirrored in both repos** (AI-ATC and airport-builder). Any change
+to the interface must be made in **one repo and copied to the other in the same
+change** — never let the two copies drift. Bump `version` in Contract A when the
+positions-file schema changes; note feed changes here. If the copies ever
+disagree, the higher `version` wins and the lower must be updated to match before
+either side ships.
+
+**Conformance status:** planner (builder) side reports **fully conformant** as of
+its current commit; ATC side implemented + validated (below). An end-to-end
+round-trip against a real planner export is ready to run — see "End-to-end check".
 
 ## Coordinate convention (shared)
 - Game-local metres, the same frame as the port's `roads[]`/`pos` (`x`, `z`).
@@ -61,6 +73,16 @@ bar that should protect the runway stays dark, its `runways` list is incomplete.
 - **ATC side (this repo):** consume Contract A (`RWSL.from_positions_file`),
   serve Contract B (`rwsl_feed.serve_rwsl` over `rwsl.feed(world)`), keep the
   occupancy/timing logic (`runway_safety`) current.
+
+## End-to-end check (when a real planner export lands)
+```
+python -c "from rwsl import RWSL; ok,errs,s=RWSL.validate_positions('KCLE.rwsl.json'); print(ok, s, errs)"
+```
+`RWSL.validate_positions` conformance-checks an export against Contract A
+(numeric e/n, non-empty string `runways`, string `taxiway`). If it passes,
+`RWSL.from_positions_file(...)` + `rwsl_feed.serve_rwsl(...)` will serve a live
+feed the planner can poll — the full round-trip. Drop a real `<ICAO>.rwsl.json`
+here and it's one command.
 
 ## Status
 - ATC side: implemented and validated — `rwsl.py` loads Contract A, `feed()`

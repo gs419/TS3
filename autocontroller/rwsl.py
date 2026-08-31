@@ -62,6 +62,35 @@ class RWSL:
                       runways=list(h.get("runways", []))) for h in data["holds"]]
         return cls(graph=graph, safety=safety, holds=holds)
 
+    @staticmethod
+    def validate_positions(path: str) -> tuple:
+        """Conformance-check an <ICAO>.rwsl.json export against Contract A
+        (docs/RWSL-INTERFACE.md). Returns (ok, errors, summary)."""
+        errs = []
+        try:
+            data = json.load(open(path, encoding="utf-8"))
+        except Exception as e:
+            return False, [f"not valid JSON: {e}"], {}
+        if not isinstance(data, dict):
+            return False, ["top level must be an object"], {}
+        if "holds" not in data or not isinstance(data["holds"], list):
+            errs.append("missing 'holds' array")
+        rwys = set()
+        for i, h in enumerate(data.get("holds", [])):
+            for key in ("e", "n"):
+                if not isinstance(h.get(key), (int, float)):
+                    errs.append(f"hold[{i}].{key} must be a number")
+            r = h.get("runways")
+            if not isinstance(r, list) or not r or not all(isinstance(x, str) for x in r):
+                errs.append(f"hold[{i}].runways must be a non-empty list of strings")
+            else:
+                rwys.update(r)
+            if "taxiway" in h and not isinstance(h["taxiway"], str):
+                errs.append(f"hold[{i}].taxiway must be a string")
+        summary = {"icao": data.get("icao"), "version": data.get("version"),
+                   "holds": len(data.get("holds", [])), "runways": sorted(rwys)}
+        return (len(errs) == 0), errs, summary
+
     def _holds_from_graph(self) -> list:
         node_classes = {}
         for e in self.g.edges:
