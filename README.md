@@ -83,6 +83,9 @@ one is a new subscriber, not a rewrite.
 | `telemetry.py` / `world_feed.py` / `regression.py` | metrics / situational feed / replay test harness. |
 | `spacing_policy.py` | consumes `compression` events; advises/acts. |
 | `senders.py` | command delivery: dry-run (default), keyboard, or port (pending write path). |
+| `arbiter.py` | CommandArbiter — de-conflicts every policy's proposed commands per tick. |
+| `config.py` | unified runtime config; folds in scoring-tuner learning. |
+| `orchestrator.py` | the assembled engine: WorldModel → policies → arbiter → sender, on a tick loop. |
 | `main.py` | log-tail runner for the arrival/departure loop. |
 
 ## Feature status

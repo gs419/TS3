@@ -9,23 +9,22 @@ voice-command capture settles it (and also the airborne `state` ints + speed
 units). See `WRITE-PATH-CAPTURE-GUIDE.md`. Everything else runs dry-run/advisory
 until this lands.
 
-## 2. Integration — the biggest real engineering gap
-~20 modules are built and each validated in isolation, but they are **not wired
-into one runtime**. Needed:
-- **`CommandArbiter`** — collect proposed commands from all policies each tick
-  (arrival, departure, sequencer, spacing, ground router, conflict, positions),
-  de-conflict them (never two clearances on one runway/aircraft per tick), apply
-  cooldowns, and hand the winner to the sender. The README diagram assumes this;
-  it doesn't exist yet.
-- **Orchestrator / launcher** — one entrypoint that starts the WorldModel +
-  PortClient + log tail + all policies + the RWSL/world feeds, on a tick loop.
-  `main.py` today only runs the arrival/departure log loop.
-- **Config unification** — every module has its own thresholds; there's no
-  single config, and `scoring_tuner`'s `Tunables` output isn't consumed by
-  anything yet. Wire tuner → policy params, and expose one config file.
-- **Per-position policy scoping** — filter each policy to the aircraft its
-  position owns (one-line `mgr.current(cs)` gate), so the multi-position layer
-  actually drives the per-position controllers.
+## 2. Integration — DONE (core), one piece remaining
+The core is assembled and validated end-to-end on the real logs:
+- **`CommandArbiter`** (`arbiter.py`) — policies propose; it de-conflicts per
+  tick (one command/aircraft, one runway-occupying clearance/runway, cooldowns)
+  and forwards winners. ✅
+- **Orchestrator** (`orchestrator.py`) — WorldModel (log + optional port) →
+  event fan-out to arrival/departure policies + tuner + telemetry → arbiter →
+  sender, on a tick loop. Single entrypoint. ✅
+- **Config unification** (`config.py`) — one Config; `apply_tunables()` folds
+  scoring-tuner learning into live params (proven: tuner adjustments reached the
+  config during replay). ✅
+- **Still to wire:** the *other* policies (sequencer, spacing, ground
+  conflict/router, position manager) into the orchestrator's fan-out + arbiter,
+  and **per-position policy scoping** (filter each policy to the aircraft its
+  position owns via `mgr.current(cs)`). The arrival+departure+tuner+telemetry
+  path is in; the rest are built but not yet mounted on the engine.
 
 ## 3. Live calibration — user-only, needs the running game
 Everything is validated on captured/synthetic data, never against the live sim:
