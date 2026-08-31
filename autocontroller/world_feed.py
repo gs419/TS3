@@ -30,7 +30,8 @@ def serve_world(world, port: int = 8771, host: str = "127.0.0.1",
                 background: bool = True) -> HTTPServer:
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self):
-            if self.path.rstrip("/") not in ("", "/world"):
+            # /traffic is Contract D (planner-facing name); /world is the alias
+            if self.path.rstrip("/") not in ("", "/world", "/traffic"):
                 self.send_response(404); self.end_headers(); return
             body = json.dumps(world_snapshot(world)).encode("utf-8")
             self.send_response(200)

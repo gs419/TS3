@@ -61,6 +61,24 @@ GET http://127.0.0.1:8770/rwsl
 - Localhost only; `Access-Control-Allow-Origin: *` is set for a local webview.
 - Port is configurable; default `8770`.
 
+## Contract D — traffic feed  (ATC → planner)  [proposed]
+The planner already polls a `/traffic` feed to draw aircraft. The ATC side
+serves it via `world_feed.serve_world` at `GET /traffic` (alias `/world`):
+
+```
+GET http://127.0.0.1:8771/traffic
+->
+{ "center": [lat, lon],
+  "planes": [
+    { "callsign": "DAL6221", "e": -950.0, "n": -400.0, "lat": .., "lon": ..,
+      "heading": 68.0, "speed": 70.0, "alt": 600.0,
+      "phase": "ON_FINAL", "runway": "24L", "target_runway": "24L" }
+  ] }
+```
+- `e`/`n` game-local metres (same frame as Contract A), lat/lon for convenience.
+- **Schema is proposed** — planner confirms field names it needs; adjust here in
+  sync. Implemented on the ATC side (`world_feed.py`), served on `/traffic` now.
+
 ## Contract C — standalone simulation (planner-side, no feed)
 For plan-time preview and to verify `saved_gateroads` completeness: click a
 runway in the planner → light every bar whose `runways` include it (and its
@@ -86,13 +104,22 @@ here and it's one command.
 
 ## Status
 - ATC side: implemented and validated — `rwsl.py` loads Contract A, `feed()`
-  emits Contract B, `rwsl_feed.py` serves it (round-trip test passes on the real
-  KBUR graph).
+  emits Contract B, `rwsl_feed.py` serves it. **End-to-end proven on the real
+  planner export** `KCLE2030.rwsl.json` (committed at
+  `autocontroller/testdata/`): Contract A validates (36 holds, 6 runways); an
+  arrival to 24L reds exactly the 15 holds protecting 6R/24L and leaves the
+  6L/24R and 10/28 holds green; `GET /rwsl` returns 36 records matching compute.
+- Contract D (`/traffic`): implemented on the ATC side (`world_feed.py`); schema
+  proposed, planner to confirm field names.
 - Native in-sim dynamic lights: **not possible** — confirmed both sides (no light
   data in `.airport` v16; no light verb in the decoded port protocol). RWSL is
   delivered on the planner screen; changing the actual 3D lights would need a
   separate BepInEx mod (see `DYNAMIC-LIGHTING-HANDOFF.md`).
-- `light_settings.cfg` parsed: it is global color-grading/post-processing, no
-  per-light data — so static REL fixtures can't be added by data either. RWSL is
-  a planner-screen feature (or a BepInEx mod for in-sim lights). Nothing about
-  lighting remains open.
+- **Lighting — closed (both threads, independent parses agree).**
+  `light_settings.cfg` is environment/grading only — the 8,640-point daily curve
+  is the bulk, `AirportsLight24H` is the one global lights dial, no per-light
+  data. `.airport` v16 carries no light data; lights are procedurally generated
+  by the SDK `LightGenerator`. There is no data-driven light placement anywhere,
+  so static REL fixtures can't be added by data either. RWSL is a planner-screen
+  feature (or a BepInEx mod for in-sim lights). Nothing about lighting remains
+  open.
