@@ -1,0 +1,27 @@
+{
+  "_comment": "Multi-position layout per airport. role: local|ground|ramp|departure|clearance. kind: ai|human. owns_runways / owns_areas define each position's authority. handoffs: when an event fires, ownership moves from 'from' (optional) to 'to' (null = leaves the airport). Frequencies are placeholders; align to the airport's real freqs or a custom multi-freq airport package.",
+  "KCLE": {
+    "positions": [
+      {"name": "Sally",  "role": "local",  "kind": "ai",    "frequency": "120.9", "owns_runways": ["24R", "6L"]},
+      {"name": "Bob",    "role": "ground", "kind": "ai",    "frequency": "121.9", "owns_areas": ["ground_east", "between_24R_24L"]},
+      {"name": "Human",  "role": "local",  "kind": "human", "frequency": "118.5", "owns_runways": ["24L", "6R"]},
+      {"name": "RampAI", "role": "ramp",   "kind": "ai",    "frequency": "121.65", "owns_areas": ["ramp"]}
+    ],
+    "handoffs": [
+      {"when": "landed_on:24R",     "from": "Sally", "to": "Bob"},
+      {"when": "holding_short:24L", "from": "Bob",   "to": "Human"},
+      {"when": "crossed:24L",       "from": "Human", "to": "RampAI"},
+      {"when": "reached:ramp",      "from": "RampAI", "to": null}
+    ]
+  },
+  "KBUR": {
+    "positions": [
+      {"name": "Local",  "role": "local",  "kind": "ai",    "frequency": "118.7", "owns_runways": ["8", "26", "15", "33"]},
+      {"name": "Ground", "role": "ground", "kind": "ai",    "frequency": "123.9", "owns_areas": ["TerminalA","TerminalB","TerminalC","TerminalD","TerminalG","TerminalM"]}
+    ],
+    "handoffs": [
+      {"when": "landed_on:15", "from": "Local", "to": "Ground"},
+      {"when": "reached:ramp", "from": "Ground", "to": null}
+    ]
+  }
+}
