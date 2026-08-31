@@ -92,5 +92,7 @@ here and it's one command.
   data in `.airport` v16; no light verb in the decoded port protocol). RWSL is
   delivered on the planner screen; changing the actual 3D lights would need a
   separate BepInEx mod (see `DYNAMIC-LIGHTING-HANDOFF.md`).
-- Pending: parse `light_settings.cfg` (630 KB, game root) to settle whether
-  static REL *fixtures* could be added by data — upload needed.
+- `light_settings.cfg` parsed: it is global color-grading/post-processing, no
+  per-light data — so static REL fixtures can't be added by data either. RWSL is
+  a planner-screen feature (or a BepInEx mod for in-sim lights). Nothing about
+  lighting remains open.
