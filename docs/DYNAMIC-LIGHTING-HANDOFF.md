@@ -85,10 +85,40 @@ lights end up externally drivable.
 - Port protocol (no light verb): `docs/PORT-PROTOCOL-DECODED.md`
 - Broader lighting notes: `docs/DYNAMIC-LIGHTING.md`
 
-## Open questions for the builder thread
-- Does `light_settings.cfg` / the SDK expose an REL/stopbar or animated light
-  type, or only static lights?
-- Are per-airport lights editable in the SDK AirfieldEditor and exported into
-  `.airport`, or global-only?
-- If dynamic isn't supported natively, is a BepInEx light-recolor mod acceptable
-  for the goal, or should this stay an external-panel feature?
+## Open questions — RESOLVED by the builder thread (2026)
+- **REL/stopbar or animated light type in the SDK/`.airport`?** **No.** The
+  `.airport` v16 schema carries no light data (13 scalars + `roads[]`/`knots[]`,
+  byte-round-tripped on the real 694 KB KCLE file). All TS3 lights are *derived
+  static scenery*: the SDK's `LightGenerator` walks the road network and emits
+  meshes under an "Airport Lights" root. No per-light editing, no conditional/
+  animated type. So a **native occupancy-driven light is dead** — which our
+  decoded port protocol independently confirms (no light verb).
+- **Per-airport lights editable/exported?** No — generated from the road
+  network at build, not authored per-light.
+- **BepInEx mod acceptable?** User's call. It's the only path to real in-sim
+  dynamic lights and is a separate Unity-modding project; our side can hand it
+  exact fixture positions (Contract A), which is half its work.
+- **Still open:** `light_settings.cfg` (630 KB, game root) is unparsed by both
+  threads. If it holds per-light records for shipped airports, adding *static*
+  REL fixtures by data becomes plausible (dynamic still won't). Upload it and
+  this thread will parse the schema.
+
+## Agreed integration (see `RWSL-INTERFACE.md`)
+Better than this handoff first assumed — the builder already has surveyed hold
+positions (`holds()` → real 75 m hold-short points, `saved_gateroads` naming the
+exact protected runways, OSM importer placing knots at mapped holding
+positions), and a top-down planner that already draws stop bars.
+
+1. **Positions (builder → ATC):** export `<ICAO>.rwsl.json` beside
+   `package.txt`; `rwsl.py` consumes it via `RWSL.from_positions_file` —
+   surveyed positions + authoritative `runways` protection lists, replacing the
+   graph-derived entrances and reciprocal guess.
+2. **Live feed (ATC → planner):** `rwsl_feed.serve_rwsl` serves
+   `rwsl.feed(world)` at `GET /rwsl`; the planner's "Live RWSL" mode polls it and
+   paints bars red/green — the "external panel" with no new UI.
+3. **Standalone sim (planner-side):** click a runway → all protecting bars red;
+   also validates `saved_gateroads` completeness.
+
+ATC side (this repo) is implemented and validated: `rwsl.py` (Contract A load +
+`feed()`), `rwsl_feed.py` (Contract B server), round-trip tested on the real
+KBUR graph. Builder side builds 1+2+3 (one rendering path).

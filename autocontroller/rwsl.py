@@ -1,64 +1,90 @@
-"""Runway Status Lights (RWSL / Runway Entrance Lights) — compute a red/green
-state for every runway hold-short point, live.
+"""Runway Status Lights (RWSL / Runway Entrance Lights) — live red/green state
+per hold-short point.
 
-Real RWSL turns the entrance lights RED at a taxiway/runway intersection when it
-is unsafe to enter or cross because an aircraft is on the runway or an arrival is
-close. That is exactly the `runway_safety` check, evaluated at each entrance
-point. This module derives the entrance points from the airport taxiway graph
-and lights them from the live WorldModel.
+A hold-short point is RED (do-not-enter) when any runway it protects is hot — an
+arrival is too close, or an aircraft is rolling out / departing on it — else
+GREEN. The occupancy timing is `runway_safety`; positions come from either:
 
-Output feeds an external display (a second-monitor ground/RWSL panel) — or a
-binary mod that recolors the in-sim lights (see docs/DYNAMIC-LIGHTING.md).
+  - the airport-builder export `<ICAO>.rwsl.json` (PREFERRED): surveyed hold
+    positions with authoritative `runways` protection lists (see
+    docs/RWSL-INTERFACE.md), or
+  - the taxiway graph, as a fallback: entrance = a node shared by a runway edge
+    and a taxiway edge, protecting that runway + its reciprocal.
+
+Output serializes to the live feed the builder's planner ("Live RWSL" mode)
+polls: [{e, n, state, reason}, ...].
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+import json
+import re
+from dataclasses import dataclass, field
 
 from runway_safety import RunwaySafety
 
 
 @dataclass
+class Hold:
+    e: float                    # east (game-local metres) == graph x
+    n: float                    # north (game-local metres) == graph z
+    taxiway: str = ""
+    runways: list = field(default_factory=list)   # runways this hold protects
+    node: int = -1              # graph node id if graph-derived
+
+
+@dataclass
 class Light:
-    runway: str
-    node: int
-    pos: tuple
-    state: str          # "RED" (do not enter) | "GREEN" (clear)
+    e: float
+    n: float
+    state: str                  # "RED" | "GREEN"
     reason: str = ""
+    taxiway: str = ""
+    runways: list = field(default_factory=list)
 
 
 class RWSL:
-    def __init__(self, graph, safety: RunwaySafety | None = None):
+    def __init__(self, graph=None, safety: RunwaySafety | None = None,
+                 holds: list | None = None):
         self.g = graph
         self.safety = safety or RunwaySafety()
-        self.entrances = self._find_entrances()          # runway -> [node ids]
-        self.threshold = self._thresholds()              # runway -> (x,z)
+        self.threshold = self._thresholds() if graph else {}
+        self.holds = holds if holds is not None else (
+            self._holds_from_graph() if graph else [])
 
-    def _find_entrances(self):
+    # ---- position sources -------------------------------------------
+    @classmethod
+    def from_positions_file(cls, path: str, graph=None,
+                            safety: RunwaySafety | None = None) -> "RWSL":
+        """Load surveyed holds from an airport-builder <ICAO>.rwsl.json export.
+        Schema: {"icao":..., "holds":[{"e","n","taxiway","runways":[...]}, ...]}"""
+        data = json.load(open(path, encoding="utf-8"))
+        holds = [Hold(e=h["e"], n=h["n"], taxiway=h.get("taxiway", ""),
+                      runways=list(h.get("runways", []))) for h in data["holds"]]
+        return cls(graph=graph, safety=safety, holds=holds)
+
+    def _holds_from_graph(self) -> list:
         node_classes = {}
         for e in self.g.edges:
-            for n in (e.a, e.b):
-                node_classes.setdefault(n, set()).add(e.rclass)
-        ent = {}
-        for n, cls in node_classes.items():
+            for nd in (e.a, e.b):
+                node_classes.setdefault(nd, set()).add(e.rclass)
+        holds = []
+        for nd, cls in node_classes.items():
             if "runway" in cls and "taxiway" in cls:
-                for e in self.g.edges:
-                    if e.rclass == "runway" and n in (e.a, e.b):
-                        ent.setdefault(e.road, [])
-                        if n not in ent[e.road]:
-                            ent[e.road].append(n)
-        return ent
+                rwys = sorted({e.road for e in self.g.edges
+                               if e.rclass == "runway" and nd in (e.a, e.b)})
+                # a physical runway = both ends: add reciprocals
+                rwys = sorted(set(rwys) | {self.reciprocal(r) for r in rwys})
+                tw = next((e.road for e in self.g.edges
+                           if e.rclass == "taxiway" and nd in (e.a, e.b)), "")
+                x, z = self.g.nodes[nd]
+                holds.append(Hold(e=x, n=z, taxiway=tw, runways=rwys, node=nd))
+        return holds
 
-    def _thresholds(self):
-        th = {}
-        for rwy, nodes in self.g.runway_nodes.items():
-            # approach threshold ≈ one runway end; use the first runway node
-            th[rwy] = self.g.nodes[nodes[0]]
-        return th
+    def _thresholds(self) -> dict:
+        return {r: self.g.nodes[ns[0]] for r, ns in self.g.runway_nodes.items()}
 
     @staticmethod
     def reciprocal(rwy: str) -> str:
-        """15 -> 33, 8 -> 26 (same physical runway, other end)."""
-        import re
         m = re.match(r"(\d{1,2})([LRC]?)", rwy)
         if not m:
             return rwy
@@ -66,24 +92,34 @@ class RWSL:
         side = {"L": "R", "R": "L", "C": "C", "": ""}[m.group(2)]
         return f"{num}{side}"
 
+    # ---- live state --------------------------------------------------
     def compute(self, world) -> list:
-        """Return the current light state for every runway entrance point. A
-        physical runway (both reciprocal ends) is treated as one: traffic on
-        either end lights all of its entrance points."""
+        """Red/green for every hold, from live traffic."""
+        # cache threats per runway this tick
+        tcache = {}
+
+        def threats(rwy):
+            if rwy not in tcache:
+                th = self.threshold.get(rwy, (0.0, 0.0))
+                tcache[rwy] = self.safety.threats_for_runway(world, rwy, th)
+            return tcache[rwy]
+
         lights = []
-        for rwy, nodes in self.entrances.items():
-            threshold = self.threshold.get(rwy, (0.0, 0.0))
-            # threats targeting this end OR its reciprocal (same strip)
-            threats = self.safety.threats_for_runway(world, rwy, threshold)
-            recip = self.reciprocal(rwy)
-            if recip in self.threshold:
-                threats += self.safety.threats_for_runway(world, recip, self.threshold[recip])
-            for n in nodes:
-                pos = self.g.nodes[n]
-                dec = self.safety.can_cross(runway=rwy, cross_point=pos, threats=threats)
-                lights.append(Light(rwy, n, pos,
-                                    "GREEN" if dec.allow else "RED", dec.reason))
+        for h in self.holds:
+            state, reason = "GREEN", f"{'/'.join(h.runways)} clear"
+            for rwy in h.runways:
+                dec = self.safety.can_cross(runway=rwy, cross_point=(h.e, h.n),
+                                            threats=threats(rwy))
+                if not dec.allow:
+                    state, reason = "RED", dec.reason
+                    break
+            lights.append(Light(h.e, h.n, state, reason, h.taxiway, h.runways))
         return lights
 
     def reds(self, world) -> list:
         return [l for l in self.compute(world) if l.state == "RED"]
+
+    def feed(self, world) -> list:
+        """Serialize to the shared live-feed spec (docs/RWSL-INTERFACE.md)."""
+        return [{"e": round(l.e, 2), "n": round(l.n, 2),
+                 "state": l.state, "reason": l.reason} for l in self.compute(world)]
