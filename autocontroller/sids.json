@@ -1,0 +1,34 @@
+{
+  "_comment": "EXAMPLE / PLACEHOLDER departure data so the mechanism is testable. Replace with real SIDs from FAA CIFP / d-TPP before relying on it. initial_climb_ft, turn_on_course (LEFT/RIGHT) and initial_heading are per runway; by_dest overrides by destination ICAO; legs[] is optional vector-mode (heading/climb_ft/until_fix).",
+  "KBUR": {
+    "runways": {
+      "15": {
+        "default": {
+          "sid": "EXAMPLE15",
+          "initial_climb_ft": 3000,
+          "turn_on_course": "LEFT",
+          "legs": [
+            {"heading": 175, "climb_ft": 3000, "note": "placeholder initial"},
+            {"heading": 90, "climb_ft": 5000, "note": "placeholder on course"}
+          ]
+        }
+      },
+      "8": {
+        "default": {"sid": "EXAMPLE08", "initial_climb_ft": 3000, "turn_on_course": "RIGHT"}
+      }
+    }
+  },
+  "KATL": {
+    "runways": {
+      "26L": {
+        "default": {"sid": "EXAMPLE26L", "initial_climb_ft": 5000, "turn_on_course": "RIGHT"},
+        "by_dest": {
+          "KBOS": {"sid": "EXAMPLENE", "initial_climb_ft": 5000, "initial_heading": 70}
+        }
+      },
+      "27R": {
+        "default": {"sid": "EXAMPLE27R", "initial_climb_ft": 5000, "turn_on_course": "LEFT"}
+      }
+    }
+  }
+}

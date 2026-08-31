@@ -51,6 +51,8 @@ PATTERNS = {
     "set_plane": re.compile(r"^SET PlANE:\s+(?P<callsign>[A-Z0-9]+)"),
     "pilot": re.compile(r"^PILOT:\s+(?P<text>.+)$"),
     "scoring": re.compile(r"^Add Scoring:\s+(?P<msg>MSG_\w+)"),
+    # airborne position line: "POS: (x, y, z) ROT: .. ALT: n .. rw: R * CALLSIGN"
+    "pos_line": re.compile(r"ALT:\s*(?P<alt>-?\d+).*?\brw:\s*(?P<rw>\w+)\s*\*\s*(?P<callsign>[A-Z0-9]+)"),
     "runway_in_cmd": re.compile(r"RUNWAY\s+(?P<runway>[0-9]{1,2}\s?[LRC]?)", re.I),
     # pilot on-final call, spoken form: "... <callsign> on final <runway>."
     "pilot_final": re.compile(r"^(?:\w+\s+tower,\s+)?(?P<callsign>.+?)\s+on final\s+(?P<runway>[\w\s]+?)\s*\.?\s*$", re.I),
@@ -93,24 +95,57 @@ class LogInterpreter:
             self.on_event("scoring:" + m["msg"], Plane(m["msg"]))
             return
 
+        m = PATTERNS["pos_line"].search(line)
+        if m and int(m["alt"]) > 50:
+            plane = self.state.plane(m["callsign"])
+            if plane.phase in (Phase.UNKNOWN, Phase.DEPARTURE):
+                plane.phase = Phase.DEPARTURE
+                self.on_event("airborne", plane)
+
     def _handle_pilot(self, text: str) -> None:
-        """PILOT lines are spoken; detect on-final and resolve to ICAO."""
-        fm = PATTERNS["pilot_final"].match(text)
-        if not fm:
-            return
-        # lazy import to keep gamestate importable standalone
+        """PILOT lines are spoken; detect on-final and departure intents,
+        resolving the spoken callsign to ICAO where possible."""
         from callsign_resolver import resolve, parse_runway
         roster = set(self.state.planes)
-        cs = resolve(fm["callsign"], roster) or resolve(fm["callsign"])
-        rwy = parse_runway(fm["runway"])
-        if not cs:
+        low = text.lower()
+
+        fm = PATTERNS["pilot_final"].match(text)
+        if fm:
+            cs = resolve(fm["callsign"], roster) or resolve(fm["callsign"])
+            if cs:
+                plane = self.state.plane(cs)
+                if plane.phase != Phase.CLEARED_TO_LAND:
+                    plane.phase = Phase.ON_FINAL
+                    r = parse_runway(fm["runway"])
+                    if r:
+                        plane.runway = r
+                    self.on_event("on_final", plane)
             return
-        plane = self.state.plane(cs)
-        if plane.phase != Phase.CLEARED_TO_LAND:
-            plane.phase = Phase.ON_FINAL
-            if rwy:
-                plane.runway = rwy
-            self.on_event("on_final", plane)
+
+        # departure intents: "... <callsign> requesting push and start" /
+        # "... <callsign> ready to taxi". Callsign is the last spoken chunk.
+        intent = None
+        if "requesting push" in low or "push and start" in low:
+            intent = "req_pushback"
+        elif "ready to taxi" in low:
+            intent = "req_taxi"
+        if intent:
+            # spoken callsign is the trailing "<airline> <numbers>" phrase
+            cs = resolve(text.split(",")[-1], roster) or self._resolve_trailing(text, roster)
+            if cs:
+                plane = self.state.plane(cs)
+                self.on_event(intent, plane)
+
+    @staticmethod
+    def _resolve_trailing(text: str, roster: set) -> Optional[str]:
+        from callsign_resolver import resolve
+        toks = text.replace(",", " ").split()
+        # try progressively longer trailing phrases to catch "<airline> <nums>"
+        for start in range(len(toks) - 1, -1, -1):
+            cand = resolve(" ".join(toks[start:]), roster)
+            if cand:
+                return cand
+        return None
 
     def _handle_command_echo(self, callsign: str, text: str) -> None:
         plane = self.state.plane(callsign)
