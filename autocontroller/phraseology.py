@@ -37,7 +37,8 @@ def latlon_to_local(lat: float, lon: float, center: tuple[float, float]) -> tupl
     """Inverse of port_client.local_to_latlon: lat/lon -> game-local (x=east,
     z=north) meters, using the airport center."""
     lat0, lon0 = center
-    x = math.radians(lon - lon0) * 111_320.0 * math.cos(math.radians(lat0))
+    # degrees * meters-per-degree (NOT radians); matches local_to_latlon inverse
+    x = (lon - lon0) * 111_320.0 * math.cos(math.radians(lat0))
     z = (lat - lat0) * 111_320.0
     return (x, z)
 

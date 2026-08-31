@@ -26,6 +26,15 @@ class Plane:
     phase: Phase = Phase.UNKNOWN
     runway: Optional[str] = None
     last_transmission: str = ""
+    # live geometry from the Communication Port (None until first port update)
+    pos: Optional[dict] = None          # {x, y, z} game-local meters
+    heading: Optional[float] = None     # deg (rot.y)
+    speed: Optional[float] = None       # game speed units
+    alt_ft: Optional[float] = None      # y (pos.y) as altitude when airborne
+    latlon: Optional[tuple] = None      # (lat, lon) derived via airport center
+    state_int: Optional[int] = None     # raw AIRPLANES state enum
+    target_runway: Optional[str] = None # trgrw
+    updated: float = 0.0                # monotonic time of last port update
 
 
 @dataclass
