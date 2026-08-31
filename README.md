@@ -70,6 +70,17 @@ one is a new subscriber, not a rewrite.
 | `ground_router.py` | Dijkstra taxi routing with guidance + path smoothing + handoff routing. |
 | `ground_controller.py` | a ground position ("Bob") with standing + per-aircraft guidance. |
 | `runway_safety.py` | is-it-safe-to-cross timing check (arrival ETA vs crossing time). |
+| `rwsl.py` + `rwsl_feed.py` | runway status lights (red/green hold-shorts) + localhost feed. |
+| `runway_selection.py` | wind-based active-runway selection. |
+| `separation.py` | wake-turbulence separation minima by weight class. |
+| `sequencer.py` | arrival sequencing/metering with wake spacing. |
+| `assignment.py` | shortest-taxi runway + airline-terminal gate assignment. |
+| `ground_conflict.py` | taxi conflicts, head-ons, pushback, runway incursions. |
+| `scoring_tuner.py` | self-tunes params from `Add Scoring` outcomes. |
+| `deviation.py` | wrong-runway / off-route detection. |
+| `voices.py` | per-position TTS voices, phrasing variety, readback checks. |
+| `airlines_db.py` / `sid_convert.py` | airline callsign DB / SID data converter. |
+| `telemetry.py` / `world_feed.py` / `regression.py` | metrics / situational feed / replay test harness. |
 | `spacing_policy.py` | consumes `compression` events; advises/acts. |
 | `senders.py` | command delivery: dry-run (default), keyboard, or port (pending write path). |
 | `main.py` | log-tail runner for the arrival/departure loop. |

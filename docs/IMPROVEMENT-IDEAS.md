@@ -5,6 +5,17 @@ needs. Most "decide-side" items are buildable and validatable on data we already
 have (log + taxiway graph + port position feed); *acting* on any of them still
 waits on the write path.
 
+> **Status (built):** everything below **except section E (Intelligence layer)**
+> is now implemented and validated on the decide-side. New modules:
+> `runway_selection.py` (A1), `separation.py` (A2), `sequencer.py` (A3),
+> `assignment.py` (A6+B9), `ground_conflict.py` (B7,B8,C11), `ground_controller.
+> reroute_around` (B10), `scoring_tuner.py` (C12), `deviation.py` (C13),
+> `voices.py` (D14–16), `airlines_db.py` (F20), `sid_convert.py` (F19),
+> `telemetry.py` (F22), `world_feed.py` (F23), `regression.py` (F21).
+> A4 (intersection departures) / A5 (LAHSO) are small policy additions using the
+> graph + runway_safety and remain to be wired into the departure/arrival flow.
+> **Section E (LLM policy, trainer/debrief) intentionally deferred.**
+
 ## A. Controller realism
 1. **Wind-based runway selection** — choose the active runway(s) from
    `_winddir`/`_windspeed` (STATUS/AIRPORT), recompute on a wind shift. Today the
