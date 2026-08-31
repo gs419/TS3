@@ -1,5 +1,10 @@
 # Dynamic runway lighting (RWSL / runway entrance lights)
 
+> **Handoff:** light *placement/rendering* is an airport-build concern — see
+> `DYNAMIC-LIGHTING-HANDOFF.md` for the spec passed to the airport-builder
+> thread. This file covers the logic and delivery options.
+
+
 Idea: like real **Runway Status Lights (RWSL)** — the red **Runway Entrance
 Lights (REL)** at a taxiway/runway hold-short that illuminate when an aircraft is
 on the runway or an arrival is close, telling anyone waiting NOT to enter/cross.
