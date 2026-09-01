@@ -16,8 +16,10 @@ import re
 AIRLINES = {
     "southwest": "SWA", "delta": "DAL", "sky west": "SKW", "skywest": "SKW",
     "avelo": "VXP", "jetblue": "JBU", "american": "AAL", "united": "UAL",
-    "frontier": "FFT", "spirit": "NKS", "alaska": "ASA", "endeavor": "EDV",
-    "republic": "RPA", "jsx": "JSX",
+    "frontier": "FFT", "spirit wings": "NKS", "spirit": "NKS", "alaska": "ASA",
+    "endeavor": "EDV", "republic": "RPA", "jsx": "JSX", "big stripe": "JSX",
+    "fedex": "FDX", "u p s": "UPS", "ups": "UPS", "flexjet": "LXJ",
+    "execjet": "EJA", "amflight": "AMF",
 }
 _UNITS = {"zero":0,"one":1,"two":2,"three":3,"four":4,"five":5,"six":6,
           "seven":7,"eight":8,"nyner":9,"niner":9,"nine":9}

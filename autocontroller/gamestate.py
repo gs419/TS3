@@ -42,6 +42,9 @@ class GameState:
     planes: dict[str, Plane] = field(default_factory=dict)
     # runway -> callsign currently holding a landing/takeoff clearance
     runway_reserved_by: dict[str, str] = field(default_factory=dict)
+    # normalized spoken phrase -> ICAO callsign, from the game's own
+    # "speech airplanes:" dictionary line (authoritative for current traffic)
+    speech_map: dict[str, str] = field(default_factory=dict)
 
     def plane(self, callsign: str) -> Plane:
         return self.planes.setdefault(callsign, Plane(callsign))
@@ -62,10 +65,28 @@ PATTERNS = {
     "scoring": re.compile(r"^Add Scoring:\s+(?P<msg>MSG_\w+)"),
     # airborne position line: "POS: (x, y, z) ROT: .. ALT: n .. rw: R * CALLSIGN"
     "pos_line": re.compile(r"ALT:\s*(?P<alt>-?\d+).*?\brw:\s*(?P<rw>\w+)\s*\*\s*(?P<callsign>[A-Z0-9]+)"),
-    "runway_in_cmd": re.compile(r"RUNWAY\s+(?P<runway>[0-9]{1,2}\s?[LRC]?)", re.I),
+    # a runway side letter must be standalone, not the leading letter of the next
+    # word — otherwise "RUNWAY 15 CLEARED" parses as "15C".
+    "runway_in_cmd": re.compile(r"RUNWAY\s+(?P<num>[0-9]{1,2})(?:\s*(?P<side>[LRC])(?![A-Za-z]))?", re.I),
+    # the game logs the live spoken-form dictionary for all current traffic
+    "speech_airplanes": re.compile(r"^speech airplanes:\s*(?P<body>.+)$"),
     # pilot on-final call, spoken form: "... <callsign> on final <runway>."
     "pilot_final": re.compile(r"^(?:\w+\s+tower,\s+)?(?P<callsign>.+?)\s+on final\s+(?P<runway>[\w\s]+?)\s*\.?\s*$", re.I),
+    # engine trace lines carry the callsign as "... * CALLSIGN => <message>"
+    "engine_line": re.compile(r"\*\s*(?P<callsign>[A-Z0-9]+)\s*=>\s*(?P<msg>.+)$"),
+    "state_change": re.compile(r"STATE CHANGE from\s+(?P<from>STATE_\w+)\s+to\s+(?P<to>STATE_\w+)"),
+    # clearance echo that arrives WITHOUT the "COMMAND:" prefix (seen this build)
+    "bare_clearance": re.compile(r"^(?P<callsign>[A-Z0-9]{2,7})\s+(?P<text>(?:RUNWAY\s+[0-9]{1,2}\s?[LRC]?\s+)?CLEARED TO LAND.*)$"),
 }
+
+# STATE_LAND means the aircraft is on the runway surface. Leaving STATE_LAND, or
+# entering any of these, means the runway is (or is about to be) clear again —
+# covers normal rollout/exit, go-arounds, flyaways and fly-overs, none of which
+# emit a "GO AROUND"/"CONTACT DEPARTURE" command echo.
+RUNWAY_FREEING_STATES = frozenset({
+    "STATE_ESCAPE_RUNWAY", "STATE_TO_TERMINAL", "STATE_FLYAWAY",
+    "STATE_FLYAROUND", "STATE_FLYOVER", "STATE_GO_AROUND",
+})
 
 
 class LogInterpreter:
@@ -82,6 +103,12 @@ class LogInterpreter:
         if PATTERNS["game_start"].match(line):
             self.state.planes.clear()
             self.state.runway_reserved_by.clear()
+            self.state.speech_map.clear()
+            return
+
+        m = PATTERNS["speech_airplanes"].match(line)
+        if m:
+            self._parse_speech(m["body"])
             return
 
         m = PATTERNS["spawn"].match(line)
@@ -93,6 +120,19 @@ class LogInterpreter:
         if m:
             self._handle_command_echo(m["callsign"], m["text"].upper())
             return
+
+        # some clearance echoes arrive without the "COMMAND:" prefix this build
+        m = PATTERNS["bare_clearance"].match(line)
+        if m:
+            self._handle_command_echo(m["callsign"], m["text"].upper())
+            return
+
+        # engine trace lines ("... * CS => STATE CHANGE ... / Successful landing")
+        # are the authoritative signal that a runway has been vacated.
+        m = PATTERNS["engine_line"].search(line)
+        if m:
+            self._handle_engine(m["callsign"], m["msg"])
+            # fall through: airborne POS info may also be on this line
 
         m = PATTERNS["pilot"].match(line)
         if m:
@@ -111,16 +151,58 @@ class LogInterpreter:
                 plane.phase = Phase.DEPARTURE
                 self.on_event("airborne", plane)
 
+    @staticmethod
+    def _norm_spoken(s: str) -> str:
+        s = s.lower().replace(",", " ").replace(".", " ").replace("-", " ")
+        return re.sub(r"\s+", " ", s).strip()
+
+    def _parse_speech(self, body: str) -> None:
+        """Parse the game's 'speech airplanes:' dictionary into an exact
+        spoken-phrase -> ICAO map for the current traffic. Entry layout:
+          airline: ICAO;CODE;TELEPHONY; digit-form; grouped-form
+          GA:      ICAO;GA;<name>; spoken-form
+        A pilot's on-final call is TELEPHONY + grouped/digit form (airline) or
+        the GA spoken form, so we register each combination."""
+        m = self.state.speech_map
+        for entry in body.split("|"):
+            f = [p.strip() for p in entry.split(";") if p.strip() != ""]
+            if len(f) < 2:
+                continue
+            icao = f[0]
+            if not icao:
+                continue
+            forms = []
+            if f[1] == "GA":
+                forms.extend(f[3:] if len(f) > 3 else f[2:])
+            else:
+                tel = f[2] if len(f) > 2 else ""
+                for spoken in f[3:]:
+                    forms.append(f"{tel} {spoken}")
+                if tel:
+                    forms.append(tel)
+            for form in forms:
+                key = self._norm_spoken(form)
+                if key:
+                    m[key] = icao
+
+    def _resolve_spoken(self, phrase: str, roster: set) -> Optional[str]:
+        """Speech-map first (authoritative), then the heuristic resolver."""
+        from callsign_resolver import resolve
+        key = self._norm_spoken(phrase)
+        if key in self.state.speech_map:
+            return self.state.speech_map[key]
+        return resolve(phrase, roster) or resolve(phrase)
+
     def _handle_pilot(self, text: str) -> None:
         """PILOT lines are spoken; detect on-final and departure intents,
         resolving the spoken callsign to ICAO where possible."""
-        from callsign_resolver import resolve, parse_runway
+        from callsign_resolver import parse_runway
         roster = set(self.state.planes)
         low = text.lower()
 
         fm = PATTERNS["pilot_final"].match(text)
         if fm:
-            cs = resolve(fm["callsign"], roster) or resolve(fm["callsign"])
+            cs = self._resolve_spoken(fm["callsign"], roster)
             if cs:
                 plane = self.state.plane(cs)
                 if plane.phase != Phase.CLEARED_TO_LAND:
@@ -140,18 +222,17 @@ class LogInterpreter:
             intent = "req_taxi"
         if intent:
             # spoken callsign is the trailing "<airline> <numbers>" phrase
-            cs = resolve(text.split(",")[-1], roster) or self._resolve_trailing(text, roster)
+            cs = self._resolve_spoken(text.split(",")[-1], roster) or \
+                self._resolve_trailing(text, roster)
             if cs:
                 plane = self.state.plane(cs)
                 self.on_event(intent, plane)
 
-    @staticmethod
-    def _resolve_trailing(text: str, roster: set) -> Optional[str]:
-        from callsign_resolver import resolve
+    def _resolve_trailing(self, text: str, roster: set) -> Optional[str]:
         toks = text.replace(",", " ").split()
         # try progressively longer trailing phrases to catch "<airline> <nums>"
         for start in range(len(toks) - 1, -1, -1):
-            cand = resolve(" ".join(toks[start:]), roster)
+            cand = self._resolve_spoken(" ".join(toks[start:]), roster)
             if cand:
                 return cand
         return None
@@ -159,7 +240,7 @@ class LogInterpreter:
     def _handle_command_echo(self, callsign: str, text: str) -> None:
         plane = self.state.plane(callsign)
         rwy = PATTERNS["runway_in_cmd"].search(text)
-        rwy_norm = rwy["runway"].upper().replace(" ", "") if rwy else None
+        rwy_norm = (rwy["num"] + (rwy["side"].upper() if rwy["side"] else "")) if rwy else None
         if "CLEARED TO LAND" in text:
             plane.phase = Phase.CLEARED_TO_LAND
             if rwy_norm:
@@ -178,7 +259,29 @@ class LogInterpreter:
             self._release_runway(callsign)
             self.on_event("handed_off", plane)
 
-    def _release_runway(self, callsign: str) -> None:
+    def _handle_engine(self, callsign: str, msg: str) -> None:
+        """Engine trace lines drive runway release. A landing aircraft holds the
+        runway while in STATE_LAND; the moment it leaves that state (to escape /
+        taxi / flyaway) or flies over/around, the surface is free again — none of
+        which produce a command echo, so this is the only reliable release."""
+        sc = PATTERNS["state_change"].search(msg)
+        if sc:
+            if sc["from"] == "STATE_LAND" or sc["to"] in RUNWAY_FREEING_STATES:
+                self._free_runway_for(callsign)
+            return
+        if "Successful landing" in msg:
+            self._free_runway_for(callsign)
+
+    def _free_runway_for(self, callsign: str) -> None:
+        plane = self.state.plane(callsign)
+        plane.phase = Phase.LANDED
+        if self._release_runway(callsign):
+            self.on_event("runway_cleared", plane)
+
+    def _release_runway(self, callsign: str) -> bool:
+        freed = False
         for rwy, cs in list(self.state.runway_reserved_by.items()):
             if cs == callsign:
                 del self.state.runway_reserved_by[rwy]
+                freed = True
+        return freed
