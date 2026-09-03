@@ -85,38 +85,53 @@ one is a new subscriber, not a rewrite.
 | `senders.py` | command delivery: dry-run (default), keyboard, or port (pending write path). |
 | `arbiter.py` | CommandArbiter — de-conflicts every policy's proposed commands per tick. |
 | `config.py` | unified runtime config; folds in scoring-tuner learning. |
-| `orchestrator.py` | the assembled engine: WorldModel → policies → arbiter → sender, on a tick loop. |
-| `main.py` | log-tail runner for the arrival/departure loop. |
+| `orchestrator.py` | the assembled engine: WorldModel → policies → arbiter → sender, on a tick loop; loads the position map and runs the handoff chain. |
+| `main.py` | log-tail runner for the single-AI arrival loop (dry-run / keyboard). |
+| `live.py` | **the live runner**: multi-position engine against the running game — tails the log, polls the port, sends via the port write path. |
+| `position_editor.py` | **local GUI** to pick an airport and designate which AI/human controls each position and runway (edits `positions.json`). |
 
 ## Feature status
 
 | Capability | Decide | Act |
 | --- | --- | --- |
-| Clear-to-land (arrivals) | ✅ validated on real logs | ⏳ write path |
-| Departures + real SID initial instr. | ✅ validated | ⏳ write path |
-| Cleared-direct / climb-via-SID | ✅ (needs fix DB) | ⏳ write path |
-| Compression / spacing | ✅ (needs state-int calibration) | ⏳ write path |
-| Multi-position + handoffs | ✅ validated (Cleveland scenario) | ⏳ write path |
-| Ground taxi routing + guidance | ✅ validated on real KBUR graph | ⏳ write path |
-| Runway cross-timing safety | ✅ validated | ⏳ write path |
+| Clear-to-land (arrivals) | ✅ validated on real logs (sequencing fix: runway released off the landing-state machine) | 🔌 wired via `live.py`; PTT commit unconfirmed in-game |
+| Departures + real SID initial instr. | ✅ validated | 🔌 wired via `live.py` |
+| Cleared-direct / climb-via-SID | ✅ (needs fix DB) | 🔌 wired |
+| Compression / spacing | ✅ (state enum calibrated) | 🔌 wired |
+| Multi-position + handoffs | ✅ validated on the real KBUR log (clear → CONTACT GROUND → TAXI TO RAMP → complete; human runway left alone) | 🔌 wired via `live.py` + `positions.json` / GUI |
+| Ground taxi routing + guidance | ✅ validated on real KBUR graph | ⏳ live ground uses a safe `TAXI TO RAMP`; routed taxi not yet in the live loop |
+| Runway cross-timing safety | ✅ validated | 🔌 wired |
 
-**The one blocker to *acting*:** the command write path — a single captured
-voice command confirms the injection message. Until then every controller runs
-in dry-run/advisory mode (it decides correctly, it just prints instead of
-sending). See `docs/WRITE-PATH-CAPTURE-GUIDE.md`.
+**Acting is now wired.** The write path was decoded from captures
+(`CMD_SET_CMD_TEXT` bracketed by `CMD_SET_PTT_STATE`, see
+`docs/PORT-PROTOCOL-DECODED.md`) and `live.py` sends through it via
+`senders.PortCommandSender`. The PTT-commit sequence is inferred from captures
+and **not yet confirmed against a running game** — run the first live session
+on a throwaway save and watch the game's readbacks.
 
 ## Running (on the gaming PC)
 
-Dry-run the arrival/departure loop off the live log:
+1. **Designate who controls what** — open the GUI, pick the airport, assign
+   each position to an AI name or *Human*, and pick the owner of every runway:
+   ```
+   python autocontroller/position_editor.py          # opens http://127.0.0.1:8765
+   ```
+   (It edits `autocontroller/positions.json`; you can also edit that by hand.)
+2. **Run live** against the game (a session must be running; port is the
+   *Communication Port* in the game's settings):
+   ```
+   python autocontroller/live.py --log "<...>\Player.log" --icao KBUR --port 12020
+   python autocontroller/live.py --log "<...>\Player.log" --icao KBUR --dry-run   # print only
+   ```
+   Runways owned by a *Human* position are left entirely to you; the AI only
+   clears its own runways and hands landed traffic to the AI ground position
+   (`CONTACT GROUND` → `TAXI TO RAMP`).
+
+Read-only helpers, always safe:
 ```
-python autocontroller/main.py --log "<...>\Player.log"
+python autocontroller/main.py --log "<...>\Player.log"     # single-AI dry-run loop
+python autocontroller/port_client.py --port <PORT>         # live radar feed
 ```
-Live world model with positions (read-only):
-```
-python autocontroller/port_client.py --port <PORT>     # see the live radar feed
-```
-Both are safe/read-only. Calibrate once per build with `--replay` (see
-`autocontroller/README.md`).
 
 ## Docs index
 - `PORT-PROTOCOL-DECODED.md` — the Communication Port protocol.

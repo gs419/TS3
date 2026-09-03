@@ -266,8 +266,18 @@ class LogInterpreter:
         which produce a command echo, so this is the only reliable release."""
         sc = PATTERNS["state_change"].search(msg)
         if sc:
-            if sc["from"] == "STATE_LAND" or sc["to"] in RUNWAY_FREEING_STATES:
+            frm, to = sc["from"], sc["to"]
+            if frm == "STATE_LAND" or to in RUNWAY_FREEING_STATES:
                 self._free_runway_for(callsign)
+            # position-handoff signals for the multi-position layer:
+            #  - a landing that rolls out and EXITS the runway is the tower ->
+            #    ground handoff moment (a flyaway/flyover is not — it stays
+            #    with tower / goes around, so no 'landed' for those);
+            #  - reaching the terminal is the ground/ramp -> complete moment.
+            if frm == "STATE_LAND" and to in ("STATE_ESCAPE_RUNWAY", "STATE_TO_TERMINAL"):
+                self.on_event("landed", self.state.plane(callsign))
+            if to == "STATE_TO_TERMINAL":
+                self.on_event("reached_ramp", self.state.plane(callsign))
             return
         if "Successful landing" in msg:
             self._free_runway_for(callsign)

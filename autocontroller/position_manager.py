@@ -33,6 +33,8 @@ class PositionManager:
     notify_human: Callable[[str, str], None] = lambda cs, msg: print(f"[HUMAN] {cs}: {msg}")
     on_assign: Callable[[str, Optional[Position]], None] = lambda cs, pos: None
     owner: dict = field(default_factory=dict)        # callsign -> Ownership
+    # role -> CONTACT wording (see contact_phrase); None = built-in table
+    contact_phrases: Optional[dict] = None
 
     # ---- initial assignment ------------------------------------------
     def assign_initial(self, callsign: str, *, runway=None, area=None) -> Optional[Position]:
@@ -76,10 +78,22 @@ class PositionManager:
         # AI target
         if src and src.frequency and dst.frequency and src.frequency != dst.frequency:
             # cross-frequency: real CONTACT command from the source controller
-            self.sender.send(f"{callsign} CONTACT {dst.frequency}")
-            return f"{callsign}: {frm} -> {dst.name} (CONTACT {dst.frequency})"
+            phrase = self.contact_phrase(dst)
+            self.sender.send(f"{callsign} {phrase}")
+            return f"{callsign}: {frm} -> {dst.name} ({phrase})"
         # same frequency: virtual transfer, no game command
         return f"{callsign}: {frm} -> {dst.name} (virtual)"
+
+    # role -> the CONTACT wording the game's grammar accepts. "CONTACT
+    # DEPARTURE" is confirmed in-game; the others follow the same pattern.
+    # Override with `contact_phrases` if a build wants the frequency spoken.
+    def contact_phrase(self, dst: Position) -> str:
+        table = self.contact_phrases or {
+            "ground": "CONTACT GROUND", "ramp": "CONTACT RAMP",
+            "departure": "CONTACT DEPARTURE", "local": "CONTACT TOWER",
+            "clearance": "CONTACT CLEARANCE",
+        }
+        return table.get(dst.role, f"CONTACT {dst.frequency}")
 
     # ---- convenience: build semantic events from world/log -----------
     @staticmethod

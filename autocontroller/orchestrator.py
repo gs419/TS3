@@ -5,8 +5,14 @@ policies through the CommandArbiter, fans the event stream out to every policy
 plus the scoring tuner and telemetry, and runs a tick loop. This is the single
 entrypoint that turns the standalone modules into one coordinated system.
 
+Multi-position: when a PositionMap is available for the airport
+(positions.json), every AI policy is scoped to the runways its position owns
+(human-owned runways are left alone), and a PositionManager runs the handoff
+chain — e.g. an arrival lands and exits the runway -> "CONTACT GROUND" -> the AI
+ground position taxis it to the ramp -> complete.
+
 Dry-run by default (arbiter forwards to a DryRunSender). Swap in a real sender
-once the write path is confirmed.
+(PortCommandSender) to actually issue commands — see live.py.
 """
 from __future__ import annotations
 
@@ -22,12 +28,16 @@ from departure_policy import DeparturePolicy
 from scoring_tuner import ScoringTuner
 from telemetry import Telemetry
 from senders import DryRunSender
+from positions import PositionMap
+from position_manager import PositionManager
 
 
 @dataclass
 class Orchestrator:
     config: Config
     sender: object = None
+    pmap: object = None                 # PositionMap; auto-loaded if None
+    handoff_settle_s: float = 2.0       # gap between CONTACT and the next controller's first call
     subs: list = field(default_factory=list)
 
     def __post_init__(self):
@@ -51,6 +61,23 @@ class Orchestrator:
             airport_icao=self.config.airport_icao,
             default_runway=self.config.default_runway)
 
+        # ---- multi-position layer ----------------------------------------
+        self.pm = None
+        self._taxi_due: dict[str, float] = {}     # callsign -> when to issue taxi
+        self._taxied: set = set()
+        if self.pmap is None and self.config.airport_icao:
+            self.pmap = PositionMap.load(self.config.airport_icao)
+        if self.pmap:
+            self.pm = PositionManager(
+                self.pmap,
+                sender=self.arbiter.proposer("handoff", PRIO_CLEARANCE),
+                notify_human=self._notify_human,
+                on_assign=self._on_assign)
+            self.ground = self.arbiter.proposer("ground", PRIO_CLEARANCE)
+            # AI controllers only touch runways an AI position is responsible for
+            self.arrival.owns_runway = self.pmap.ai_owns_runway
+            self.departure.owns_runway = self.pmap.ai_owns_runway
+
         # fan-out order: policies first, then learning/metrics
         self.subs = [self.arrival.on_event, self.departure.on_event,
                      self.tuner.on_event, self.telemetry.on_event]
@@ -58,6 +85,42 @@ class Orchestrator:
     def _dispatch(self, kind, plane):
         for s in self.subs:
             s(kind, plane)
+        if self.pm:
+            self._position_events(kind, plane)
+
+    # ---- multi-position: ownership + handoffs ---------------------------
+    def _position_events(self, kind, plane):
+        cs = plane.callsign
+        if kind == "on_final" and plane.runway:
+            # an arrival enters under whoever owns its runway (AI or human)
+            if cs not in self.pm.owner:
+                pos = self.pm.assign_initial(cs, runway=plane.runway)
+                if pos:
+                    print(f"[pos] {cs} on final {plane.runway} -> {pos.name} "
+                          f"({pos.kind} {pos.role})")
+        elif kind == "landed" and plane.runway:
+            self._log_handoff(self.pm.handle_event(f"landed_on:{plane.runway}", cs))
+        elif kind == "reached_ramp":
+            self._log_handoff(self.pm.handle_event("reached:ramp", cs))
+
+    def _on_assign(self, cs, pos):
+        """Ownership changed. When an AI ground/ramp position receives an
+        aircraft, it issues the taxi — after a short settle so it doesn't
+        collide with the CONTACT in the same arbiter tick."""
+        if pos is None:
+            self._taxied.discard(cs)
+            self._taxi_due.pop(cs, None)
+            return
+        if pos.kind == "ai" and pos.role in ("ground", "ramp") and cs not in self._taxied:
+            self._taxi_due[cs] = time.monotonic() + self.handoff_settle_s
+
+    def _notify_human(self, cs, msg):
+        print(f"\a[HUMAN] {cs}: {msg}")
+
+    @staticmethod
+    def _log_handoff(desc):
+        if desc:
+            print(f"[pos] handoff {desc}")
 
     # ---- inputs -------------------------------------------------------
     def feed_log(self, line: str):
@@ -75,12 +138,20 @@ class Orchestrator:
     def tick(self, now: float | None = None) -> dict:
         self.arrival.tick()
         self.departure.tick()
+        self._flush_taxi(now if now is not None else time.monotonic())
         result = self.arbiter.resolve(now)
         # feed learned adjustments back into live params
         self.config.apply_tunables(self.tuner.params)
         self.arrival.runway_cooldown_s = self.config.runway_cooldown_s
         self.departure.enabled = True
         return result
+
+    def _flush_taxi(self, now: float):
+        for cs, due in list(self._taxi_due.items()):
+            if now >= due:
+                del self._taxi_due[cs]
+                self._taxied.add(cs)
+                self.ground.send(f"{cs} TAXI TO RAMP")
 
     # ---- live loop ----------------------------------------------------
     def run(self, log_path: str, port_client=None, poll_hz: float = 2.0):

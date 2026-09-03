@@ -20,7 +20,7 @@
       {"name": "Ground", "role": "ground", "kind": "ai",    "frequency": "123.9", "owns_areas": ["TerminalA","TerminalB","TerminalC","TerminalD","TerminalG","TerminalM"]}
     ],
     "handoffs": [
-      {"when": "landed_on:15", "from": "Local", "to": "Ground"},
+      {"when": "landed_on:*",  "from": "Local",  "to": "Ground"},
       {"when": "reached:ramp", "from": "Ground", "to": null}
     ]
   }

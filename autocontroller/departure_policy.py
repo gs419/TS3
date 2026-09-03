@@ -46,6 +46,9 @@ class DeparturePolicy:
     default_runway: str = ""          # set from CMD_REQUEST_STATUS/UICFG when live
     lineup_wait: bool = True
     enabled: bool = True
+    # multi-position: predicate(runway) -> bool; when set, only work departures
+    # on runways this controller is responsible for.
+    owns_runway: object = None
 
     _dep: dict[str, DepState] = field(default_factory=dict)
 
@@ -54,6 +57,11 @@ class DeparturePolicy:
         if not self.enabled:
             return
         cs = plane.callsign
+        # departures use this controller's runway; skip if it isn't ours
+        if (kind in ("req_pushback", "req_taxi") and self.owns_runway is not None
+                and not self.owns_runway(self._dep.get(cs, DepState(cs)).runway
+                                         or self.default_runway)):
+            return
         if kind == "req_pushback":
             self._pushback(cs)
         elif kind == "req_taxi":

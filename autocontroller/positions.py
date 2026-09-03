@@ -61,11 +61,34 @@ class PositionMap:
                 return p
         return None
 
+    def ai_owns_runway(self, runway: str) -> bool:
+        """True if an AI (not human) local/clearance position owns this runway —
+        the gate that keeps an AI controller off runways it isn't responsible
+        for (human-owned, or another position's)."""
+        p = self.responsible_for(runway=runway)
+        return bool(p and p.kind == "ai")
+
+    def owner_kind(self, runway: str) -> Optional[str]:
+        p = self.responsible_for(runway=runway)
+        return p.kind if p else None
+
     def handoff_for(self, event_key: str, frm: Optional[str]) -> Optional[Handoff]:
         for h in self.handoffs:
-            if h.when == event_key and (h.frm in (None, frm)):
+            if not self._event_matches(h.when, event_key):
+                continue
+            if h.frm in (None, frm):
                 return h
         return None
+
+    @staticmethod
+    def _event_matches(pattern: str, event_key: str) -> bool:
+        """Exact match, or a trailing '*' wildcard on the value after the colon
+        (e.g. 'landed_on:*' matches 'landed_on:15')."""
+        if pattern == event_key:
+            return True
+        if pattern.endswith(":*") and event_key.startswith(pattern[:-1]):
+            return True
+        return False
 
     @classmethod
     def load(cls, icao: str, path: Optional[str] = None) -> Optional["PositionMap"]:

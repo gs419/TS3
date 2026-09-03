@@ -29,6 +29,10 @@ class AutoTowerPolicy:
     echo_timeout_s: float = 6.0
     max_retries: int = 1
     enabled: bool = True
+    # multi-position: predicate(runway) -> bool. When set, this controller only
+    # acts on runways it is responsible for; everything else is left to the
+    # human / another position. None = owns every runway (single-AI mode).
+    owns_runway: "object" = None
 
     _last_clearance_at: dict[str, float] = field(default_factory=dict)
     _pending: dict[str, PendingCommand] = field(default_factory=dict)
@@ -82,6 +86,11 @@ class AutoTowerPolicy:
         if plane.callsign in self._abandoned:
             return
         rwy = plane.runway
+        if self.owns_runway is not None and not self.owns_runway(rwy):
+            self._note(plane.callsign,
+                       f"[policy] {plane.callsign} on final {rwy} — not my runway, "
+                       f"leaving to its controller")
+            return
         holder = self.state.runway_reserved_by.get(rwy)
         if holder and holder != plane.callsign:
             self._note(plane.callsign,
