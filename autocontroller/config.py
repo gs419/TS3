@@ -26,7 +26,7 @@ class Config:
     # ground
     ground_conflict_range_m: float = 150.0
     # arbiter
-    aircraft_cooldown_s: float = 8.0
+    aircraft_cooldown_s: float = 5.0        # < policy echo_timeout so a retry is not a 'duplicate'
     arbiter_runway_cooldown_s: float = 12.0
     # behaviour
     auto_handoff: bool = False

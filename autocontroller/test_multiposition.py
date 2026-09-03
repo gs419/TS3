@@ -2,15 +2,19 @@
 
 Replays the real KBUR session log (testdata/kbur_arrivals.log) through the
 fully assembled engine — WorldModel -> policies -> arbiter -> sender — with a
-position map, on a virtual clock, and checks what the arbiter actually SENDS:
+position map, on a virtual clock, and checks what the arbiter actually SENDS.
 
-  1. all-AI map (stock KBUR): every arrival is cleared; when it lands and exits
-     the runway the Local position hands it off with "CONTACT GROUND" and the AI
-     Ground position then issues "TAXI TO RAMP"; reaching the terminal completes
-     the chain (ownership released).
-  2. human-owned runway: with runway 15 assigned to a human position, the AI
-     issues NO landing clearance on 15 (left to the human) and the human is
-     alerted on handoff instead of an in-game CONTACT.
+The maps are built HERE, not loaded from positions.json: that file is the
+user's live config (edited by the GUI), so a test must not depend on it.
+
+  1. all-AI map: every arrival is cleared; when it lands and exits the runway
+     the Local position hands it off with "CONTACT GROUND" and the AI Ground
+     position then issues "TAXI TO RAMP"; reaching the terminal completes the
+     chain (ownership released).
+  2. human Ground (AI Local): arrivals are cleared, but a landing is handed to
+     the HUMAN — an alert, no CONTACT and no TAXI from the AI.
+  3. human-owned runway: with runway 15 assigned to a human position, the AI
+     issues NO landing clearance on 15 and no CONTACT for it.
 
 Run: python test_multiposition.py
 """
@@ -27,6 +31,7 @@ from positions import PositionMap, Position, Handoff
 LOG = os.path.join(os.path.dirname(__file__), "testdata", "kbur_arrivals.log")
 ARRIVALS = ["N355FV", "SKW6353", "JSX1877", "JSX194"]
 LANDED_AND_EXITED = ["SKW6353"]   # the only full landing->exit->terminal in the log
+KBUR_RUNWAYS = ("8", "26", "15", "33")
 
 
 class _Clock:
@@ -64,16 +69,20 @@ def _replay(orch):
         clk.t += 1.0; orch.tick(clk.t)
 
 
-def _kbur_map(human_runways=()):
-    pm = PositionMap.load("KBUR")
-    assert pm, "positions.json must have a KBUR entry"
+def _kbur_map(human_runways=(), ground_kind="ai"):
+    """Explicit KBUR layout: AI Local owns the runways (minus any given to a
+    human position), Ground is AI or human."""
+    positions = {
+        "Local": Position(name="Local", role="local", kind="ai", frequency="118.7",
+                          owns_runways=[r for r in KBUR_RUNWAYS if r not in human_runways]),
+        "Ground": Position(name="Ground", role="ground", kind=ground_kind, frequency="123.9",
+                           owns_areas=["TerminalA", "TerminalB"]),
+    }
     if human_runways:
-        local = pm.positions["Local"]
-        local.owns_runways = [r for r in local.owns_runways if r not in human_runways]
-        pm.positions["Human"] = Position(name="Human", role="local", kind="human",
-                                         frequency="118.7",
-                                         owns_runways=list(human_runways))
-    return pm
+        positions["Human"] = Position(name="Human", role="local", kind="human",
+                                      frequency="118.7", owns_runways=list(human_runways))
+    handoffs = [Handoff("landed_on:*", "Ground", "Local"), Handoff("reached:ramp", None, "Ground")]
+    return PositionMap("KBUR", positions, handoffs)
 
 
 def test_all_ai_chain():
@@ -97,6 +106,24 @@ def test_all_ai_chain():
         assert cs not in orch.pm.owner, f"{cs} still owned after reaching ramp"
 
 
+def test_human_ground_gets_alert_not_contact():
+    """The user's current KBUR layout: AI Local, HUMAN Ground."""
+    snd = _CapSender()
+    alerts = []
+    orch = Orchestrator(Config(airport_icao="KBUR"), sender=snd,
+                        pmap=_kbur_map(ground_kind="human"))
+    orch.pm.notify_human = lambda cs, msg: alerts.append((cs, msg))
+    _replay(orch)
+    sent = snd.sent
+    cleared = {t.split()[0] for t in sent if "CLEARED TO LAND" in t}
+    for cs in ARRIVALS:
+        assert cs in cleared, f"{cs} not cleared to land by the AI Local: {sent}"
+    assert not any("CONTACT" in t for t in sent), f"AI must not CONTACT a human position: {sent}"
+    assert not any("TAXI" in t for t in sent), f"AI must not taxi the human's traffic: {sent}"
+    for cs in LANDED_AND_EXITED:
+        assert any(a[0] == cs for a in alerts), f"human was not alerted for {cs}: {alerts}"
+
+
 def test_human_owned_runway_is_left_alone():
     snd = _CapSender()
     alerts = []
@@ -116,6 +143,8 @@ def test_human_owned_runway_is_left_alone():
 if __name__ == "__main__":
     test_all_ai_chain()
     print("  ok all-AI chain: clear -> CONTACT GROUND -> TAXI TO RAMP -> complete")
+    test_human_ground_gets_alert_not_contact()
+    print("  ok human Ground: AI clears, then alerts the human (no CONTACT / TAXI)")
     test_human_owned_runway_is_left_alone()
     print("  ok human-owned runway left alone")
     print("all multi-position regression tests PASSED")

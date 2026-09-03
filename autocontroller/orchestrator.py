@@ -54,7 +54,8 @@ class Orchestrator:
         self.arrival = AutoTowerPolicy(
             state=self.world.state,
             sender=self.arbiter.proposer("arrival", PRIO_CLEARANCE),
-            runway_cooldown_s=self.config.runway_cooldown_s)
+            runway_cooldown_s=self.config.runway_cooldown_s,
+            echo_timeout_s=8.0, max_retries=2)   # live: a missed injection is retried
         self.departure = DeparturePolicy(
             state=self.world.state,
             sender=self.arbiter.proposer("departure", PRIO_CLEARANCE),

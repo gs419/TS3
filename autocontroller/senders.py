@@ -83,9 +83,9 @@ class PortCommandSender:
 
     def __init__(self, host: str = "127.0.0.1", port: int = 12020,
                  greet: bool = True, ptt_commit: bool = True,
-                 settle_s: float = 0.3, lowercase: bool = True,
+                 settle_s: float = 0.5, lowercase: bool = True,
                  hold_s: float = 1.5, stream_hz: float = 10.0,
-                 ptt_mode: str = "ptt"):
+                 ptt_mode: str = "both"):
         self._json = __import__("json")
         self._socket = __import__("socket")
         self._select = __import__("select")

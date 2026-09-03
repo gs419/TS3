@@ -9,7 +9,8 @@ geometry, and issues commands back through the port write path.
 
 Who controls what comes from positions.json (edit it, or use position_editor.py).
 LIVE MODE SENDS REAL COMMANDS. The write path (CONFIRMED in-game): open a
-recognition session with CMD_SET_PTT_STATE, stream the text with
+recognition session with CMD_SET_PTT_STATE + btnRecognize (--ptt-mode both:
+PTT alone executed 1 of 2 probes, both executed 2 of 2), stream the text with
 CMD_SET_CMD_TEXT while held (--hold, default 1.5 s), release to execute.
 See docs/PORT-PROTOCOL-DECODED.md. Each command holds the loop ~2 s while it
 streams; keep the first sessions short and watch the readbacks.
@@ -74,11 +75,13 @@ def main():
     ap.add_argument("--dry-run", action="store_true", help="print commands, send nothing")
     ap.add_argument("--no-port-read", action="store_true",
                     help="don't poll the port for positions (log-only events)")
-    ap.add_argument("--ptt-mode", choices=list(PortCommandSender.MODES), default="ptt",
+    ap.add_argument("--ptt-mode", choices=list(PortCommandSender.MODES), default="both",
                     help="how the recognition session is signalled around the "
                          "streamed text (see tools/probe_write_path.py)")
     ap.add_argument("--hold", type=float, default=1.5,
                     help="seconds to hold the session while streaming the text")
+    ap.add_argument("--settle", type=float, default=0.5,
+                    help="seconds after the press before streaming / before release")
     ap.add_argument("--no-ptt", action="store_true",
                     help="alias for --ptt-mode none")
     args = ap.parse_args()
@@ -94,7 +97,7 @@ def main():
     # write path
     if live:
         sender = PortCommandSender(args.host, args.port, ptt_mode=args.ptt_mode,
-                                   hold_s=args.hold)
+                                   hold_s=args.hold, settle_s=args.settle)
         try:
             sender.connect()
             print(f"[live] command channel connected on {args.host}:{args.port} "
