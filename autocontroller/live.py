@@ -23,7 +23,7 @@ import sys
 from config import Config
 from orchestrator import Orchestrator
 from positions import PositionMap
-from senders import DryRunSender, PortCommandSender
+from senders import DryRunSender, PortCommandSender, KeyboardSender
 from port_client import PortClient
 
 PRIME_PREFIXES = ("speech airplanes:", "CREATE SERVER AIRPLANE:")
@@ -73,6 +73,16 @@ def main():
     ap.add_argument("--host", default="127.0.0.1")
     ap.add_argument("--runway", default="", help="default departure runway")
     ap.add_argument("--dry-run", action="store_true", help="print commands, send nothing")
+    ap.add_argument("--send", choices=["port", "keyboard"], default="keyboard",
+                    help="how to issue commands: 'keyboard' types into the game's "
+                         "command box (robust; bypasses the recognizer), 'port' uses "
+                         "the recognizer injection (jams under sustained use)")
+    ap.add_argument("--window", default="Tower! Simulator 3",
+                    help="game window title for the keyboard sender")
+    ap.add_argument("--focus-key", default=None,
+                    help="key that focuses the game's command box before typing, if any")
+    ap.add_argument("--no-clear", action="store_true",
+                    help="don't clear the command box before typing")
     ap.add_argument("--no-port-read", action="store_true",
                     help="don't poll the port for positions (log-only events)")
     ap.add_argument("--ptt-mode", choices=list(PortCommandSender.MODES), default="both",
@@ -97,7 +107,19 @@ def main():
     banner(pmap, cfg.airport_icao, live)
 
     # write path
-    if live:
+    if not live:
+        sender = DryRunSender()
+    elif args.send == "keyboard":
+        try:
+            sender = KeyboardSender(window_title=args.window, focus_key=args.focus_key,
+                                    clear_first=not args.no_clear)
+            print(f"[live] keyboard sender ready — typing into '{args.window}'. "
+                  f"Keep the game focused; move mouse to a screen corner to abort.")
+        except ImportError:
+            print("[live] keyboard sender needs: pip install pyautogui pygetwindow\n"
+                  "       Falling back to DRY-RUN.")
+            sender = DryRunSender(); live = False; cfg.dry_run = True
+    else:
         sender = PortCommandSender(args.host, args.port, ptt_mode=args.ptt_mode,
                                    hold_s=args.hold, settle_s=args.settle,
                                    preseed_s=args.preseed)
@@ -110,8 +132,6 @@ def main():
                   f"       Is a session running? Check Settings > Communication Port. "
                   f"Falling back to DRY-RUN.")
             sender = DryRunSender(); live = False; cfg.dry_run = True
-    else:
-        sender = DryRunSender()
 
     # read path (live geometry); optional
     pc = None
