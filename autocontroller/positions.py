@@ -61,6 +61,15 @@ class PositionMap:
                 return p
         return None
 
+    GROUND_ROLES = ("ground", "ramp", "clearance", "departure")
+
+    def has_ai_ground(self) -> bool:
+        """True if an AI position owns a ground-side role (pushback/taxi). When
+        the human owns Ground, the AI must NOT issue departures — they are a
+        ground function, not the tower/runway owner's job."""
+        return any(p.kind == "ai" and p.role in self.GROUND_ROLES
+                   for p in self.positions.values())
+
     def ai_owns_runway(self, runway: str) -> bool:
         """True if an AI (not human) local/clearance position owns this runway —
         the gate that keeps an AI controller off runways it isn't responsible

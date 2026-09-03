@@ -78,6 +78,13 @@ class Orchestrator:
             # AI controllers only touch runways an AI position is responsible for
             self.arrival.owns_runway = self.pmap.ai_owns_runway
             self.departure.owns_runway = self.pmap.ai_owns_runway
+            # pushback/taxi/takeoff is a GROUND function: only run departures
+            # when an AI position owns a ground-side role. If the human owns
+            # Ground, the AI issues no departures (they are the human's).
+            self.departure.enabled = self.pmap.has_ai_ground()
+            if not self.departure.enabled:
+                print('[orch] departures are HUMAN-owned (no AI ground position) '
+                      '— AI will clear arrivals only')
 
         # fan-out order: policies first, then learning/metrics
         self.subs = [self.arrival.on_event, self.departure.on_event,
@@ -147,7 +154,6 @@ class Orchestrator:
         # feed learned adjustments back into live params
         self.config.apply_tunables(self.tuner.params)
         self.arrival.runway_cooldown_s = self.config.runway_cooldown_s
-        self.departure.enabled = True
         return result
 
     def _flush_taxi(self, now: float):
