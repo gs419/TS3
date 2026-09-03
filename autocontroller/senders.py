@@ -39,7 +39,8 @@ class KeyboardSender:
                  type_interval: float = 0.02,
                  clear_first: bool = True,
                  lowercase: bool = False,
-                 activate: bool = True):
+                 activate: bool = True,
+                 focus_delay: float = 0.15):
         import pyautogui       # noqa: F401  (fail fast if missing)
         import pygetwindow
         self._pyautogui = __import__("pyautogui")
@@ -50,6 +51,7 @@ class KeyboardSender:
         self.clear_first = clear_first
         self.lowercase = lowercase
         self.activate = activate
+        self.focus_delay = focus_delay
         self._warned = False
         self._pyautogui.FAILSAFE = True  # mouse to top-left corner aborts
 
@@ -81,8 +83,8 @@ class KeyboardSender:
             cmd = cmd.lower()
         self._focus_window()
         if self.focus_key:
-            self._pyautogui.press(self.focus_key)
-            time.sleep(0.05)
+            self._pyautogui.press(self.focus_key)   # e.g. F6 opens the command box
+            time.sleep(self.focus_delay)
         if self.clear_first:
             # select-all + delete, so a leftover partial command is replaced
             self._pyautogui.hotkey("ctrl", "a")
