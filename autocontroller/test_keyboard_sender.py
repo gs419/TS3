@@ -18,6 +18,7 @@ class FakeAuto:
     def hotkey(self, *keys): self.calls.append(("hotkey",) + keys)
     def press(self, k): self.calls.append(("press", k))
     def typewrite(self, text, interval=0.0): self.calls.append(("type", text))
+    def click(self, x, y): self.calls.append(("click", x, y))
 
 
 class FakeWin:
@@ -33,14 +34,14 @@ class FakeGW:
 def _make(**kw):
     auto = FakeAuto(); win = FakeWin()
     sys.modules["pyautogui"] = types.SimpleNamespace(
-        FAILSAFE=True, hotkey=auto.hotkey, press=auto.press, typewrite=auto.typewrite)
+        FAILSAFE=True, hotkey=auto.hotkey, press=auto.press, typewrite=auto.typewrite, click=auto.click)
     sys.modules["pygetwindow"] = FakeGW(win)
     import importlib, senders
     importlib.reload(senders)
     s = senders.KeyboardSender(**kw)
     # rebind to our recording fake (reload made a fresh __import__ target)
     s._pyautogui = types.SimpleNamespace(
-        FAILSAFE=True, hotkey=auto.hotkey, press=auto.press, typewrite=auto.typewrite)
+        FAILSAFE=True, hotkey=auto.hotkey, press=auto.press, typewrite=auto.typewrite, click=auto.click)
     s._gw = FakeGW(win)
     return s, auto, win
 
@@ -74,8 +75,19 @@ def test_missing_window_still_types():
     assert ("type", "SWA606 RUNWAY 15 CLEARED FOR TAKEOFF") in auto.calls, "should still type"
 
 
+def test_click_to_focus_and_no_activate():
+    s, auto, win = _make(click_xy=(500, 380), activate=False, clear_first=False)
+    s.send("N355FV RUNWAY 15 CLEARED TO LAND")
+    seq = auto.calls
+    assert ("click", 500, 380) in seq, seq
+    assert seq.index(("click", 500, 380)) < seq.index(("type", "N355FV RUNWAY 15 CLEARED TO LAND"))
+    assert seq[-1] == ("press", "enter")
+    assert win.activated == 0, "no-activate must not steal window focus"
+
+
 if __name__ == "__main__":
     test_clears_types_and_enters();            print("  ok clears, types verbatim, enters, focuses")
     test_focus_key_and_no_clear_and_lowercase(); print("  ok focus_key / no-clear / lowercase options")
     test_missing_window_still_types();         print("  ok types even if window not found")
+    test_click_to_focus_and_no_activate();     print("  ok click-to-focus + no-activate")
     print("all keyboard-sender tests PASSED")

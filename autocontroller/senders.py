@@ -40,7 +40,8 @@ class KeyboardSender:
                  clear_first: bool = True,
                  lowercase: bool = False,
                  activate: bool = True,
-                 focus_delay: float = 0.15):
+                 focus_delay: float = 0.15,
+                 click_xy: tuple | None = None):
         import pyautogui       # noqa: F401  (fail fast if missing)
         import pygetwindow
         self._pyautogui = __import__("pyautogui")
@@ -52,6 +53,7 @@ class KeyboardSender:
         self.lowercase = lowercase
         self.activate = activate
         self.focus_delay = focus_delay
+        self.click_xy = click_xy       # (x, y) of the command box, to click-focus it
         self._warned = False
         self._pyautogui.FAILSAFE = True  # mouse to top-left corner aborts
 
@@ -82,8 +84,12 @@ class KeyboardSender:
         if self.lowercase:
             cmd = cmd.lower()
         self._focus_window()
+        if self.click_xy:
+            # click into the COMMAND window's "Enter command..." box to focus it
+            self._pyautogui.click(self.click_xy[0], self.click_xy[1])
+            time.sleep(self.focus_delay)
         if self.focus_key:
-            self._pyautogui.press(self.focus_key)   # e.g. F6 opens the command box
+            self._pyautogui.press(self.focus_key)
             time.sleep(self.focus_delay)
         if self.clear_first:
             # select-all + delete, so a leftover partial command is replaced

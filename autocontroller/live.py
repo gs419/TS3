@@ -81,6 +81,12 @@ def main():
                     help="game window title for the keyboard sender")
     ap.add_argument("--focus-key", default=None,
                     help="key that focuses the game's command box before typing, if any")
+    ap.add_argument("--no-activate", action="store_true",
+                    help="don't touch window focus — type into whatever you've clicked "
+                         "(use after clicking the COMMAND box yourself)")
+    ap.add_argument("--click", default=None, metavar="X,Y",
+                    help="screen x,y of the COMMAND 'Enter command' box; the sender "
+                         "clicks there to focus it before each command")
     ap.add_argument("--no-clear", action="store_true",
                     help="don't clear the command box before typing")
     ap.add_argument("--no-port-read", action="store_true",
@@ -111,10 +117,16 @@ def main():
         sender = DryRunSender()
     elif args.send == "keyboard":
         try:
+            click_xy = None
+            if args.click:
+                click_xy = tuple(int(v) for v in args.click.replace(" ", "").split(","))
             sender = KeyboardSender(window_title=args.window, focus_key=args.focus_key,
-                                    clear_first=not args.no_clear)
-            print(f"[live] keyboard sender ready — typing into '{args.window}'. "
-                  f"Keep the game focused; move mouse to a screen corner to abort.")
+                                    clear_first=not args.no_clear,
+                                    activate=not args.no_activate, click_xy=click_xy)
+            where = (f"clicking box at {click_xy} then typing" if click_xy
+                     else "typing into the focused command box")
+            print(f"[live] keyboard sender ready — {where}. "
+                  f"Move mouse to a screen corner to abort.")
         except ImportError:
             print("[live] keyboard sender needs: pip install pyautogui pygetwindow\n"
                   "       Falling back to DRY-RUN.")
