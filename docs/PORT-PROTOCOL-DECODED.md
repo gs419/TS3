@@ -186,15 +186,20 @@ callsign_tower, callsign_ground, roads[]`, runway geometry, etc.
   `btnRecognize`, `both`, `none`), and `tools/probe_write_path.py` tries the
   four variants against the running game with hard evidence (STATUS `cmdtxt` /
   `rec_state` mid-hold, the game's replies, and the recognition lines it logs)
-  and stops at the first that produces `COMMAND: <callsign> …`. **CONFIRMED IN-GAME (KBUR, second live test):** variant `ptt` —
-  `CMD_SET_PTT_STATE "true"` → `CMD_SET_CMD_TEXT` re-sent 10×/s for 1.5 s →
-  `CMD_SET_PTT_STATE "false"` — executed `COMMAND: UPS87 PUSHBACK APPROVED
-  EXPECT RUNWAY 15` with the TOWER readback, `resp:` and TTS. During the hold
-  STATUS still reported `rec_state=False` / `cmdtxt=''` (the port session is
-  tracked separately from the physical PTT) and `selected_plane` switched to
-  the addressed aircraft. The game also pushes `CMD_REQUEST_STATUS` snapshots
-  to the RECOG client continuously, so the sender's drain is required.
-  `CMD_RECOG_HELPER` still pushes the lexicon; the sender drains it too.
+  and stops at the first that produces `COMMAND: <callsign> …`. **CONFIRMED IN-GAME (KBUR, two probe runs).** Variant `ptt`
+  (`CMD_SET_PTT_STATE "true"` → `CMD_SET_CMD_TEXT` re-sent 10×/s for 1.5 s →
+  `CMD_SET_PTT_STATE "false"`) executed `COMMAND: UPS87 PUSHBACK APPROVED
+  EXPECT RUNWAY 15` with the TOWER readback, `resp:` and TTS — but on the
+  second run its release again logged an empty `COMMAND:` (a race with the
+  recognizer's init). Variant `both` (the same plus `CMD_RECOG_UPDATE
+  {"btnRecognize":true|false}` around the stream) executed **2 of 2**
+  (`COMMAND: N355FV RUNWAY 15 CLEARED TO LAND`) and is the default. `btn`
+  alone does nothing — the game merely echoes the button state back to the
+  RECOG client. During the hold STATUS still reports `rec_state=False` /
+  `cmdtxt=''` (the port session is tracked separately from the physical PTT)
+  and `selected_plane` switches to the addressed aircraft. The core pushes
+  `CMD_REQUEST_STATUS` snapshots to the RECOG client ~3/s continuously, so the
+  sender drains its socket every tick. `CMD_RECOG_HELPER` still pushes the lexicon; the sender drains it too.
 
 ### AIRPLANES `state` enum — DECODED (speed/alt calibration)
 `states.py`: 1/2/6 = airborne (approach, high); 3/7 = short final / flare;

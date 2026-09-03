@@ -103,7 +103,8 @@ one is a new subscriber, not a rewrite.
 | Runway cross-timing safety | ✅ validated | ✅ live |
 
 **Acting works — confirmed in-game.** The write path is the Communication
-Port: open a recognition session with `CMD_SET_PTT_STATE "true"`, stream the
+Port: open a recognition session with `CMD_SET_PTT_STATE "true"` plus the
+`btnRecognize` button signal (that combination executed every time), stream the
 command text with `CMD_SET_CMD_TEXT` while it is held (~1.5 s), release with
 `"false"` — the game parses, executes and reads it back exactly like a spoken
 command (`docs/PORT-PROTOCOL-DECODED.md`). `live.py` sends through it via
