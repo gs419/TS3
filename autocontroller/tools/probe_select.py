@@ -114,20 +114,26 @@ def executed(log, start, callsign):
 
 
 def try_select(cmdc, data, plane, callsign):
-    """Try to select the aircraft; return (how, selected_value) once it sticks."""
+    """Ensure the target is selected; return (how, selected_value). Success is
+    'the target IS selected' (selected_plane == its netidx), whether we changed
+    it or it was already selected."""
     netidx = plane.get("netidx"); name = plane.get("name", callsign)
+    cur = selected(data)
+    if netidx is not None and cur == netidx:
+        print(f"  target already selected (selected_plane={cur}); no select needed")
+        return "already", cur
     attempts = []
     if netidx is not None:
         attempts += [("netidx-int", netidx), ("netidx-str", str(netidx))]
     attempts += [("callsign", name)]
     for how, val in attempts:
-        before = selected(data)
         cmdc.cmd("CMD_SELECT_AIRPLANE", value=val)
         time.sleep(0.4)
         cmdc.drain(0.3)
         after = selected(data)
-        print(f"  select by {how:11} value={val!r:>10}: selected_plane {before} -> {after}")
-        if after not in (0, None) and after != before:
+        print(f"  select by {how:11} value={val!r:>10}: selected_plane -> {after} "
+              f"(want {netidx})")
+        if netidx is not None and after == netidx:
             return how, after
     return None, selected(data)
 
@@ -183,7 +189,8 @@ def main():
 
     start = log_size(args.log)
     # keep it selected, open session (both), stream text, release
-    cmdc.cmd("CMD_SELECT_AIRPLANE", value=(plane.get("netidx") if how.startswith("netidx") else plane.get("name")))
+    if how != "already":
+        cmdc.cmd("CMD_SELECT_AIRPLANE", value=(plane.get("netidx") if how.startswith("netidx") else plane.get("name")))
     cmdc.cmd("CMD_SET_PTT_STATE", value="true")
     cmdc.cmd("CMD_RECOG_UPDATE", value=json.dumps({"btnRecognize": True, "airplanes": ""}))
     time.sleep(0.3)
@@ -201,8 +208,8 @@ def main():
         print(f" IT WORKED: selecting first, then injecting, executed the command.")
         print(f" -> the fix is CMD_SELECT_AIRPLANE (by {how}) before every command.")
     else:
-        print(" Still empty even with the aircraft selected — selection is not the "
-              "(only) missing piece. Paste this whole output.")
+        print(" Still EMPTY even though the aircraft was selected — so being selected\n"
+              " is NOT sufficient. The missing piece is elsewhere. Paste this output.")
     print("=" * 64)
     cmdc.sock.close(); data.sock.close()
     return 0 if ok else 1
