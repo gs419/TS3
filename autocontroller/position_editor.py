@@ -11,8 +11,11 @@ Run:
 Endpoints (bound to 127.0.0.1 only):
     GET  /                      the editor page (embedded below, works offline)
     GET  /api/config            the current positions.json document
-    POST /api/config            full JSON document -> validated, written atomically
-                                -> {"ok": true, "path": ...} or 400 {"ok": false, "error": ...}
+    POST /api/config            full JSON document -> normalised, validated, written atomically
+                                -> {"ok": true, "path": ...} or {"ok": false, "error": ...} with
+                                400 invalid document / 403 cross-site request / 409 the file on
+                                disk exists but cannot be parsed (never overwritten) / 415 body
+                                is not application/json
     GET  /api/runways?icao=XXXX best-effort runway designators from testdata/<icao>_airport.json
     GET  /api/areas?icao=XXXX   best-effort area names (Terminal<X> from gate names)
     GET  /api/meta              {"file": ..., "exists": ...}
@@ -53,12 +56,25 @@ def default_config_path() -> Path:
     return Path(__file__).resolve().parent / "positions.json"
 
 
+class UnreadableConfigError(Exception):
+    """The target file exists but cannot be parsed. Writing over it would destroy
+    whatever the user has in there, so a save must be refused, not treated as
+    'the file is empty'."""
+
+
 def load_config(path: Path) -> dict:
-    """Load the document; a missing file yields an empty skeleton (comment only)."""
+    """Load the document. A missing file -- or an existing but blank one (0 bytes /
+    whitespace only, e.g. a fresh 'New text document') -- yields an empty skeleton
+    (comment only); there is nothing in it to protect. Anything else that cannot be
+    parsed raises, and callers must never treat that as an empty document.
+    Read as utf-8-sig so a Windows UTF-8 BOM (PowerShell 5 Set-Content -Encoding
+    UTF8, Notepad 'UTF-8 with BOM') does not make the file unreadable."""
     if not path.exists():
         return {"_comment": DEFAULT_COMMENT}
-    with path.open("r", encoding="utf-8") as f:
-        data = json.load(f)
+    text = path.read_text(encoding="utf-8-sig")
+    if not text.strip():
+        return {"_comment": DEFAULT_COMMENT}
+    data = json.loads(text)
     if not isinstance(data, dict):
         raise ValueError("positions file must contain a JSON object at the top level")
     return data
@@ -68,23 +84,57 @@ def _is_str_list(v) -> bool:
     return isinstance(v, list) and all(isinstance(x, str) and x.strip() for x in v)
 
 
+def normalize_config(doc) -> None:
+    """Trim whitespace around the identifiers that positions.py matches by exact
+    string comparison: position names, runway / area designators, handoff event
+    keys and position references. Nothing else is touched (unknown fields stay,
+    types are not coerced -- validate_config reports those). Mirrors normalizeDoc()
+    in the page, so 'Bob ' and 'Bob' can never become two positions on disk."""
+    if not isinstance(doc, dict):
+        return
+    for icao, entry in doc.items():
+        if icao.startswith("_") or not isinstance(entry, dict):
+            continue
+        positions = entry.get("positions")
+        for p in positions if isinstance(positions, list) else []:
+            if not isinstance(p, dict):
+                continue
+            if isinstance(p.get("name"), str):
+                p["name"] = p["name"].strip()
+            for key in ("owns_runways", "owns_areas"):
+                if isinstance(p.get(key), list):
+                    p[key] = [x.strip() if isinstance(x, str) else x for x in p[key]]
+        handoffs = entry.get("handoffs")
+        for h in handoffs if isinstance(handoffs, list) else []:
+            if not isinstance(h, dict):
+                continue
+            for key in ("when", "from", "to"):
+                if isinstance(h.get(key), str):
+                    h[key] = h[key].strip()
+
+
 def validate_config(doc) -> None:
     """Raise ValueError (with a human-readable message) if ``doc`` is not a valid
-    positions document. Keys starting with '_' are metadata and are skipped;
-    every other top-level *object* is validated as an airport entry."""
+    positions document. Keys starting with '_' are metadata and are skipped; every
+    other top-level key is an airport entry -- positions.py looks entries up by
+    ICAO and crashes on anything but an object -- so it must be an object with a
+    'positions' list. Also enforces what the consumer silently relies on: unique
+    (trimmed) names, at most one owner per runway, and handoffs that reference
+    positions which exist at that airport."""
     if not isinstance(doc, dict):
         raise ValueError("top level must be a JSON object")
     for icao, entry in doc.items():
         if icao.startswith("_"):
             continue
-        if not isinstance(entry, dict):
-            # unknown scalar / list metadata: leave it alone
-            continue
         where = f"airport {icao}"
+        if not isinstance(entry, dict):
+            raise ValueError(f"top-level key '{icao}' must be an airport object with a 'positions' list "
+                             f"(got {type(entry).__name__}); metadata keys must start with '_'")
         positions = entry.get("positions")
         if not isinstance(positions, list):
             raise ValueError(f"{where}: 'positions' must be a list")
         names = set()
+        runway_owner: dict = {}          # runway -> name of the position that owns it
         for i, p in enumerate(positions):
             pw = f"{where}, position #{i + 1}"
             if not isinstance(p, dict):
@@ -92,6 +142,7 @@ def validate_config(doc) -> None:
             name = p.get("name")
             if not isinstance(name, str) or not name.strip():
                 raise ValueError(f"{pw}: 'name' must be a non-empty string")
+            name = name.strip()          # same comparison the page makes
             if name in names:
                 raise ValueError(f"{where}: duplicate position name '{name}'")
             names.add(name)
@@ -107,6 +158,11 @@ def validate_config(doc) -> None:
             for key in ("owns_runways", "owns_areas"):
                 if key in p and not _is_str_list(p[key]):
                     raise ValueError(f"{pw}: '{key}' must be a list of non-empty strings")
+            for rwy in p.get("owns_runways") or []:
+                owner = runway_owner.setdefault(rwy.strip(), name)
+                if owner != name:
+                    raise ValueError(f"{where}: runway '{rwy.strip()}' is owned by both '{owner}' and '{name}' "
+                                     "-- a runway can have only one owner")
         handoffs = entry.get("handoffs", [])
         if not isinstance(handoffs, list):
             raise ValueError(f"{where}: 'handoffs' must be a list")
@@ -119,10 +175,15 @@ def validate_config(doc) -> None:
                 raise ValueError(f"{hw}: 'when' must be a non-empty string (e.g. landed_on:24R)")
             if "to" not in h:
                 raise ValueError(f"{hw} ({when}): missing 'to' (use null for 'leaves the airport')")
-            if h["to"] is not None and not isinstance(h["to"], str):
-                raise ValueError(f"{hw} ({when}): 'to' must be a position name or null")
-            if h.get("from") is not None and not isinstance(h["from"], str):
-                raise ValueError(f"{hw} ({when}): 'from' must be a position name or null")
+            for key in ("from", "to"):
+                ref = h.get(key)
+                if ref is None:
+                    continue
+                if not isinstance(ref, str) or not ref.strip():
+                    raise ValueError(f"{hw} ({when}): '{key}' must be a position name or null")
+                if ref.strip() not in names:
+                    raise ValueError(f"{hw} ({when}): '{key}' refers to unknown position '{ref}' "
+                                     f"(positions at {icao}: {', '.join(sorted(names)) or 'none'})")
 
 
 def _inline(v) -> str:
@@ -166,10 +227,17 @@ def dumps_config(doc: dict) -> str:
 def merge_with_disk(path: Path, posted: dict) -> dict:
     """The posted document is authoritative for airports; '_'-prefixed metadata
     keys that exist on disk but were not posted are carried over. '_comment'
-    stays first."""
-    try:
-        current = load_config(path) if path.exists() else {}
-    except Exception:
+    stays first. A file that exists but cannot be parsed raises
+    UnreadableConfigError: it must not be mistaken for an empty document and
+    then overwritten with the posted one."""
+    if path.exists():
+        try:
+            current = load_config(path)
+        except Exception as e:
+            raise UnreadableConfigError(
+                f"refusing to overwrite an unreadable file: {path}: {e}. "
+                "Fix the JSON (or move the file away) and try again.") from e
+    else:
         current = {}
     out: dict = {}
     if "_comment" in posted:
@@ -304,6 +372,32 @@ class EditorHandler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):  # quieter one-line log
         sys.stderr.write(f"[editor] {fmt % args}\n")
 
+    def _write_refused(self) -> str | None:
+        """Cross-site request forgery guard for writes. Any web page open in the
+        user's browser can fire a 'simple' (no pre-flight) POST at the fixed local
+        port, so a save must come from this editor's own origin: refuse a foreign
+        Origin, a cross-site Sec-Fetch-Site, and a Host that is not loopback (DNS
+        rebinding). Requests without those headers (curl, scripts) are unaffected."""
+        port = self.server.server_address[1]
+        allowed = {f"http://127.0.0.1:{port}", f"http://localhost:{port}"}
+        if port == 80:
+            allowed |= {"http://127.0.0.1", "http://localhost"}
+        origin = self.headers.get("Origin")
+        if origin is not None and origin.strip().lower() not in allowed:
+            return f"cross-origin write refused (Origin {origin.strip()!r}); only the editor page itself may save"
+        site = self.headers.get("Sec-Fetch-Site")
+        if site is not None and site.strip().lower() not in ("same-origin", "none"):
+            return f"cross-site write refused (Sec-Fetch-Site {site.strip()!r})"
+        host = self.headers.get("Host")
+        if host is not None:
+            try:
+                hostname = urlparse("//" + host.strip()).hostname
+            except ValueError:
+                hostname = None
+            if hostname not in ("127.0.0.1", "localhost", "::1"):
+                return f"write refused for Host {host.strip()!r}; open the editor via http://127.0.0.1:{port}/"
+        return None
+
     # -- routes --
     def do_GET(self):
         u = urlparse(self.path)
@@ -333,6 +427,15 @@ class EditorHandler(BaseHTTPRequestHandler):
         if u.path != "/api/config":
             self._json(404, {"ok": False, "error": "not found"})
             return
+        refused = self._write_refused()
+        if refused:
+            self._json(403, {"ok": False, "error": refused})
+            return
+        ctype = (self.headers.get("Content-Type") or "").split(";", 1)[0].strip().lower()
+        if ctype != "application/json":
+            # also what forces browsers to pre-flight a cross-origin request (which we do not answer)
+            self._json(415, {"ok": False, "error": f"Content-Type must be application/json (got {ctype or 'none'!r})"})
+            return
         try:
             n = int(self.headers.get("Content-Length") or 0)
         except ValueError:
@@ -352,10 +455,14 @@ class EditorHandler(BaseHTTPRequestHandler):
         if not isinstance(posted, dict):
             self._json(400, {"ok": False, "error": "top level must be a JSON object"})
             return
+        normalize_config(posted)
         try:
             merged = merge_with_disk(self.config_path, posted)
             validate_config(merged)
             save_config_atomic(self.config_path, merged)
+        except UnreadableConfigError as e:
+            self._json(409, {"ok": False, "error": str(e)})
+            return
         except ValueError as e:
             self._json(400, {"ok": False, "error": str(e)})
             return
@@ -382,7 +489,8 @@ def main(argv=None) -> int:
     try:
         load_config(path)
     except Exception as e:
-        print(f"warning: {path}: {e} (the editor will report this until the file is fixed)", file=sys.stderr)
+        print(f"warning: {path}: {e}\n         the editor will show this error and refuse to save "
+              "until the file is fixed (or moved away)", file=sys.stderr)
 
     EditorHandler.config_path = path
     EditorHandler.hint_dirs = hint_dirs
@@ -472,7 +580,9 @@ HTML = r"""<!DOCTYPE html>
   .badge.ai { background: var(--ai-bg); color: var(--ai); }
   .badge.human { background: var(--human-bg); color: var(--human); }
   .badge.note { background: var(--warn-bg); color: var(--warn); }
+  .badge.conflict { background: var(--err-bg); color: var(--err); }
   table.matrix th, table.matrix td { text-align: center; }
+  table.matrix td.conflict { background: var(--err-bg); }
   table.matrix th:first-child, table.matrix td:first-child { text-align: left; font-weight: 600; }
   table.matrix tbody tr:hover { background: var(--hover); }
   table.matrix input[type=radio] { width: 18px; height: 18px; margin: 0; cursor: pointer; }
@@ -500,9 +610,9 @@ HTML = r"""<!DOCTYPE html>
       <div class="muted small" id="file-line">Loading…</div>
     </div>
     <div class="toolbar" role="toolbar" aria-label="File actions">
-      <button id="btn-save" class="primary" type="button" title="Save to positions.json (Ctrl+S)">Save</button>
+      <button id="btn-save" class="primary" type="button" title="Save to positions.json (Ctrl+S)" disabled>Save</button>
       <button id="btn-reload" type="button" title="Discard unsaved edits and re-read the file">Reload</button>
-      <button id="btn-download" type="button" title="Download the current document as a .json file">Download JSON</button>
+      <button id="btn-download" type="button" title="Download the current document as a .json file" disabled>Download JSON</button>
     </div>
   </div>
   <div id="status" class="status" role="status" aria-live="polite"></div>
@@ -514,8 +624,8 @@ HTML = r"""<!DOCTYPE html>
     <div class="row">
       <label for="airport-select">Airport</label>
       <select id="airport-select" aria-label="Select airport"></select>
-      <button id="btn-add-airport" type="button">Add airport…</button>
-      <button id="btn-remove-airport" type="button" class="danger">Remove airport</button>
+      <button id="btn-add-airport" type="button" disabled>Add airport…</button>
+      <button id="btn-remove-airport" type="button" class="danger" disabled>Remove airport</button>
     </div>
     <div id="summary" class="summary"></div>
     <ul id="overview" class="overview" aria-label="All airports in this file"></ul>
@@ -668,6 +778,27 @@ function uniqueName(base) {
   if (!names.includes(base)) return base;
   for (let n = 2; ; n++) if (!names.includes(base + n)) return base + n;
 }
+// Trim the identifiers that are matched by exact string comparison (mirrors normalize_config on the
+// server): position names, runway/area designators, handoff event keys and position references.
+// Done at save time -- not on every keystroke, which would eat the space in "Ramp AI" as it is typed.
+function normalizeDoc(d) {
+  if (!isObj(d)) return d;
+  for (const code of Object.keys(d)) {
+    if (code.startsWith('_') || !isObj(d[code])) continue;
+    const a = d[code];
+    (Array.isArray(a.positions) ? a.positions : []).forEach(p => {
+      if (!isObj(p)) return;
+      if (typeof p.name === 'string') p.name = p.name.trim();
+      for (const k of ['owns_runways', 'owns_areas']) if (Array.isArray(p[k])) p[k] = p[k].map(x => typeof x === 'string' ? x.trim() : x);
+    });
+    (Array.isArray(a.handoffs) ? a.handoffs : []).forEach(hh => {
+      if (!isObj(hh)) return;
+      for (const k of ['when', 'from', 'to']) if (typeof hh[k] === 'string') hh[k] = hh[k].trim();
+    });
+  }
+  return d;
+}
+function normalizedCopy(d) { return d ? normalizeDoc(JSON.parse(JSON.stringify(d))) : {}; }
 
 // ---------- formatting (mirrors dumps_config in the Python server) ----------
 function jsonInline(v) {
@@ -719,12 +850,19 @@ function summaryFor(a) {
   });
   return parts.length ? parts.join(' · ') : 'no positions';
 }
+function fileChecks() {
+  const d = state.doc; if (!isObj(d)) return [];
+  return Object.keys(d).filter(k => !k.startsWith('_') && !isObj(d[k])).map(k => ({ level: 'warn',
+    text: 'Top-level key "' + k + '" is not an airport entry (its value is not an object) — Save will be refused. '
+      + 'Rename it to "_' + k + '" to keep it as metadata, or remove it from the file.' }));
+}
 function computeChecks() {
   const w = []; const ps = positions(); const names = ps.map(p => String(p.name || '').trim());
   ps.forEach((p, i) => {
-    const n = names[i];
+    const n = names[i]; const raw = String(p.name == null ? '' : p.name);
     if (!n) w.push({ level: 'warn', text: 'Position #' + (i + 1) + ' has no name.' });
     else if (names.indexOf(n) !== i) w.push({ level: 'warn', text: 'Duplicate position name "' + n + '" — names must be unique.' });
+    else if (raw !== n) w.push({ level: 'info', text: 'Position name "' + raw + '" has leading/trailing spaces — they are removed on Save.' });
     if (!ROLES.includes(p.role)) w.push({ level: 'warn', text: posName(p, i) + ' has an unknown role "' + p.role + '".' });
     if (p.kind != null && p.kind !== 'ai' && p.kind !== 'human') w.push({ level: 'warn', text: posName(p, i) + ' has an unknown kind "' + p.kind + '".' });
   });
@@ -751,6 +889,13 @@ function renderHeader() {
   $('#file-line').textContent = state.filePath ? 'Editing ' + state.filePath : '';
 }
 
+function renderToolbar() {
+  // state.doc is null until a document has actually been loaded (and after a failed load):
+  // nothing may be saved, downloaded or added to a document we do not have.
+  const ok = !!state.doc;
+  $('#btn-save').disabled = !ok; $('#btn-download').disabled = !ok; $('#btn-add-airport').disabled = !ok;
+}
+
 function renderAirportSelect() {
   const sel = $('#airport-select'); clear(sel);
   const list = airports();
@@ -758,7 +903,7 @@ function renderAirportSelect() {
   sel.value = state.icao || '';
   sel.disabled = !list.length;
   $('#btn-remove-airport').disabled = !state.icao;
-  $('#empty-note').hidden = !!list.length;
+  $('#empty-note').hidden = !!list.length || !state.doc;
   $('#airport-sections').hidden = !state.icao;
 
   const ov = $('#overview'); clear(ov);
@@ -775,7 +920,7 @@ function renderAirportSelect() {
 
 function renderChecks() {
   const ul = $('#checks'); clear(ul);
-  const items = state.icao ? computeChecks() : [];
+  const items = fileChecks().concat(state.icao ? computeChecks() : []);
   items.forEach(it => ul.appendChild(h('li', { class: it.level, text: it.text })));
   ul.hidden = !items.length;
 }
@@ -839,15 +984,19 @@ function renderMatrix() {
     ps.map((p, i) => h('th', { scope: 'col' }, posName(p, i), badge(p))),
     h('th', { scope: 'col', text: '(unassigned)' }));
   const body = ps.length ? rows.map(r => {
-    const owners = ownersOf(r); const current = owners.length ? owners[0] : -1;
+    const owners = ownersOf(r);
+    // A runway with several owners (hand-edited file) gets NO pre-checked radio: a checked radio
+    // fires no change event, so pre-checking owners[0] would make "keep A" impossible to click.
+    const current = owners.length === 1 ? owners[0] : (owners.length ? null : -1);
     const cell = (idx, label) => {
       const id = 'rwy-' + r + '-' + idx;
-      return h('td', null, h('label', { for: id },
+      return h('td', { class: owners.length > 1 && owners.includes(idx) ? 'conflict' : null }, h('label', { for: id },
         h('input', { type: 'radio', id, name: 'rwy-' + r, value: String(idx), checked: current === idx, 'data-fk': 'rwy:' + r + ':' + idx,
           'aria-label': r + ': ' + label, onchange: () => { setOwner(r, idx); changed(); } })));
     };
     return h('tr', null,
-      h('td', null, r, master.includes(r) ? null : h('span', { class: 'badge note', text: 'not in list', title: 'Assigned to a position but missing from the runway list' })),
+      h('td', null, r, master.includes(r) ? null : h('span', { class: 'badge note', text: 'not in list', title: 'Assigned to a position but missing from the runway list' }),
+        owners.length > 1 ? h('span', { class: 'badge conflict', text: owners.length + ' owners', title: 'Owned by more than one position — pick the one that keeps it' }) : null),
       ps.map((p, i) => cell(i, 'owned by ' + posName(p, i))),
       cell(-1, 'unassigned'));
   }) : [];
@@ -884,13 +1033,13 @@ function renderHandoffs() {
   uniq(opts).forEach(o => dl.appendChild(h('option', { value: o })));
 }
 
-function renderPreview() { $('#preview').textContent = fmtDoc(state.doc); }
+function renderPreview() { $('#preview').textContent = fmtDoc(normalizedCopy(state.doc)); }   // what Save will write, trimmed
 
 function renderAll() {
   const active = document.activeElement;
   const key = active && active.dataset ? active.dataset.fk : null;
   const caret = active && typeof active.selectionStart === 'number' ? active.selectionStart : null;
-  renderHeader(); renderAirportSelect(); renderChecks();
+  renderHeader(); renderToolbar(); renderAirportSelect(); renderChecks();
   if (state.icao) { renderRunways(); renderPositions(); renderMatrix(); renderHandoffs(); }
   renderPreview();
   if (key) {
@@ -944,13 +1093,16 @@ async function load() {
     await selectAirport(list.includes(state.icao) ? state.icao : (list[0] || null));
     setStatus(meta.exists === false ? 'File does not exist yet — it will be created on Save.' : '', '');
   } catch (e) {
-    state.doc = state.doc || {};
+    // No document: leave state.doc null so Save / Download / Add airport stay disabled (renderToolbar)
+    // and Ctrl+S cannot write an empty document over a file that merely failed to parse.
+    state.doc = null; state.icao = null; state.dirty = false;
     renderAll();
-    setStatus('Load failed: ' + e.message, 'err');
+    setStatus('Load failed: ' + e.message + ' — saving is disabled until the file can be read; fix it on disk (or move it away), then click Reload.', 'err');
   }
 }
 async function save() {
-  if (!state.doc) return;
+  if (!state.doc) { setStatus('Nothing to save — the file could not be loaded. Fix it on disk, then click Reload.', 'err'); return; }
+  normalizeDoc(state.doc); linkHandoffs(ap()); renderAll();   // trim names etc. in place so the page shows what was written
   setStatus('Saving…', '');
   try {
     const r = await fetch('/api/config', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(state.doc) });
@@ -960,7 +1112,8 @@ async function save() {
   } catch (e) { setStatus('Not saved: ' + e.message, 'err'); }
 }
 function download() {
-  const blob = new Blob([fmtDoc(state.doc)], { type: 'application/json' });
+  if (!state.doc) return;
+  const blob = new Blob([fmtDoc(normalizedCopy(state.doc))], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob); a.download = 'positions.json';
   document.body.appendChild(a); a.click(); a.remove();
@@ -969,6 +1122,7 @@ function download() {
 
 // ---------- actions ----------
 async function addAirport() {
+  if (!state.doc) return;
   let code = prompt('ICAO code for the new airport (3-4 letters/digits, e.g. KBUR):', '');
   if (code == null) return;
   code = code.trim().toUpperCase();
