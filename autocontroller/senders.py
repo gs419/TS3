@@ -85,7 +85,7 @@ class PortCommandSender:
                  greet: bool = True, ptt_commit: bool = True,
                  settle_s: float = 0.5, lowercase: bool = True,
                  hold_s: float = 1.5, stream_hz: float = 10.0,
-                 ptt_mode: str = "both"):
+                 ptt_mode: str = "both", preseed_s: float = 0.4):
         self._json = __import__("json")
         self._socket = __import__("socket")
         self._select = __import__("select")
@@ -98,6 +98,7 @@ class PortCommandSender:
         self.settle_s = settle_s
         self.hold_s = hold_s
         self.stream_hz = stream_hz
+        self.preseed_s = preseed_s   # populate the command box BEFORE PTT-down
         self.lowercase = lowercase
         self.sock = None
         self._drained = 0
@@ -171,24 +172,35 @@ class PortCommandSender:
         command instead of crashing the live loop."""
         cmd = self.format_command(text, self.lowercase)
         opened = False
-        try:
-            self._drain()
-            self._session(True); opened = True
-            self._time.sleep(self.settle_s)
-            period = 1.0 / max(self.stream_hz, 0.5)
-            end = self._time.monotonic() + self.hold_s
-            n = 0
-            while self._time.monotonic() < end:
+        period = 1.0 / max(self.stream_hz, 0.5)
+
+        def stream_until(deadline):
+            k = 0
+            while self._time.monotonic() < deadline:
                 self._raw({"cmd": "CMD_SET_CMD_TEXT", "value": cmd, "flags": 1,
                            "func": None})
-                n += 1
+                k += 1
                 self._time.sleep(period)
+            return k
+
+        try:
+            self._drain()
+            # The game samples the command box at/just after PTT-down (recog_init):
+            # in a live capture an empty COMMAND was logged one line after
+            # recog_init because the text hadn't been sent yet. So PRE-SEED the
+            # box before opening the session, then keep streaming through the hold
+            # so it is populated whenever the game reads it (init OR release).
+            now = self._time.monotonic()
+            n = stream_until(now + self.preseed_s)
+            self._session(True); opened = True
+            n += stream_until(self._time.monotonic() + self.hold_s)
             if self.ptt_mode == "none":
                 self._raw({"cmd": "CMD_SET_CMD_TEXT", "value": cmd, "flags": 0,
                            "func": None})
             self._time.sleep(self.settle_s)
             self._session(False); opened = False     # release = execute
-            print(f"[port] issued: {cmd}  (mode={self.ptt_mode}, {n} text msgs over {self.hold_s}s)")
+            print(f"[port] issued: {cmd}  (mode={self.ptt_mode}, {n} text msgs, "
+                  f"preseed {self.preseed_s}s + hold {self.hold_s}s)")
         except OSError as e:
             print(f"[port] send FAILED for '{cmd}': {e} — will reconnect on the next command")
             if opened:

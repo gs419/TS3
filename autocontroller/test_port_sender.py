@@ -97,16 +97,19 @@ def test_ptt_mode_sequence():
         time.sleep(0.2)
         seq = core.cmds()
         kinds = [(m["cmd"], m.get("value")) for m in seq]
-        assert kinds[0] == ("CMD_SET_PTT_STATE", "true"), kinds[:3]
+        # box is PRE-SEEDED before the session opens, then held; released last.
+        i_down = next(i for i, m in enumerate(seq)
+                      if m["cmd"] == "CMD_SET_PTT_STATE" and m["value"] == "true")
+        assert i_down > 0, "text must be sent BEFORE PTT-down (pre-seed)"
         assert kinds[-1] == ("CMD_SET_PTT_STATE", "false"), kinds[-3:]
         texts = [m for m in seq if m["cmd"] == "CMD_SET_CMD_TEXT"]
-        assert len(texts) >= 5, f"text must be STREAMED while held, got {len(texts)}"
+        assert len(texts) >= 5, f"text must be STREAMED, got {len(texts)}"
         assert all(m["value"] == "skw6353 runway 15 cleared to land" for m in texts)
         assert all(m["flags"] == 1 for m in texts)
         assert not any(m["cmd"] == "CMD_RECOG_UPDATE" for m in seq)
-        # every text message sits strictly between press and release
-        i_press = 0; i_rel = len(kinds) - 1
-        assert all(i_press < i < i_rel for i, m in enumerate(seq) if m["cmd"] == "CMD_SET_CMD_TEXT")
+        # text present both before PTT-down (pre-seed) and after (held)
+        assert any(m["cmd"] == "CMD_SET_CMD_TEXT" for m in seq[:i_down]), "no pre-seed text"
+        assert any(m["cmd"] == "CMD_SET_CMD_TEXT" for m in seq[i_down:]), "no held text"
         s.close()
     finally:
         core.stop()
@@ -157,7 +160,8 @@ def test_recovers_when_core_drops_connection():
         time.sleep(0.2)
         assert core.conns >= 2, "second send should have reconnected"
         last = core.cmds(core.conns - 1)
-        assert last[0]["cmd"] == "CMD_SET_PTT_STATE" and last[-1]["value"] == "false"
+        assert any(m["cmd"] == "CMD_SET_CMD_TEXT" for m in last), "reconnect sent no text"
+        assert last[-1]["cmd"] == "CMD_SET_PTT_STATE" and last[-1]["value"] == "false"
         s.close()
     finally:
         core.stop()

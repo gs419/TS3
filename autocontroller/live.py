@@ -80,6 +80,8 @@ def main():
                          "streamed text (see tools/probe_write_path.py)")
     ap.add_argument("--hold", type=float, default=1.5,
                     help="seconds to hold the session while streaming the text")
+    ap.add_argument("--preseed", type=float, default=0.4,
+                    help="seconds to stream the text BEFORE PTT-down (box must be populated when the game reads it at recog_init)")
     ap.add_argument("--settle", type=float, default=0.5,
                     help="seconds after the press before streaming / before release")
     ap.add_argument("--no-ptt", action="store_true",
@@ -97,7 +99,8 @@ def main():
     # write path
     if live:
         sender = PortCommandSender(args.host, args.port, ptt_mode=args.ptt_mode,
-                                   hold_s=args.hold, settle_s=args.settle)
+                                   hold_s=args.hold, settle_s=args.settle,
+                                   preseed_s=args.preseed)
         try:
             sender.connect()
             print(f"[live] command channel connected on {args.host}:{args.port} "
