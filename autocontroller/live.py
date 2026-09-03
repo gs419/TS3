@@ -72,9 +72,16 @@ def main():
     ap.add_argument("--dry-run", action="store_true", help="print commands, send nothing")
     ap.add_argument("--no-port-read", action="store_true",
                     help="don't poll the port for positions (log-only events)")
+    ap.add_argument("--ptt-mode", choices=list(PortCommandSender.MODES), default="ptt",
+                    help="how the recognition session is signalled around the "
+                         "streamed text (see tools/probe_write_path.py)")
+    ap.add_argument("--hold", type=float, default=1.5,
+                    help="seconds to hold the session while streaming the text")
     ap.add_argument("--no-ptt", action="store_true",
-                    help="send CMD_SET_CMD_TEXT without the PTT bracket")
+                    help="alias for --ptt-mode none")
     args = ap.parse_args()
+    if args.no_ptt:
+        args.ptt_mode = "none"
 
     live = not args.dry_run
     cfg = Config(airport_icao=args.icao.upper(), default_runway=args.runway,
@@ -84,10 +91,12 @@ def main():
 
     # write path
     if live:
-        sender = PortCommandSender(args.host, args.port, ptt_commit=not args.no_ptt)
+        sender = PortCommandSender(args.host, args.port, ptt_mode=args.ptt_mode,
+                                   hold_s=args.hold)
         try:
             sender.connect()
-            print(f"[live] command channel connected on {args.host}:{args.port}")
+            print(f"[live] command channel connected on {args.host}:{args.port} "
+                  f"(session mode={args.ptt_mode}, hold={args.hold}s, streaming text)")
         except OSError as e:
             print(f"[live] cannot open command channel on port {args.port}: {e}\n"
                   f"       Is a session running? Check Settings > Communication Port. "

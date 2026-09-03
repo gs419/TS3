@@ -156,21 +156,39 @@ callsign_tower, callsign_ground, roads[]`, runway geometry, etc.
   command back, confirming execution ("negative, unknown command" is the failure
   reply).
 
-  **Commit = PTT release.** A control-flow trace (`--flow`) of the voice capture
-  showed NO port-side execute message — just `CMD_SET_CMD_TEXT` repeating the
-  full text, interleaved with polling. The game holds the text in `cmdtxt`
-  (a STATUS field) and executes it when **PTT is released** (`rec_state`->false).
-  In the voice capture the physical right-Ctrl key drove that, so nothing
-  crossed the port. The **port-side control is `CMD_SET_PTT_STATE`**
-  (`value:"true"`/`"false"`, seen in the first capture). So the injection
-  sequence is: `CMD_SET_PTT_STATE "true"` → `CMD_SET_CMD_TEXT "<callsign>
-  <command>"` → `CMD_SET_PTT_STATE "false"` (release = execute).
-  `senders.PortCommandSender` emits exactly this (PTT-bracketed; `ptt_commit`
-  toggles it). **Confirm on a throwaway session** — the alternative, if the game
-  ignores port PTT, is TS3 Assistant's `,callsign; COMMAND` path (a different,
-  reply-suppressed mechanism), which one more targeted capture would reveal.
-  Not the empty-valued `CMD_RECOG_UPDATE` (that carries only recog button/state
-  in this build). `CMD_RECOG_HELPER` still pushes the lexicon.
+  **What the working voice session actually sends (capture report):** the
+  recognizer module does NOT send one text message. It **streams the growing
+  hypothesis, ~10×/s for several seconds while the button is held** —
+  `ups87 pushback approved` ×32 → `…expect` ×12 → `…expect runway` ×10 →
+  `…runway 1` ×6 → `…runway 15` ×20 — all `flags:1`, no `flags:0`, and no
+  port-side PTT: the module reports its own button as
+  `CMD_RECOG_UPDATE {"btnRecognize":true|false,"airplanes":""}` (`flags:0`,
+  also sent as a heartbeat). `CMD_SET_PTT_STATE` in the first capture came from
+  the DATA/DBRITE client (same `id` counter as its `CMD_REQUEST_STATUS`).
+
+  **First live test (KBUR, this build) — what the game logs:**
+  - `CMD_SET_PTT_STATE "true"` over the port → `recog_init: True / True / 0`
+    (the radio squelch): **port PTT does open a recognition session.**
+  - ONE `CMD_SET_CMD_TEXT` sent 50 ms after the press, then `"false"` 50 ms
+    later → `COMMAND: ` (**empty**) → `recog_stop` → `recog_cb_end`. The release
+    executed, but the box was empty — a single text message right after the
+    press is not picked up.
+  - text alone with no session → nothing at all.
+  - For comparison, the in-game recognizer path logs per hypothesis
+    `ALT: 94%: <spoken>` / `REC: <spoken>` / `->: <normalized>` /
+    `FINAL: "<normalized>"` / `recog_cb_hypo`, and executes `COMMAND: …` as soon
+    as the normalized text is a complete command (before `recog_stop`).
+
+  So the injection must look like the module: **open a session, hold it
+  ~1–2 s while streaming the text repeatedly, then release.**
+  `senders.PortCommandSender` now does exactly that, with the session signal
+  selectable (`ptt_mode`: `ptt` = `CMD_SET_PTT_STATE`, `btn` =
+  `btnRecognize`, `both`, `none`), and `tools/probe_write_path.py` tries the
+  four variants against the running game with hard evidence (STATUS `cmdtxt` /
+  `rec_state` mid-hold, the game's replies, and the recognition lines it logs)
+  and stops at the first that produces `COMMAND: <callsign> …`. **Which variant
+  commits is still to be confirmed in-game.** `CMD_RECOG_HELPER` still pushes
+  the lexicon; the sender drains it.
 
 ### AIRPLANES `state` enum — DECODED (speed/alt calibration)
 `states.py`: 1/2/6 = airborne (approach, high); 3/7 = short final / flare;

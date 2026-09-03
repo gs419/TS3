@@ -72,21 +72,39 @@ class PortCommandSender:
     confirm on a throwaway session before trusting it. Loopback only.
     """
 
+    # How the recognition session is signalled around the text:
+    #   "ptt"  CMD_SET_PTT_STATE true/false      (port PTT: confirmed to start/stop
+    #                                            a session — recog_init/recog_stop)
+    #   "btn"  CMD_RECOG_UPDATE {"btnRecognize"} (how FeelThere's recognizer module
+    #                                            reports its own button)
+    #   "both" both of the above
+    #   "none" no session signalling; stream, then one flags:0 text
+    MODES = ("ptt", "btn", "both", "none")
+
     def __init__(self, host: str = "127.0.0.1", port: int = 12020,
                  greet: bool = True, ptt_commit: bool = True,
-                 settle_s: float = 0.05, lowercase: bool = True):
+                 settle_s: float = 0.3, lowercase: bool = True,
+                 hold_s: float = 1.5, stream_hz: float = 10.0,
+                 ptt_mode: str = "ptt"):
         self._json = __import__("json")
         self._socket = __import__("socket")
+        self._select = __import__("select")
         self._time = __import__("time")
         self.host, self.port = host, port
         self.greet = greet
-        self.ptt_commit = ptt_commit      # bracket the text with PTT true/false
+        self.ptt_mode = ptt_mode if ptt_commit else "none"
+        if self.ptt_mode not in self.MODES:
+            raise ValueError(f"ptt_mode must be one of {self.MODES}")
         self.settle_s = settle_s
+        self.hold_s = hold_s
+        self.stream_hz = stream_hz
         self.lowercase = lowercase
         self.sock = None
+        self._drained = 0
 
     def connect(self):
         self.sock = self._socket.create_connection((self.host, self.port), 5.0)
+        self.sock.settimeout(5.0)
         if self.greet:
             self._raw({"greeting": {"name": "AIATC", "author": "self",
                                     "type": "RECOG", "version": "v0.1",
@@ -99,29 +117,84 @@ class PortCommandSender:
             self.connect()
         self.sock.sendall((self._json.dumps(obj) + "\n").encode("utf-8"))
 
+    def _drain(self):
+        """Discard whatever the game pushed to this client (welcome, lexicon
+        re-pushes). Never block; without this a long session fills the receive
+        window and the core's writes to us stall."""
+        if self.sock is None:
+            return
+        try:
+            while True:
+                r, _, _ = self._select.select([self.sock], [], [], 0.0)
+                if not r:
+                    return
+                chunk = self.sock.recv(1 << 16)
+                if not chunk:
+                    raise OSError("command channel closed by the game")
+                self._drained += len(chunk)
+        except (OSError, ValueError):
+            raise
+
+    def _session(self, down: bool):
+        if self.ptt_mode in ("ptt", "both"):
+            self._raw({"cmd": "CMD_SET_PTT_STATE", "value": "true" if down else "false",
+                       "flags": 0, "func": None})
+        if self.ptt_mode in ("btn", "both"):
+            self._raw({"cmd": "CMD_RECOG_UPDATE",
+                       "value": self._json.dumps({"btnRecognize": bool(down),
+                                                  "airplanes": ""}),
+                       "flags": 0, "func": None})
+
     @staticmethod
     def format_command(text: str, lowercase: bool = True) -> str:
         t = " ".join(text.split())          # collapse whitespace
         return t.lower() if lowercase else t
 
     def send(self, text: str) -> None:
+        """Mimic FeelThere's recognizer module: open a recognition session, STREAM
+        the command text repeatedly while it is held (the module re-sends the
+        growing hypothesis ~10x/s for seconds; a single message sent right after
+        the press executed as an empty command in a live test), then release.
+        Any socket failure is logged and the channel reconnects on the next
+        command instead of crashing the live loop."""
         cmd = self.format_command(text, self.lowercase)
-        # Mimic the recognizer: press PTT, set the command text, release PTT.
-        # The game streams recognition into the command box (cmdtxt) and executes
-        # it on PTT release (rec_state -> false) — CMD_SET_PTT_STATE is the
-        # port-side control for that (seen in the first capture).
-        if self.ptt_commit:
-            self._raw({"cmd": "CMD_SET_PTT_STATE", "value": "true",
-                       "flags": 0, "func": None})
+        opened = False
+        try:
+            self._drain()
+            self._session(True); opened = True
             self._time.sleep(self.settle_s)
-        self._raw({"cmd": "CMD_SET_CMD_TEXT", "value": cmd, "flags": 1,
-                   "func": None})
-        if self.ptt_commit:
+            period = 1.0 / max(self.stream_hz, 0.5)
+            end = self._time.monotonic() + self.hold_s
+            n = 0
+            while self._time.monotonic() < end:
+                self._raw({"cmd": "CMD_SET_CMD_TEXT", "value": cmd, "flags": 1,
+                           "func": None})
+                n += 1
+                self._time.sleep(period)
+            if self.ptt_mode == "none":
+                self._raw({"cmd": "CMD_SET_CMD_TEXT", "value": cmd, "flags": 0,
+                           "func": None})
             self._time.sleep(self.settle_s)
-            self._raw({"cmd": "CMD_SET_PTT_STATE", "value": "false",
-                       "flags": 0, "func": None})   # release = execute
-        print(f"[port] issued: {cmd}")
+            self._session(False); opened = False     # release = execute
+            print(f"[port] issued: {cmd}  (mode={self.ptt_mode}, {n} text msgs over {self.hold_s}s)")
+        except OSError as e:
+            print(f"[port] send FAILED for '{cmd}': {e} — will reconnect on the next command")
+            if opened:
+                try:
+                    self._session(False)
+                except OSError:
+                    pass
+            try:
+                if self.sock:
+                    self.sock.close()
+            finally:
+                self.sock = None
 
     def close(self):
         if self.sock:
+            try:
+                self._session(False)
+            except OSError:
+                pass
             self.sock.close()
+            self.sock = None
