@@ -94,20 +94,20 @@ one is a new subscriber, not a rewrite.
 
 | Capability | Decide | Act |
 | --- | --- | --- |
-| Clear-to-land (arrivals) | ✅ validated on real logs (sequencing fix: runway released off the landing-state machine) | 🔌 wired via `live.py`; PTT commit unconfirmed in-game |
-| Departures + real SID initial instr. | ✅ validated | 🔌 wired via `live.py` |
-| Cleared-direct / climb-via-SID | ✅ (needs fix DB) | 🔌 wired |
-| Compression / spacing | ✅ (state enum calibrated) | 🔌 wired |
-| Multi-position + handoffs | ✅ validated on the real KBUR log (clear → CONTACT GROUND → TAXI TO RAMP → complete; human runway left alone) | 🔌 wired via `live.py` + `positions.json` / GUI |
+| Clear-to-land (arrivals) | ✅ validated on real logs (sequencing fix: runway released off the landing-state machine) | ✅ **live — confirmed in-game** via `live.py` |
+| Departures + real SID initial instr. | ✅ validated | ✅ live via `live.py` |
+| Cleared-direct / climb-via-SID | ✅ (needs fix DB) | ✅ live |
+| Compression / spacing | ✅ (state enum calibrated) | ✅ live |
+| Multi-position + handoffs | ✅ validated on the real KBUR log (clear → CONTACT GROUND → TAXI TO RAMP → complete; human runway left alone) | ✅ live via `live.py` + `positions.json` / GUI |
 | Ground taxi routing + guidance | ✅ validated on real KBUR graph | ⏳ live ground uses a safe `TAXI TO RAMP`; routed taxi not yet in the live loop |
-| Runway cross-timing safety | ✅ validated | 🔌 wired |
+| Runway cross-timing safety | ✅ validated | ✅ live |
 
-**Acting is now wired.** The write path was decoded from captures
-(`CMD_SET_CMD_TEXT` bracketed by `CMD_SET_PTT_STATE`, see
-`docs/PORT-PROTOCOL-DECODED.md`) and `live.py` sends through it via
-`senders.PortCommandSender`. The PTT-commit sequence is inferred from captures
-and **not yet confirmed against a running game** — run the first live session
-on a throwaway save and watch the game's readbacks.
+**Acting works — confirmed in-game.** The write path is the Communication
+Port: open a recognition session with `CMD_SET_PTT_STATE "true"`, stream the
+command text with `CMD_SET_CMD_TEXT` while it is held (~1.5 s), release with
+`"false"` — the game parses, executes and reads it back exactly like a spoken
+command (`docs/PORT-PROTOCOL-DECODED.md`). `live.py` sends through it via
+`senders.PortCommandSender`; `tools/probe_write_path.py` is what confirmed it.
 
 ## Running (on the gaming PC)
 
@@ -148,7 +148,7 @@ python autocontroller/port_client.py --port <PORT>         # live radar feed
 
 ## Status & honesty
 - Read + decide: built and validated on real data across all features above.
-- Act: gated on the write-path capture (one short session).
+- Act: **confirmed in-game** — the port write path executes commands with full readback.
 - This is unofficial, external, read-first tooling for personal use; it uses the
   game's own command grammar and undocumented-but-observed interfaces. Capture
   passively and test any command injection on a throwaway session first.

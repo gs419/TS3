@@ -8,9 +8,11 @@ geometry, and issues commands back through the port write path.
     python live.py --log ... --icao KBUR --port 12020      # Communication Port (game settings)
 
 Who controls what comes from positions.json (edit it, or use position_editor.py).
-LIVE MODE SENDS REAL COMMANDS: the write path is CMD_SET_CMD_TEXT bracketed by
-CMD_SET_PTT_STATE (decoded from captures; see docs/PORT-PROTOCOL-DECODED.md).
-Try it on a throwaway session first.
+LIVE MODE SENDS REAL COMMANDS. The write path (CONFIRMED in-game): open a
+recognition session with CMD_SET_PTT_STATE, stream the text with
+CMD_SET_CMD_TEXT while held (--hold, default 1.5 s), release to execute.
+See docs/PORT-PROTOCOL-DECODED.md. Each command holds the loop ~2 s while it
+streams; keep the first sessions short and watch the readbacks.
 """
 from __future__ import annotations
 

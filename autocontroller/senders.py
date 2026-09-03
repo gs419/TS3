@@ -135,6 +135,18 @@ class PortCommandSender:
         except (OSError, ValueError):
             raise
 
+    def drain(self) -> None:
+        """Idle drain for the tick loop: the core pushes STATUS snapshots to
+        this client ~3/s even when we send nothing."""
+        try:
+            self._drain()
+        except OSError as e:
+            print(f"[port] command channel dropped while idle: {e} — will reconnect on the next command")
+            try:
+                if self.sock: self.sock.close()
+            finally:
+                self.sock = None
+
     def _session(self, down: bool):
         if self.ptt_mode in ("ptt", "both"):
             self._raw({"cmd": "CMD_SET_PTT_STATE", "value": "true" if down else "false",

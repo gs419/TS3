@@ -140,6 +140,9 @@ class Orchestrator:
         self.departure.tick()
         self._flush_taxi(now if now is not None else time.monotonic())
         result = self.arbiter.resolve(now)
+        drain = getattr(self.sender, "drain", None)
+        if drain:
+            drain()          # keep the command channel's receive window empty
         # feed learned adjustments back into live params
         self.config.apply_tunables(self.tuner.params)
         self.arrival.runway_cooldown_s = self.config.runway_cooldown_s

@@ -1,4 +1,4 @@
-"""Probe the command write path against the RUNNING game, one variant at a
+r"""Probe the command write path against the RUNNING game, one variant at a
 time, with hard evidence for each. Stops at the first variant that executes.
 
 Background (docs/PORT-PROTOCOL-DECODED.md): a live test showed the port PTT
