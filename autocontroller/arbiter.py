@@ -110,7 +110,10 @@ class CommandArbiter:
     def _parse(source, priority, text, seq) -> Proposal:
         t = text.upper()
         cs = t.split()[0] if t.split() else ""
-        rm = re.search(r"RUNWAY\s+(\d{1,2}\s?[LRC]?)", t)
-        runway = rm.group(1).replace(" ", "") if rm else ""
+        # same rule as gamestate: a side letter only counts when standalone,
+        # otherwise "RUNWAY 15 CLEARED" keys as 15C and "... LINE UP" as 15L and
+        # the per-runway exclusion/cooldown never sees them as one runway.
+        rm = re.search(r"RUNWAY\s+(\d{1,2})(?:\s*([LRC])(?![A-Z]))?", t)
+        runway = (rm.group(1) + (rm.group(2) or "")) if rm else ""
         occ = any(k in t for k in _RUNWAY_CLEARANCE)
         return Proposal(source, priority, text, cs, runway, occ, seq)
