@@ -17,16 +17,31 @@ class DryRunSender:
 
 
 class KeyboardSender:
-    """Types `text` + Enter into the focused game window.
+    """Types '<CALLSIGN> <COMMAND>' + Enter into the game's command text box.
 
-    Calibrate first (README): confirm the game accepts a full
-    '<CALLSIGN> <COMMAND>' line in its text box, and whether a key must be
-    pressed to focus the box. If so, set `focus_key`.
+    This bypasses the port recognizer entirely (which jams under sustained
+    external sessions) — it drives the same typed command line a human uses.
+
+    Calibrate once (see README):
+      - window_title: the game window (substring match).
+      - focus_key: a key that focuses/opens the command box, if the game needs
+        one before typing (many builds: none — the box always takes keys; some:
+        Enter to open). Leave None to type straight away.
+      - clear_first: clear any leftover text before typing (Ctrl+A then Backspace)
+        so a partial command never gets a new one appended to it.
+      - The command is typed VERBATIM (upper-case, as the policies emit it) — the
+        typed grammar matches the COMMAND: echoes; set lowercase=True if a build
+        wants it lower.
     """
 
     def __init__(self, window_title: str = "Tower! Simulator 3",
                  focus_key: str | None = None,
-                 type_interval: float = 0.02):
+                 type_interval: float = 0.02,
+                 clear_first: bool = True,
+                 lowercase: bool = False,
+                 activate: bool = True,
+                 focus_delay: float = 0.15,
+                 click_xy: tuple | None = None):
         import pyautogui       # noqa: F401  (fail fast if missing)
         import pygetwindow
         self._pyautogui = __import__("pyautogui")
@@ -34,24 +49,56 @@ class KeyboardSender:
         self.window_title = window_title
         self.focus_key = focus_key
         self.type_interval = type_interval
+        self.clear_first = clear_first
+        self.lowercase = lowercase
+        self.activate = activate
+        self.focus_delay = focus_delay
+        self.click_xy = click_xy       # (x, y) of the command box, to click-focus it
+        self._warned = False
         self._pyautogui.FAILSAFE = True  # mouse to top-left corner aborts
 
-    def send(self, text: str) -> None:
-        wins = self._gw.getWindowsWithTitle(self.window_title)
+    def _focus_window(self) -> bool:
+        if not self.activate:
+            return True
+        try:
+            wins = self._gw.getWindowsWithTitle(self.window_title)
+        except Exception:
+            wins = []
         if not wins:
-            print(f"[keyboard] window '{self.window_title}' not found; "
-                  f"skipping: {text}")
-            return
+            if not self._warned:
+                print(f"[keyboard] window '{self.window_title}' not found — "
+                      f"typing into whatever is focused. Pass --window to fix.")
+                self._warned = True
+            return False
         win = wins[0]
-        if not win.isActive:
-            win.activate()
-            time.sleep(0.15)
+        try:
+            if not win.isActive:
+                win.activate()
+                time.sleep(0.15)
+        except Exception:
+            pass
+        return True
+
+    def send(self, text: str) -> None:
+        cmd = " ".join(text.split())
+        if self.lowercase:
+            cmd = cmd.lower()
+        self._focus_window()
+        if self.click_xy:
+            # click into the COMMAND window's "Enter command..." box to focus it
+            self._pyautogui.click(self.click_xy[0], self.click_xy[1])
+            time.sleep(self.focus_delay)
         if self.focus_key:
             self._pyautogui.press(self.focus_key)
-            time.sleep(0.05)
-        self._pyautogui.typewrite(text, interval=self.type_interval)
+            time.sleep(self.focus_delay)
+        if self.clear_first:
+            # select-all + delete, so a leftover partial command is replaced
+            self._pyautogui.hotkey("ctrl", "a")
+            self._pyautogui.press("backspace")
+            time.sleep(0.02)
+        self._pyautogui.typewrite(cmd, interval=self.type_interval)
         self._pyautogui.press("enter")
-        print(f"[keyboard] typed: {text}")
+        print(f"[keyboard] typed: {cmd}")
 
 
 class PortCommandSender:

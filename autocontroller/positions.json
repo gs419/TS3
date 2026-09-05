@@ -16,8 +16,8 @@
   },
   "KBUR": {
     "positions": [
-      {"name": "Local", "role": "local", "kind": "ai", "frequency": "118.7", "owns_runways": ["8", "26", "15", "33"]},
-      {"name": "Ground", "role": "ground", "kind": "human", "frequency": "123.9", "owns_areas": ["TerminalA", "TerminalB", "TerminalC", "TerminalD", "TerminalG", "TerminalM"]}
+      {"name": "Local", "role": "local", "kind": "ai", "frequency": "118.7", "owns_runways": ["15", "33"]},
+      {"name": "Ground", "role": "ground", "kind": "ai", "frequency": "123.9", "owns_areas": ["TerminalA", "TerminalB", "TerminalC", "TerminalD", "TerminalG", "TerminalM"], "owns_runways": ["8", "26"]}
     ],
     "handoffs": [
       {"when": "landed_on:*", "from": "Local", "to": "Ground"},
